@@ -1,13 +1,35 @@
 <?php
-  require "connection.php";
-  if(!empty($_SESSION["id"])){
-  $id = $_SESSION["id"];
-  $check = mysqli_query($con,"SELECT * FROM `users` WHERE id=$id ");
-  $row = mysqli_fetch_array($check);
-  }
-  else{
-  header('location:login.php');
-  } 
+require "./connection.php";
+
+if (!empty($_SESSION["id"])) {
+    $id = $_SESSION["id"];
+} else {
+    header('location:login.php');
+    exit();
+}
+
+if (isset($_GET['action']) && isset($_GET['table']) && isset($_GET['id'])) {
+    $action = mysqli_real_escape_string($con, $_GET['action']);
+    $table = mysqli_real_escape_string($con, $_GET['table']);
+    $row_id = mysqli_real_escape_string($con, $_GET['id']);
+
+    if (in_array($table, ['assurance']) && in_array($action, ['approve', 'disapprove'])) {
+        $status = $action === 'approve' ? 'APPROVED' : 'DISAPPROVED';
+
+        $query = $con->prepare("UPDATE `$table` SET status=? WHERE id=?");
+        $query->bind_param("si", $status, $row_id);
+
+        if ($query->execute()) {
+            // Redirect to avoid reprocessing on refresh
+            header('location:quality-assurance.php');
+            exit();
+        } else {
+            echo "Error updating record: " . $query->error;
+        }
+    } else {
+        echo "Invalid action or table";
+    }
+}
 ?>
 <html lang="en">
 <head>
@@ -24,7 +46,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
   <script scr="dropdown.js"></script>
-  <title>PRODUCTION</title>
+  <title>QUALITY ASSURANCE</title>
 </head>
 <body>
   <style>
@@ -42,6 +64,39 @@
     }
     .logout i{
       color:black;
+    }
+    input[name="pending"]{
+      display: none;
+    }
+    .td {
+      display: flex;
+      justify-content: center;
+      padding: .3rem .5rem;
+    }
+    td button {
+      padding: 10px 25px;
+      border-radius: 5px;
+      border: none;
+      margin: .5rem;
+      background: #21A747;
+      color: #fff;
+      cursor: pointer;
+    }
+    .td a {
+      padding: 10px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #fff;
+      margin:0rem 1.2rem;
+    }
+    .td a.fg-eric1 {
+      background: #00BDD6;
+    }
+    .td a.fg-eric2 {
+      background: red;
+    }
+    .td a:hover {
+      opacity: 0.8;
     }
   </style>
 <div class="sidebar">
@@ -111,7 +166,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>PRODUCTION</h1>
+          <h1>QUALITY CONTROL ASSURANCE</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -129,148 +184,103 @@
           </button>
         </div> 
       </div>
-      <?php
-$sql = mysqli_query($con, "SELECT * FROM `production`");
-
-$count_above_100 = 0;
-$count_between_50_and_90 = 0;
-$count_below_50 = 0;
-while ($row = mysqli_fetch_array($sql)) {
-    $qc = $row['qc_check'];
-    $inventory = $row['inventory_update'];
-    $demanding = $row['demand'];
-    $total = $qc + $inventory + $demanding;
-    if ($total >= 100) {
-        $count_above_100++;
-    } elseif ($total >= 50 && $total < 100) {
-        $count_between_50_and_90++;
-    } else {
-        $count_below_50++;
-    }
-        ?>
-      <div class="bigm">
-        <div class="tol">
-
-          <div class="tyy">
-          <div class="lel">
-            <div class="first">COMPLETED</div>
-            <div class="first"><i class="fa-solid fa-check"></i></div>
-          </div>
-            <div class="div-le"><?php echo $count_above_100?></div>
-          </div>
-
-          <div class="yyt">
-          <div class="lel">
-            <div class="first">IN-PROGRESS</div>
-            <i class="fa-solid fa-list-check"></i>
-          </div>
-            <div class="div-le"><?php echo  $count_below_50?></div>
-          </div>
-
-          <div class="boo">
-          <div class="lel">
-            <div class="first">PENDING</div>
-            <div class="first"><i class="fa-solid fa-stop"></i></div>
-          </div>
-            <div class="div-le"><?php echo $count_below_50?></div>
-          </div>
-
-          
-        </div>
-      </div><?php
-      }
-      ?>
       
-      <style>
-        .tyy{
-          color: #12f570;
-          background-color: #d6f0e1;
-        }
-        .boo{
-          color: #f78484;
-          background-color:  #f82a2a;
-        }
-        .yyt{
-          color:#8ad2f3;
-          background-color:#22b1f3;
-        }
-        .lel{
-          margin:1rem;
-          font-size:27px;
-          display:grid;
-          justify-content: space-between; 
-          gap: 28vh; 
-          grid-template-columns: repeat(2, 1fr); /
-        }
-        
-        .div-le{
-          display:grid;
-          text-align:center;
-          align-items:center;
-          justify-content:center;
-          font-size:50px;
-        }
-      </style>
       <div class="catch">
-        <h1>PRODUCTION FORM </h1>
-        <form  method="post" class="form-form">
+        <form action="" method="post" class="form-form" >
           <div class="formation-1">
-          <label for="">RAW MATERIAL</label>
-          <input type="text" name="raw_material" id="" required>
-          <label for="">PRODUCTION LINE SETUP</label>
-          <input type="text" name="line_setup" id="" required>
-          <label for="">QC CHECK</label>
-          <input type="number" name="qc_check" id="" required maxlength="2" placeholder="1% - 99%">
-          <label for="">BATCH PRODUCTION</label>
-          <input type="date" name="Batchdate" id="" value="<?php echo date('y-m-d')?>" required>
-          <label for="">INVENTORY UPDATE</label>
-          <input type="number"  name="inventory_update" id="" required maxlength="2" placeholder="1% - 99%">
-          <label for="">DEMAND FORECASTING UPDATE</label>
-          <input type="number"  name="demand" id="" required maxlength="2" placeholder="1% - 99%">
+          <label for="aspect">ASPECT</label>
+        <input type="text" name="aspect" id="aspect" required>
+        
+        <label for="testing_method">TESTING METHOD</label>
+        <input type="text" name="method" id="testing_method" required>
+        
+        <label for="frequency_testing">FREQUENCY OF TESTING</label>
+        <input type="text" name="testing" id="frequency_testing" required>
+        
+        <label for="actual_values">ACTUAL VALUES</label>
+        <input type="text" name="values" id="actual_values" required>
+        
+        <label for="deviation">DEVIATION</label>
+        <input type="text" name="deviation" id="deviation" required>
+        <input type="text" name="pending" id="deviation" value="pending" required>
         </div>
-          <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
-          </button>
+          <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</button>
         </form>
        </div>
-
-       
 
        <div class="tablestotable">
     <div class="table-containment">
     <?php
-        $sql=mysqli_query($con,"SELECT * FROM `production`");
+        $sql=mysqli_query($con,"SELECT * FROM `assurance`");
         $number=0;
         ?>
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
         <tr>
           <th>#</th>
-          <th>RAW MATERIAL</th>
-          <th>QC CHECK</th>
-          <th>INVENTORY UPDATE</th>
-          <th>PRODUCTION LINE SETUP</th>
-          <th>BATCH PRODUCTION</th>
-          <th>DEMAND FORECASTING UPDATE</th>
-          <th>UPDATE</th>
-          <th>DOWNLOAD</th>
+          <th>ASPECT</th>
+          <th>TESTING METHOD</th>
+          <th>FREQUENCY TESTING</th>
+          <th>ACTUAL VALUES</th>
+          <th>DEVIATION</th>
+          <th>RESULT</th>
         </tr>
         <?php 
         while($row=mysqli_fetch_array($sql)):
         ?>
         <tr>
           <td><?php echo ++$number ?></td>
-          <td><?php echo $row['raw_material']?></td>
-          <td><?php echo $row['line_setup']?></td>
-          <td><?php echo $row['qc_check']?>%</td>
-          <td><?php echo $row['Batchdate']?></td>
-          <td><?php echo $row['inventory_update']?>%</td>
-          <td><?php echo $row['demand']?>%</td>
-          <td>
-            <button class="update-btn"><a href="update-production.php?id=<?php echo $row['id'];?>">MODIFY</button>
-          </td>
-          <td><button class="view-btn">
-            <a href="./pdf/production.php"><i class="fa-solid fa-circle-down"></i></a>
-          </button></td>
+          <td><?php echo $row['aspect']?></td>
+          <td><?php echo $row['method']?></td>
+          <td><?php echo $row['testing']?></td>
+          <td><?php echo $row['values']?></td>
+          <td><?php echo $row['deviation']?></td>
+          <td><?php echo $row['status']?></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <?php 
+        endwhile
+        ?>
+      </table>
+    </div>
+</div> 
+
+<div class="tablestotable">
+    <div class="table-containment">
+    <?php
+        $sql=mysqli_query($con,"SELECT * FROM `assurance`");
+        $number=0;
+        ?>
+        <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
+        <table>
+        <tr>
+          <th>#</th>
+          <th>ASPECT</th>
+          <th>TESTING METHOD</th>
+          <th>FREQUENCY TESTING</th>
+          <th>ACTUAL VALUES</th>
+          <th>DEVIATION</th>
+          <th>ACTION</th>
+        </tr>
+        <?php 
+        while($row=mysqli_fetch_array($sql)):
+        ?>
+        <tr>
+          <td><?php echo ++$number ?></td>
+          <td><?php echo $row['aspect']?></td>
+          <td><?php echo $row['method']?></td>
+          <td><?php echo $row['testing']?></td>
+          <td><?php echo $row['values']?></td>
+          <td><?php echo $row['deviation']?></td>
+          <td class="td">
+                <?php if (strtolower($row['status']) == 'pending') { ?>
+                        <a href="?id=<?php echo $row['id']; ?>&action=approve&table=assurance" class="fg-eric1">APPROVE</a>
+                        <a href="?id=<?php echo $row['id']; ?>&action=disapprove&table=assurance" class="fg-eric2">DISAPPROVE</a>
+                    <?php } else { ?>
+                        <span><?php echo htmlspecialchars($row['status']); ?></span>
+                    <?php } ?>
+                </td>
         </tr>
         <?php 
         endwhile
@@ -279,6 +289,7 @@ while ($row = mysqli_fetch_array($sql)) {
     </div>
 </div> 
 </div> 
+
 
   
  <script>
@@ -316,14 +327,13 @@ menu.classList.remove('menu-open');
 </body>
 </html>
 <?php
-if(isset($_POST['submit'])){
-  $raw_material=$_POST['raw_material'];
-  $line_setup=$_POST['line_setup'];
-  $qc_check=$_POST['qc_check'];
-  $Batchdate=$_POST['Batchdate'];
-  $inventory_update=$_POST['inventory_update'];
-  $demand=$_POST['demand'];
-  $sql=mysqli_query($con,"INSERT INTO production VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate','$inventory_update','$demand')");
+if (isset($_POST['submit'])) {
+    $material = $_POST['aspect'];
+    $setup = $_POST['method'];
+    $check = $_POST['testing'];
+    $date = $_POST['values'];
+    $update = $_POST['deviation'];
+    $sql=mysqli_query($con,"INSERT INTO `assurance` VALUES('', '$material', '$setup', '$check', '$date', '$update') ");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";

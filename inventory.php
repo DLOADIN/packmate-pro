@@ -164,13 +164,14 @@
         <tr>
           <th>#</th>
           <th>RAW MATERIAL</th>
-          <th>QC CHECK</th>
-          <th>INVENTORY UPDATE</th>
-          <th>PRODUCTION LINE SETUP</th>
-          <th>BATCH PRODUCTION</th>
-          <th>DEMAND FORECASTING UPDATE</th>
+          <th>CURRENT STOCK (Tons)</th>
+          <th>RE-ORDER POINT (Tons)</th>
+          <th>SUPPLIER</th>
+          <th>LEAD TIME (Days)</th>
+          <th>SAFETY STOCK (Tons)</th>
           <th>UPDATE</th>
           <th>DELETE</th>
+          <th>DOWNLOAD</th>
         </tr>
         <?php 
         while($row=mysqli_fetch_array($sql)):
@@ -189,7 +190,9 @@
           <td>
             <button class="delete-btn"><a href="delete-inventory.php?id=<?php echo $row['id'];?>">DELETE</button>
           </td>
-          <td></td>
+          <td><button class="view-btn">
+            <a href="./pdf/inventory.php"><i class="fa-solid fa-circle-down"></i></a>
+          </button></td>
         </tr>
         <?php 
         endwhile
