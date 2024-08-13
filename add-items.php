@@ -168,20 +168,19 @@
        <div class="tablestotable">
     <div class="table-containment">
     <?php
-        $sql=mysqli_query($con,"SELECT * FROM `inventory`");
+        $sql=mysqli_query($con,"SELECT * FROM `equipments`");
         $number=0;
         ?>
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
         <tr>
           <th>#</th>
-          <th>RAW MATERIAL</th>
-          <th>CURRENT STOCK (Tons)</th>
-          <th>RE-ORDER POINT (Tons)</th>
-          <th>SUPPLIER</th>
-          <th>LEAD TIME (Days)</th>
-          <th>SAFETY STOCK (Tons)</th>
-          <th>UPDATE</th>
+          <th>EQUIPMENTS</th>
+          <th>MANTENANCE TASK</th>
+          <th>FREQUENCY</th>
+          <th>FIRST MANTENANCE</th>
+          <th>LAST MANTENANCE</th>
+          <th>STATUS</th>
           <th>DELETE</th>
           <th>DOWNLOAD</th>
         </tr>
@@ -190,20 +189,17 @@
         ?>
         <tr>
           <td><?php echo ++$number ?></td>
-          <td><?php echo $row['raw_material']?></td>
-          <td><?php echo $row['current_stock']?></td>
-          <td><?php echo $row['reorder_point']?></td>
-          <td><?php echo $row['supplier']?></td>
-          <td><?php echo $row['lead_time']?></td>
-          <td><?php echo $row['safety_stock']?></td>
+          <td><?php echo $row['equipment']?></td>
+          <td><?php echo $row['maintenance_task']?></td>
+          <td><?php echo $row['frequency']?></td>
+          <td><?php echo $row['first_maintenance']?></td>
+          <td><?php echo $row['last_maintenance']?></td>
+          <td><?php echo $row['status']?></td>
           <td>
-            <button class="update-btn"><a href="update-inventory.php?id=<?php echo $row['id'];?>">MODIFY</button>
-          </td>
-          <td>
-            <button class="delete-btn"><a href="delete-inventory.php?id=<?php echo $row['id'];?>">DELETE</button>
+            <button class="delete-btn"><a href="delete-items.php?id=<?php echo $row['id'];?>">DELETE</button>
           </td>
           <td><button class="view-btn">
-            <a href="./pdf/inventory.php"><i class="fa-solid fa-circle-down"></i></a>
+            <a href="./pdf/equipments.php"><i class="fa-solid fa-circle-down"></i></a>
           </button></td>
         </tr>
         <?php 
@@ -251,13 +247,13 @@ menu.classList.remove('menu-open');
 </html>
 <?php
 if(isset($_POST['submit'])){
-  $raw_material=$_POST['raw_material'];
-  $line_setup=$_POST['current_stock'];
-  $qc_check=$_POST['reorder_point'];
-  $Batchdate=$_POST['supplier'];
-  $inventory_update=$_POST['lead_time'];
-  $demand=$_POST['safety_stock'];
-  $sql=mysqli_query($con,"INSERT INTO inventory VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate','$inventory_update','$demand')");
+  $raw_material=$_POST['equipment'];
+  $line_setup=$_POST['maintenance_task'];
+  $qc_check=$_POST['frequency'];
+  $Batchdate=$_POST['first_maintenance'];
+  $inventory_update=$_POST['last_maintenance'];
+  $demand=$_POST['status'];
+  $sql=mysqli_query($con,"INSERT INTO equipments VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate','$inventory_update','$demand')");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";

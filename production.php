@@ -139,7 +139,7 @@ while ($row = mysqli_fetch_array($sql)) {
     $qc = $row['qc_check'];
     $inventory = $row['inventory_update'];
     $demanding = $row['demand'];
-    $total = $qc + $inventory + $demanding;
+    $total = $qc + $inventory + $demanding / 100 * 50;
     if ($total >= 100) {
         $count_above_100++;
     } elseif ($total >= 50 && $total < 100) {
