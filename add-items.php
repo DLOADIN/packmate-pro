@@ -199,7 +199,7 @@
             <button class="delete-btn"><a href="delete-items.php?id=<?php echo $row['id'];?>">DELETE</button>
           </td>
           <td><button class="view-btn">
-            <a href="./pdf/equipments.php"><i class="fa-solid fa-circle-down"></i></a>
+            <a href="./pdf/items.php"><i class="fa-solid fa-circle-down"></i></a>
           </button></td>
         </tr>
         <?php 
