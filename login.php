@@ -42,11 +42,11 @@
 </head>
 <body>
   <div id="grided">
-    <div class="grid-1">
+  <div class="grid-1">
       <div class="text">
-        <h1>Welcome</h1>
-        <p>To Cement Manufacturing<br>
-        Process System</p>
+      <h1>Welcome</h1>
+        <H2>TO CEMENT MANUFACTURING<br>
+        PROCESS SYSTEM</H2>
       </div>
     </div>
     <div class="grid-2">

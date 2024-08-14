@@ -24,7 +24,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
   <script scr="dropdown.js"></script>
-  <title>EQUIPMENTS</title>
+  <title>SUPPLY CHAIN</title>
 </head>
 <body>
   <style>

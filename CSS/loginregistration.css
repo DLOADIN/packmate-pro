@@ -4,6 +4,7 @@
 :root{
   --primary-color: #00BDD6;
 }
+
 *{
   margin:0;
   padding:0;
@@ -24,7 +25,8 @@
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-  background: url("../image/5192479.jpg")no-repeat;
+  /* background: url("../image/5192479.jpg")no-repeat; */
+  background: none;
   background-size: cover;
   background-position: center;
 }
@@ -43,7 +45,8 @@ label{
   justify-content: center;
   min-height: 100vh;
   width: 100%;
-  background: url("../image/6060171.jpg")no-repeat;
+  /* background: url("../image/6060171.jpg")no-repeat; */
+  background: none;
   background-size: cover;
   background-position: center;
 }
@@ -66,6 +69,7 @@ label{
 .text{
   margin-top: 5rem;
   text-align: center;
+  color:black
 }
 .text h1{
   font-size: 50px;
@@ -80,6 +84,12 @@ label{
   padding: 1rem;
 }
 
+
+.text-1 img{
+  height:350px;
+  width:450px
+}
+
 .grid-2{
   padding: 0rem 2rem 2rem 2rem;
   background-color: white;
@@ -88,6 +98,7 @@ label{
   height: fit-content;
   border-radius: 10px;
   color: aliceblue;
+  border: 5px solid var(--primary-color);
 }
 
 a{
