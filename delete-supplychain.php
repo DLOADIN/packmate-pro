@@ -1,6 +1,6 @@
 <?php
 require './connection.php';
 $id=$_GET['id'];
-$sql=mysqli_query($con,"DELETE FROM `inventory` WHERE id = $id");
+$sql=mysqli_query($con,"DELETE FROM `supply-chain` WHERE id = $id");
 header("location:user-dashboard.php");
 ?>
