@@ -16,15 +16,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./CSS/newfriend.css">
   <link rel="stylesheet" href="./CSS/dropdown.css">
-  <link rel="stylesheet" href="./CSS/another-one.css">
-  <link rel="stylesheet" href="./CSS/tables.css">
   <link rel="stylesheet" href="./CSS/charts.css">
+  <link rel="stylesheet" href="./CSS/tables.css">
   <link rel="shortcut icon" href="./image/images.jpeg" type="image/x-icon">
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
-  <script scr="dropdown.js"></script>
-  <title>EQUIPMENTS</title>
+  <script src="./extension_remover.js"></script>
+  <script scr="./dropdown.js"></script>
+  <title>NOTIFICATIONS</title>
 </head>
 <body>
   <style>
@@ -34,26 +34,10 @@
     .caradan-products{
       text-decoration: none;
     }
-    .form-form{
-      width:fit-content;
-      padding-right: 1rem;
+    .ropdown{
+      padding:1rem 0rem;
     }
-    #clear{
-      margin-right:3rem;
-    }
-    .catch h1{
-      text-align:center
-    }
-    .logout i{
-      color:black;
-    }
-    option{
-              border-radius:20px
-            }
-            select{
-              border-radius:15px;
-              border-top: 1px solid black;
-            }
+    
   </style>
 <div class="sidebar">
       <ul class="menu">
@@ -122,7 +106,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>ASSET MANAGEMENT</h1>
+          <h1>NOTIFICATIONS</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -137,89 +121,74 @@
           <p>User</p></div> 
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
-          </button>
         </div> 
       </div>
-      
-      <div class="catch">
-        <form  method="post" class="form-form">
-          <div class="formation-1">
-          <label for="">LOCATION</label>
-          <input type="text" name="location" id="" placeholder="NAME" required>
-          <label for="">STATUS</label>
-          <select name="status" id="">
-            <option value="active">ACTIVE</option>
-            <option value="inactive">IN-ACTIVE</option>
-          </select>
-          <label for="">PERFORMANCE</label>
-          <input type="range" name="performance" required value="<?=$performance?>" min="1" max="100"> 
+    <div class="info-container">
+      <div class="info-subcontainer">
+        <div class="freeed">
+          <?php
+          $sql=mysqli_query($con,"SELECT * from `equipments`");
+          while($rowed=mysqli_fetch_array($sql)):
+          $stock=$rowed['equipment'];
+          $stocked=$rowed['first_maintenance'];
+          $stockedd=$rowed['last_maintenance'];
+          $stockeddd=$rowed['last_maintenance'];
           
-        </div>
-          <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
-          </button>
-        </form>
-       </div>
-       <?php
-if(isset($_POST['submit'])){
-  $raw_material=$_POST['location'];
-  $demand=$_POST['status'];
-  $performance=$_POST['performance'];
-  $sql=mysqli_query($con,"INSERT INTO assets VALUES('','$raw_material','$demand','$performance')");
-
-  if($sql){
-    echo "<script>alert('Documented Successfully')</script>";
-  }
-  else{
-    echo "<script>alert('failed to document')</script>";
-  }
-
-}
-?>
-
-       
-
-       <div class="tablestotable">
-    <div class="table-containment">
-    <?php
-        $sql=mysqli_query($con,"SELECT * FROM `assets`");
-        $number=0;
-        ?>
-        <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
-        <table>
-        <tr>
-          <th>#</th>
-          <th>LOCATION</th>
-          <th>STATUS</th>
-          <th>PERFORMANCE</th>
-        </tr>
-        <?php 
-        while($row=mysqli_fetch_array($sql)):
-        ?>
-        <tr>
-          <td>00<?php echo ++$number ?></td>
-          <td><?php echo $row['location']?></td>
-          <td><?php echo $row['status']?></td>
-          <td><?php echo $row['performance']?></td>
-        </tr>
-        <?php 
+        echo "<i class='fa-solid fa-triangle-exclamation'></i>";
+        echo "<h3> The equipment $stock is out of stock; For it Had it's first maintenance on $stocked <br>
+        and last maintenance on the $stockedd which is still now in $status</h3>";
         endwhile
         ?>
-      </table>
+        </div>
+      </div>
     </div>
 </div> 
-</div> 
-
+<style>
+  .info-container{
+    position:relative;
+  }
+  .info-subcontainer{
+    display:grid;
+    gap:1;
+    place-items:center;
+    color:black
+  }
+  .freeed{
+    width:180vh;
+    height:20vh;
+    background: #caebf0;
+    border-radius:15px;
+    border:border-box;
+    display:flex;
+    padding:1.7rem;
+    font-size:20px;
+  }
+  .freeed h3{
+    text-align:center;
+    margin-bottom:2rem
+  }
+  .freeed i{
+    font-size:50px;
+    margin-right:5px;
+    margin-top:15px;
+  }
+</style>
   
- <script>
-    document.addEventListener('DOMContentLoaded', () => {
-const dropdowns = document.querySelectorAll('.ropdown');
+ 
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="./charts/linechart.js"></script>
+<script src="./charts/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const dropdowns = document.querySelectorAll('.ropdown');
 
 dropdowns.forEach(dropdown => {
-const select = dropdown.querySelector('.select');
-const caret = dropdown.querySelector('.caret');
-const menu = dropdown.querySelector('.fireef');
-const options = dropdown.querySelectorAll('.fireef li');
-const selected = dropdown.querySelector('.selectee');
+  const select = dropdown.querySelector('.select');
+  const caret = dropdown.querySelector('.caret');
+  const menu = dropdown.querySelector('.fireef');
+  const options = dropdown.querySelectorAll('.fireef li');
+  const selected = dropdown.querySelector('.selectee');
 
 select.addEventListener('click', () => {
 select.classList.toggle('select-clicked');
@@ -238,9 +207,9 @@ menu.classList.remove('menu-open');
 });
 });
 
- </script>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </script>
+<?php
+require "./charts/app.php";
+?>
 </body>
 </html>

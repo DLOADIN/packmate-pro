@@ -43,12 +43,20 @@
     .logout i{
       color:black;
     }
+    
+    .form-form{
+      width:fit-content;
+      padding-right: 1rem;
+    }
     option{
               border-radius:20px
             }
             select{
               border-radius:15px;
               border-top: 1px solid black;
+            }
+            input[name="asset_id"]{
+              /* display:none; */
             }
   </style>
 <div class="sidebar">
@@ -157,6 +165,11 @@
             <option value="In-progress">IN-PROGRESS</option>
             <option value="completed">COMPLETED</option>
           </select>
+          <?php
+          $ty=mysqli_query($con,"SELECT id from `assets`");
+          $robin=mysqli_fetch_array($ty);
+          ?>
+          <input type="number"  name="asset_id" value="<?php echo $robin['id']?>" required>
         </div>
           <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
           </button>
@@ -253,7 +266,8 @@ if(isset($_POST['submit'])){
   $Batchdate=$_POST['first_maintenance'];
   $inventory_update=$_POST['last_maintenance'];
   $demand=$_POST['status'];
-  $sql=mysqli_query($con,"INSERT INTO equipments VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate','$inventory_update','$demand')");
+  $asset_id=$_POST['asset_id'];
+  $sql=mysqli_query($con,"INSERT INTO `equipments` VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate','$inventory_update','$demand','$asset_id')");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";
