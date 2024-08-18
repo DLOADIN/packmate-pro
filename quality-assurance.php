@@ -216,44 +216,6 @@ if (isset($_GET['action']) && isset($_GET['table']) && isset($_GET['id'])) {
         </form>
        </div>
 
-       <div class="tablestotable">
-    <div class="table-containment">
-    <?php
-        $sql=mysqli_query($con,"SELECT * FROM `assurance`");
-        $number=0;
-        ?>
-        <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
-        <table>
-        <tr>
-          <th>#</th>
-          <th>ASPECT</th>
-          <th>TESTING METHOD</th>
-          <th>FREQUENCY TESTING</th>
-          <th>ACTUAL VALUES</th>
-          <th>DEVIATION</th>
-          <th>RESULT</th>
-        </tr>
-        <?php 
-        while($row=mysqli_fetch_array($sql)):
-        ?>
-        <tr>
-          <td><?php echo ++$number ?></td>
-          <td><?php echo $row['aspect']?></td>
-          <td><?php echo $row['method']?></td>
-          <td><?php echo $row['testing']?></td>
-          <td><?php echo $row['values']?></td>
-          <td><?php echo $row['deviation']?></td>
-          <td><?php echo $row['status']?></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <?php 
-        endwhile
-        ?>
-      </table>
-    </div>
-</div> 
-
 <div class="tablestotable">
     <div class="table-containment">
     <?php

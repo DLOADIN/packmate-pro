@@ -202,7 +202,7 @@
           <th>FIRST MANTENANCE</th>
           <th>LAST MANTENANCE</th>
           <th>STATUS</th>
-          <th>DELETE</th>
+          <!-- <th>DELETE</th> -->
           <th>DOWNLOAD</th>
         </tr>
         <?php 
@@ -216,9 +216,9 @@
           <td><?php echo $row['first_maintenance']?></td>
           <td><?php echo $row['last_maintenance']?></td>
           <td><?php echo $row['status']?></td>
-          <td>
+          <!-- <td>
             <button class="delete-btn"><a href="delete-items.php?id=<?php echo $row['id'];?>">DELETE</button>
-          </td>
+          </td> -->
           <td><button class="view-btn">
             <a href="./pdf/items.php"><i class="fa-solid fa-circle-down"></i></a>
           </button></td>

@@ -195,7 +195,7 @@
           <th>DISTRIBUTOR</th>
           <th>DATE</th>
           <th>STATUS</th>
-          <th>DELETE</th>
+          <!-- <th>DELETE</th> -->
         </tr>
         <?php 
         while($row=mysqli_fetch_array($sql)):
@@ -210,9 +210,9 @@
           <td><?php echo $row['date']?></td>
           <td><?php echo $row['status']?></td>
           <td><?php echo $row['u_tools']?></td>
-          <td>
+          <!-- <td>
             <button class="delete-btn"><a href="delete-supplychain.php?id=<?php echo $row['id'];?>">DELETE</button>
-          </td>
+          </td> -->
         </tr>
         <?php 
         endwhile

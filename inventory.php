@@ -177,8 +177,8 @@
           <th>SUPPLIER</th>
           <th>LEAD TIME (Days)</th>
           <th>SAFETY STOCK (Tons)</th>
-          <th>UPDATE</th>
-          <th>DELETE</th>
+          <!-- <th>UPDATE</th>
+          <th>DELETE</th> -->
           <th>DOWNLOAD</th>
         </tr>
         <?php 
@@ -192,12 +192,12 @@
           <td><?php echo $row['supplier']?></td>
           <td><?php echo $row['lead_time']?></td>
           <td><?php echo $row['safety_stock']?></td>
-          <td>
+          <!-- <td>
             <button class="update-btn"><a href="update-inventory.php?id=<?php echo $row['id'];?>">MODIFY</button>
           </td>
           <td>
             <button class="delete-btn"><a href="delete-inventory.php?id=<?php echo $row['id'];?>">DELETE</button>
-          </td>
+          </td> -->
           <td><button class="view-btn">
             <a href="./pdf/inventory.php"><i class="fa-solid fa-circle-down"></i></a>
           </button></td>

@@ -190,8 +190,8 @@
           <th>QUANTITY</th>
           <th>ALLOCATED TO</th>
           <th>STATUS</th>
-          <th>UPDATE</th>
-          <th>DELETE</th>
+          <!-- <th>UPDATE</th>
+          <th>DELETE</th> -->
           <th>DOWNLOAD</th>
         </tr>
         <?php 
@@ -204,12 +204,12 @@
           <td><?php echo $row['quantity']?></td>
           <td><?php echo $row['allocation']?></td>
           <td><?php echo $row['statuss']?></td>
-          <td>
+        <!--   <td>
             <button class="update-btn"><a href="update-resources.php?id=<?php echo $row['id'];?>">MODIFY</button>
           </td>
           <td>
             <button class="delete-btn"><a href="delete-resources.php?id=<?php echo $row['id'];?>">DELETE</button>
-          </td>
+          </td> -->
           <td><button class="view-btn">
             <a href="./pdf/resources.php"><i class="fa-solid fa-circle-down"></i></a>
           </button></td>

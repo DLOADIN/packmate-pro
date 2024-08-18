@@ -13,6 +13,13 @@
   <title>REGISTER PAGE</title>
 </head>
 <style>
+  .btn{
+    color:#00BDD6;
+    border:3px solid #00BDD6;
+  }
+  .btn a{
+    color:#00BDD6;
+  }
 </style>
 <body>
   <div class="grided">
