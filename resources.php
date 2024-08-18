@@ -25,7 +25,7 @@
   <script src="jsfile.js"></script>
   <script src="./extension_remover.js"></script>
   <script scr="dropdown.js"></script>
-  <title>EQUIPMENTS</title>
+  <title>RESOURCES</title>
 </head>
 <body>
   <style>
@@ -34,10 +34,6 @@
     }
     .caradan-products{
       text-decoration: none;
-    }
-    .form-form{
-      width:fit-content;
-      padding-right: 1rem;
     }
     #clear{
       margin-right:3rem;
@@ -54,6 +50,10 @@
             select{
               border-radius:15px;
               border-top: 1px solid black;
+              height:8vh
+            }
+            input[name="asset_id"]{
+              /* display:none; */
             }
   </style>
 <div class="sidebar">
@@ -130,7 +130,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>ASSET MANAGEMENT</h1>
+          <h1>RESOURCES</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -152,62 +152,67 @@
       <div class="catch">
         <form  method="post" class="form-form">
           <div class="formation-1">
-          <label for="">LOCATION</label>
-          <input type="text" name="location" id="" placeholder="NAME" required>
+          <label for="">RESOURCES</label>
+          <input type="text" name="u_resources" id="" placeholder="RAW MATERIAL" required>
+          <label for="">DESCRIPTION</label>
+          <input type="text" name="descriptions" id="" placeholder="CHEMICAL COMPOSITION" required>
+          <label for="">QUANTITY</label>
+          <input type="text" name="quantity" id="" required placeholder="TONS">
+          <label for="">ALLOCATED TO</label>
+          <input type="text" name="allocation" id="" placeholder="LOCATION" required>
           <label for="">STATUS</label>
-          <select name="status" id="">
-            <option value="active">ACTIVE</option>
-            <option value="inactive">IN-ACTIVE</option>
+          <select name="statuss" id="">
+            <option value="Allocated">Allocated</option>
+            <option value="Scheduled">Scheduled</option>
+            <option value="Consumed">Consumed</option>
+            <option value="Operational">Operational</option>
           </select>
-          <label for="">PERFORMANCE</label>
-          <input type="range" name="performance" required value="<?=$performance?>" min="1" max="100"> 
-          
         </div>
           <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
           </button>
         </form>
        </div>
-       <?php
-if(isset($_POST['submit'])){
-  $raw_material=$_POST['location'];
-  $demand=$_POST['status'];
-  $performance=$_POST['performance'];
-  $sql=mysqli_query($con,"INSERT INTO assets VALUES('','$raw_material','$demand','$performance')");
-
-  if($sql){
-    echo "<script>alert('Documented Successfully')</script>";
-  }
-  else{
-    echo "<script>alert('failed to document')</script>";
-  }
-
-}
-?>
 
        
 
        <div class="tablestotable">
     <div class="table-containment">
     <?php
-        $sql=mysqli_query($con,"SELECT * FROM `assets`");
+        $sql=mysqli_query($con,"SELECT * FROM `myresources`");
         $number=0;
         ?>
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
         <tr>
           <th>#</th>
-          <th>LOCATION</th>
+          <th>RESOURCES</th>
+          <th>DESCRIPTION</th>
+          <th>QUANTITY</th>
+          <th>ALLOCATED TO</th>
           <th>STATUS</th>
-          <th>PERFORMANCE</th>
+          <th>UPDATE</th>
+          <th>DELETE</th>
+          <th>DOWNLOAD</th>
         </tr>
         <?php 
         while($row=mysqli_fetch_array($sql)):
         ?>
         <tr>
-          <td>00<?php echo ++$number ?></td>
-          <td><?php echo $row['location']?></td>
-          <td><?php echo $row['status']?></td>
-          <td><?php echo $row['performance']?></td>
+          <td><?php echo ++$number ?></td>
+          <td><?php echo $row['u_resources']?></td>
+          <td><?php echo $row['descriptions']?></td>
+          <td><?php echo $row['quantity']?></td>
+          <td><?php echo $row['allocation']?></td>
+          <td><?php echo $row['statuss']?></td>
+          <td>
+            <button class="update-btn"><a href="update-resources.php?id=<?php echo $row['id'];?>">MODIFY</button>
+          </td>
+          <td>
+            <button class="delete-btn"><a href="delete-resources.php?id=<?php echo $row['id'];?>">DELETE</button>
+          </td>
+          <td><button class="view-btn">
+            <a href="./pdf/resources.php"><i class="fa-solid fa-circle-down"></i></a>
+          </button></td>
         </tr>
         <?php 
         endwhile
@@ -252,3 +257,21 @@ menu.classList.remove('menu-open');
 </script>
 </body>
 </html>
+<?php
+if(isset($_POST['submit'])){
+  $raw_material=$_POST['u_resources'];
+  $line_setup=$_POST['descriptions'];
+  $qc_check=$_POST['quantity'];
+  $Batchdate=$_POST['allocation'];
+  $inventory_update=$_POST['statuss'];
+  $sql=mysqli_query($con,"INSERT INTO `myresources` VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate','$inventory_update')");
+
+  if($sql){
+    echo "<script>alert('Documented Successfully')</script>";
+  }
+  else{
+    echo "<script>alert('failed to document')</script>";
+  }
+
+}
+?>

@@ -23,6 +23,7 @@
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
+  <script src="./extension_remover.js"></script>
   <script scr="dropdown.js"></script>
   <title>INVENTORY</title>
 </head>
@@ -45,7 +46,7 @@
     }
   </style>
 <div class="sidebar">
-      <ul class="menu">
+      <!-- <ul class="menu">
         <div class="logout">
         <li>
           <a href="dashboard.php">
@@ -104,7 +105,7 @@
             <span>PROFILE</span>
           </a>
         </li>
-    </ul>
+    </ul> -->
   </div>
 
 
@@ -130,7 +131,8 @@
         </div> 
       </div>
       <?php
-            $sql=mysqli_query($con, "SELECT * from `inventory`");
+            $id=$_GET['id'];
+            $sql=mysqli_query($con, "SELECT * from `inventory` WHERE id='$id'");
             while($row=mysqli_fetch_array($sql)):
             ?>
       <div class="catch">

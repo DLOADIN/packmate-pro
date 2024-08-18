@@ -23,6 +23,7 @@
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
+  <script src="./extension_remover.js"></script>
   <script scr="dropdown.js"></script>
   <title>PRODUCTION</title>
 </head>
@@ -53,12 +54,19 @@
             <span>DASHBOARD</span>
           </a>
         </li>
-        <li>
-          <a href="production.php">
-            <i class="fa-brands fa-product-hunt"></i>
-            <span>PRODUCTION</span>
-          </a>
-        </li>
+        <div class="ropdown">
+          <div class="select">
+          <i class="fa-brands fa-product-hunt"></i>
+              <span class="selectee">PRODUCTION</span>
+              <div class="caret"></div>
+          </div>
+          <ul class="fireef">
+              <li>
+              <a href="production.php">PRODUCT PLANNING & SCHEDULING </a></li>
+              <li>
+              <a href="resources.php">RESOURCES & DEMAND</a></li>
+          </ul>
+      </div>
         <li>
           <a href="inventory.php">
             <i class="fa-solid fa-warehouse"></i>
@@ -139,12 +147,12 @@ while ($row = mysqli_fetch_array($sql)) {
     $qc = $row['qc_check'];
     $inventory = $row['inventory_update'];
     $demanding = $row['demand'];
-    $total = $qc + $inventory + $demanding / 3;
+    $total = $qc + $inventory + $demanding * 1.5 / 3;
     if ($total >= 90) {
         $count_above_100++;
-    } elseif ($total >= 50 && $total < 90) {
+    } elseif ($total >= 50 && $total <= 89) {
         $count_between_50_and_90++;
-    } else {
+    } elseif($total <= 49) {
         $count_below_50++;
     }
         ?>

@@ -24,6 +24,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
   <script scr="dropdown.js"></script>
+  <script src="./extension_remover.js"></script>
   <title>SUPPLY CHAIN</title>
 </head>
 <body>
@@ -60,12 +61,19 @@
             <span>DASHBOARD</span>
           </a>
         </li>
-        <li>
-          <a href="production.php">
-            <i class="fa-brands fa-product-hunt"></i>
-            <span>PRODUCTION</span>
-          </a>
-        </li>
+        <div class="ropdown">
+          <div class="select">
+          <i class="fa-brands fa-product-hunt"></i>
+              <span class="selectee">PRODUCTION</span>
+              <div class="caret"></div>
+          </div>
+          <ul class="fireef">
+              <li>
+              <a href="production.php">PRODUCT PLANNING & SCHEDULING </a></li>
+              <li>
+              <a href="resources.php">RESOURCES & DEMAND</a></li>
+          </ul>
+      </div>
         <li>
           <a href="inventory.php">
             <i class="fa-solid fa-warehouse"></i>

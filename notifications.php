@@ -48,12 +48,19 @@
             <span>DASHBOARD</span>
           </a>
         </li>
-        <li>
-          <a href="production.php">
-            <i class="fa-brands fa-product-hunt"></i>
-            <span>PRODUCTION</span>
-          </a>
-        </li>
+        <div class="ropdown">
+          <div class="select">
+          <i class="fa-brands fa-product-hunt"></i>
+              <span class="selectee">PRODUCTION</span>
+              <div class="caret"></div>
+          </div>
+          <ul class="fireef">
+              <li>
+              <a href="production.php">PRODUCT PLANNING & SCHEDULING </a></li>
+              <li>
+              <a href="resources.php">RESOURCES & DEMAND</a></li>
+          </ul>
+      </div>
         <li>
           <a href="inventory.php">
             <i class="fa-solid fa-warehouse"></i>
@@ -132,11 +139,11 @@
           $stock=$rowed['equipment'];
           $stocked=$rowed['first_maintenance'];
           $stockedd=$rowed['last_maintenance'];
-          $stockeddd=$rowed['last_maintenance'];
+          $stockeddd=$rowed['status'];
           
         echo "<i class='fa-solid fa-triangle-exclamation'></i>";
         echo "<h3> The equipment $stock is out of stock; For it Had it's first maintenance on $stocked <br>
-        and last maintenance on the $stockedd which is still now in $status</h3>";
+        and last maintenance on the $stockedd which is still now in $stockeddd</h3>";
         endwhile
         ?>
         </div>

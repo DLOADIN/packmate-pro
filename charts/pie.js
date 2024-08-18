@@ -1,67 +1,92 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const ctx1 = document.getElementById('children').getContext('2d');
+  const ctx2 = document.getElementById('stongone').getContext('2d');
+  const ctx3 = document.getElementById('valueable').getContext('2d');
 
-    // Chart 1: Pie Chart
-    const canvas1 = document.getElementById('acquisitions');
-    const data1 = {
-      labels: ['70% market Price', '29% crop yield trends', '34% malnutrition rates'],
+
+  // Data and configuration for the first doughnut chart
+  const emergingTrendsData = {
+      labels: ['Regulatory Compliance Status'],
       datasets: [{
-        label: 'Accreditated data',
-        data: [300, 50, 100],
-        backgroundColor: ['#5E80AB', '#FF895F', '#24E795'],
-        hoverOffset: 4
+          data: [89, 11],
+          backgroundColor: ['#00BDD6', '#D0D3D4'],
+          hoverBackgroundColor: ['#00BDD6', '#BFC9CA']
       }]
-    };
+  };
 
-    const ctx1 = canvas1.getContext('2d');
-    new Chart(ctx1, {
-      type: 'pie',
-      data: data1,
-      options: {}
-    });
-
-    // Chart 2: Line Chart
-    const labels2 = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-    const data2 = {
-      labels: labels2,
+  // Data and configuration for the second doughnut chart
+  const priceFluctuationsData = {
+      labels: ['Laws & Regulatory Performance Metrics'],
       datasets: [{
-        label: ' key food security indicators',
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
+          data: [78, 22],
+          backgroundColor: ['#00BDD6', '#D0D3D4'],
+          hoverBackgroundColor: ['#00BDD6', '#BFC9CA']
       }]
-    };
+  };
 
-    const canvas2 = document.getElementById('lenovo');
-    const ctx2 = canvas2.getContext('2d');
-    new Chart(ctx2, {
-      type: 'line',
-      data: data2,
-      options: {}
-    });
-
-    // Chart 3: Bar Chart
-    const labels3 = ['JANUARY', 'FEBRUARY', 'MARCH', 'MAY', 'JUNE'];
-    const data3 = {
-      labels: labels3,
+  // Data and configuration for the Polar Area chart
+  const complianceData = {
+      labels: ['Market Assessment Compliance', 'Product Review Compliance', 'Active Communication', 'Maintenance Compliance', 'Regulatory Compliance'],
       datasets: [{
-        label: 'Yield Production as expected',
-        data: [11, 16, 7, 3, 14],
-        backgroundColor: ['rgb(255, 99, 132)', 'rgb(75, 192, 192)', 'rgb(255, 205, 86)', 'rgb(201, 203, 207)', 'rgb(54, 162, 235)'],
-        borderWidth: 1
+          label: 'Laws & Regulations Compliance',
+          data: [30, 20, 25, 15, 10], // Example data
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9F40', '#4BC0C0'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#FF9F40', '#4BC0C0']
       }]
-    };
+  };
 
-    const canvas3 = document.getElementById('sand-worm');
-    const ctx3 = canvas3.getContext('2d');
-    new Chart(ctx3, {
-      type: 'radar',
-      data: data3,
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+
+  // Common chart options with custom tooltip configuration
+  const options = {
+      responsive: true,
+      plugins: {
+          tooltip: {
+              enabled: true,
+              callbacks: {
+                  label: function(context) {
+                      const value = context.raw;
+                      return `${value}`; // Display only the value in the tooltip
+                  }
+              }
+          },
+          legend: {
+              display: false
+          },
+          title: {
+              display: true,
+              text: function(context) {
+                  if (context.chart.canvas.id === 'children') {
+                      return 'Regulatory Compliance Status';
+                  } else if (context.chart.canvas.id === 'stongone') {
+                      return 'Laws & Regulatory Performance Metrics';
+                  } else if (context.chart.canvas.id === 'valueable') {
+                      return 'Laws & Regulations Compliance';
+                  }
+                  return '';
+              }
           }
-        }
       }
-    });
-  
+  };
+
+  // Initialize the first doughnut chart
+  new Chart(ctx1, {
+      type: 'doughnut',
+      data: emergingTrendsData,
+      options: options
+  });
+
+  // Initialize the second doughnut chart
+  new Chart(ctx2, {
+      type: 'doughnut',
+      data: priceFluctuationsData,
+      options: options
+  });
+
+  // Initialize the Polar Area chart
+  new Chart(ctx3, {
+      type: 'polarArea',
+      data: complianceData,
+      options: options
+  });
+
+});
