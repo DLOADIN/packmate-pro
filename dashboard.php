@@ -29,7 +29,9 @@
 <body>
   <style>
     #main-contents{
-      height:200vh;
+      height:fit-content;
+      overflow-y:auto;
+      padding-bottom:3rem;
     }
     .caradan-products{
       text-decoration: none;
@@ -136,30 +138,153 @@
           </button>
         </div> 
       </div>
- <!-- <div class="tye-wrapper">
-                <h2>Hi <?php echo $row['u_name']; ?>, Here's what is recorded overall <br> from the information you provided</h2>
-                <div class="tye">
-                    <div class="urk-urk">
-                        <div class="acanvas" id="first-one">
-                          <h4><?php echo $totalData['Total']?> ORDERS</h4>
-                            <canvas id="children">
-                            </canvas>
-                        </div>
-                        <div class="acanvas" id="first-two">
-                        <h4><?php echo $overallWeightData['overall_weight']?> KGS</h4>
-                            <canvas id="stongone"></canvas>
-                        </div>
-                        <div class="acanvas" id="first-three">
-                        <h4><?php echo $orderNumbersData['OrderNumbers']?>%</h4>
-                            <canvas id="acquisitions"></canvas>
-                        </div>
-                        <div class="acanvas" id="first-four">
-                        <h4><?php echo $totalCountData['TotalCount']?>%</h4>
-                            <canvas id="beatit"></canvas>
-                        </div>
-                    </div>
-                </div>      
-  </div> -->
+    
+      <?php
+$sql_1 = mysqli_query($con, "SELECT count(*) AS total FROM `users`");
+$number = mysqli_fetch_array($sql_1);
+$numbers = $number['total'];
+
+$sql_2 = mysqli_query($con, "SELECT sum(qc_check + inventory_update + demand) AS focal FROM `production`");
+$number2 = mysqli_fetch_array($sql_2);
+$numberss = $number2['focal'];
+
+$sql_3 = mysqli_query($con, "SELECT sum(current_stock + reorder_point + lead_time + safety_stock) AS strt FROM `inventory`");
+$div1 = mysqli_fetch_array($sql_3);
+$numbersss = $div1['strt'];
+
+$sql_4 = mysqli_query($con, "SELECT count(*) AS strt FROM `supply-chain`");
+$div1 = mysqli_fetch_array($sql_4);
+$numberssss = $div1['strt'];
+
+$sql_5 = mysqli_query($con, "SELECT count(*) AS strt FROM `myresources`");
+$div1 = mysqli_fetch_array($sql_5);
+$DATE = $div1['strt'];
+
+$sql_6 = mysqli_query($con, "SELECT count(*) AS strt FROM `assurance`");
+$div11 = mysqli_fetch_array($sql_6);
+$frequency = $div11['strt'];
+
+$sql_7 = mysqli_query($con, "SELECT count(*) AS strt FROM `equipments`");
+$div11 = mysqli_fetch_array($sql_7);
+$tye = $div11['strt'];
+?>
+    <div class="comptia">
+    <h1>OVERVIEW</h1>
+    <div class="giy">
+        <div class="gta5">
+            <div class="majj">
+                <h6>USERS</h6>
+                <h6 class="numbers"><?php echo $numbers; ?></h6>
+            </div>
+            <div class="majjor">
+                <i class="fa-solid fa-user-group"></i>
+            </div>
+        </div>
+
+        <div class="gta5">
+            <div class="majj">
+                <h6>PRODUCTS</h6>
+                <h6 class="numbers"><?php echo $numberss; ?></h6>
+            </div>
+            <div class="majjor">
+              <i class="fa-solid fa-boxes-packing"></i>
+            </div>
+        </div>
+
+        <div class="gta5">
+            <div class="majj">
+                <h6>INVENTORY</h6>
+                <h6 class="numbers"><?php echo $numbersss; ?></h6>
+            </div>
+            <div class="majjor">
+            <i class="fa-solid fa-warehouse"></i>
+            </div>
+        </div>
+
+
+        <div class="gta5">
+            <div class="majj">
+                <h6>SUPPPLY-CHAIN</h6>
+                <h6 class="numbers"><?php echo $numberssss; ?></h6>
+            </div>
+            <div class="majjor">
+            <i class="fa-solid fa-chart-line"></i>
+            </div>
+        </div>
+        
+        <div class="gta5">
+            <div class="majj">
+                <h6>MANTAINED EQUIPMENTS</h6>
+                <h6 class="numbers"><?php echo $DATE; ?></h6>
+            </div>
+            <div class="majjor">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+        </div>
+
+        <div class="gta5">
+            <div class="majj">
+                <h6>ASSURANCE DATA</h6>
+                <h6 class="numbers"><?php echo $frequency; ?></h6>
+            </div>
+            <div class="majjor">
+            <i class="fa-solid fa-hand-holding-medical"></i>
+            </div>
+        </div>
+        
+        <div class="gta5">
+            <div class="majj">
+                <h6>SUCCESSFUL UTILZED EQUIPMENTS</h6>
+                <h6 class="numbers"><?php echo $tye; ?></h6>
+            </div>
+            <div class="majjor">
+            <i class="fa-solid fa-check"></i>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<style>
+    .giy {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        padding: 3rem;
+        gap: 1rem;
+        flex-wrap: wrap; 
+    }
+
+    .gta5 {
+        width: 20%; 
+        height: 30vh;
+        background: #fff;
+        border-radius: 17px;
+        border: 1px solid #000;
+        box-sizing: border-box; 
+    }
+    .majj {
+        padding: 1rem; 
+        font-size: 2rem;
+        display: flex;
+        justify-content:space-between
+    }
+
+    .majjor {
+        display: flex;
+        justify-content: center;
+    }
+
+    .majjor i {
+        font-size: 5.3rem; 
+        margin:2rem 0rem 0rem 0rem;
+        color: #00BDD6;
+    }
+    .comptia{
+      text-align:center
+    }
+</style>
   <div class="tablestotable">
     <div class="table-containment">
     <?php
@@ -190,13 +315,71 @@
         ?>
       </table>
     </div>
+    <style>
+       .far-off {
+            display: flex;
+            justify-content: center; 
+            padding: 2rem;
+        }
+
+        .one-time {
+            margin: 5rem 0;
+            width: 100%; 
+            max-width: 160vh;
+        }
+
+        .one-time canvas {
+            width: 100%; /* Responsive width */
+            height: auto; /* Maintain aspect ratio */
+            border: 1px solid #ddd; /* Optional: adds a border around the canvas */
+        }
+    </style>
+    <div class="far-off">
+      <div class="one-time">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
 </div> 
-  
- 
+<script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+const myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August'], 
+        datasets: [{
+            label: 'Sales',
+            data: [12, 19, 3, 5, 2, 3, 7,9], 
+            backgroundColor: 'rgba(75, 192, 192, 0.2)', 
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1 
+        }]
+    },
+    options: {
+        scales: {
+            x: {
+                beginAtZero: true 
+            },
+            y: {
+                beginAtZero: true 
+            }
+        },
+        plugins: {
+            legend: {
+                display: true, // Display the legend
+            },
+            tooltip: {
+                enabled: true // Enable tooltips
+            }
+        }
+    }
+});
+</script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="./charts/linechart.js"></script>
-<script src="./charts/app.js"></script>
+
+<script src="./charts/devoid.js"></script>
+
 <script>
   document.addEventListener('DOMContentLoaded', () => {
 const dropdowns = document.querySelectorAll('.ropdown');

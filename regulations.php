@@ -169,7 +169,7 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script src="./charts/devoid.js"></script>
-<script src="./charts/app.js"></script>
+<script src="./charts/pie.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
 const dropdowns = document.querySelectorAll('.ropdown');
@@ -199,6 +199,5 @@ menu.classList.remove('menu-open');
 });
 
 </script>
-<script src="./charts/pie.js"></script>
 </body>
 </html>
