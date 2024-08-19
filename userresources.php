@@ -145,6 +145,11 @@
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
+          <div class="search__box">
+            <form method="GET">
+            <input type="text" placeholder="Search" name="search"/>
+        </form>
+      </div>
         </div> 
       </div>
       
@@ -176,50 +181,74 @@
 
        <div class="tablestotable">
     <div class="table-containment">
-    <?php
-        $sql=mysqli_query($con,"SELECT * FROM `myresources`");
-        $number=0;
+        <?php
+        $search = '';
+        if (isset($_GET['search'])) {
+            $search = mysqli_real_escape_string($con, $_GET['search']);
+        }
+        $sql = "SELECT * FROM `myresources`";
+        if (!empty($search)) {
+            $sql .= " WHERE `u_resources` LIKE '%$search%' OR 
+                        `descriptions` LIKE '%$search%' OR 
+                        `quantity` LIKE '%$search%' OR 
+                        `allocation` LIKE '%$search%' OR 
+                        `statuss` LIKE '%$search%'";
+        }
+        $sql .= " ORDER BY `u_resources` ASC"; // Modify order as needed
+        $result = mysqli_query($con, $sql);
         ?>
+
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
-        <tr>
-          <th>#</th>
-          <th>RESOURCES</th>
-          <th>DESCRIPTION</th>
-          <th>QUANTITY</th>
-          <th>ALLOCATED TO</th>
-          <th>STATUS</th>
-          <th>UPDATE</th>
-          <th>DELETE</th>
-          <th>DOWNLOAD</th>
-        </tr>
-        <?php 
-        while($row=mysqli_fetch_array($sql)):
-        ?>
-        <tr>
-          <td><?php echo ++$number ?></td>
-          <td><?php echo $row['u_resources']?></td>
-          <td><?php echo $row['descriptions']?></td>
-          <td><?php echo $row['quantity']?></td>
-          <td><?php echo $row['allocation']?></td>
-          <td><?php echo $row['statuss']?></td>
-          <td>
-            <button class="update-btn"><a href="update-resources.php?id=<?php echo $row['id'];?>">MODIFY</button>
-          </td>
-          <td>
-            <button class="delete-btn"><a href="delete-resources.php?id=<?php echo $row['id'];?>">DELETE</button>
-          </td>
-          <td><button class="view-btn">
-            <a href="./pdf/resources.php"><i class="fa-solid fa-circle-down"></i></a>
-          </button></td>
-        </tr>
-        <?php 
-        endwhile
-        ?>
-      </table>
+            <tr>
+                <th>#</th>
+                <th>RESOURCES</th>
+                <th>DESCRIPTION</th>
+                <th>QUANTITY</th>
+                <th>ALLOCATED TO</th>
+                <th>STATUS</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+                <th>DOWNLOAD</th>
+            </tr>
+            <?php 
+            if (mysqli_num_rows($result) > 0) {
+                $number = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $number++;
+            ?>
+            <tr>
+                <td><?php echo $number; ?></td>
+                <td><?php echo htmlspecialchars($row['u_resources']); ?></td>
+                <td><?php echo htmlspecialchars($row['descriptions']); ?></td>
+                <td><?php echo htmlspecialchars($row['quantity']); ?></td>
+                <td><?php echo htmlspecialchars($row['allocation']); ?></td>
+                <td><?php echo htmlspecialchars($row['statuss']); ?></td>
+                <td>
+                    <button class="update-btn">
+                        <a href="update-resources.php?id=<?php echo $row['id']; ?>">MODIFY</a>
+                    </button>
+                </td>
+                <td>
+                    <button class="delete-btn">
+                        <a href="delete-resources.php?id=<?php echo $row['id']; ?>">DELETE</a>
+                    </button>
+                </td>
+                <td>
+                    <button class="view-btn">
+                        <a href="./pdf/resources.php"><i class="fa-solid fa-circle-down"></i></a>
+                    </button>
+                </td>
+            </tr>
+            <?php 
+                }
+            } else {
+                echo "<tr><td colspan='9'>No results found</td></tr>";
+            }
+            ?>
+        </table>
     </div>
-</div> 
-</div> 
+</div>
 
   
  <script>

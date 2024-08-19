@@ -135,6 +135,11 @@
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
+          <div class="search__box">
+            <form method="GET">
+            <input type="text" placeholder="Search" name="search"/>
+        </form>
+      </div>
         </div> 
       </div>
       
@@ -163,52 +168,79 @@
 
        <div class="tablestotable">
     <div class="table-containment">
-    <?php
-        $sql=mysqli_query($con,"SELECT * FROM `inventory`");
-        $number=0;
+        <?php
+        $search = '';
+        if (isset($_GET['search'])) {
+            $search = mysqli_real_escape_string($con, $_GET['search']);
+        }
+        $sql = "SELECT * FROM `inventory`";
+        if (!empty($search)) {
+            $sql .= " WHERE 
+                        `raw_material` LIKE '%$search%' OR 
+                        `current_stock` LIKE '%$search%' OR 
+                        `reorder_point` LIKE '%$search%' OR 
+                        `supplier` LIKE '%$search%' OR 
+                        `lead_time` LIKE '%$search%' OR 
+                        `safety_stock` LIKE '%$search%'";
+        }
+        $sql .= " ORDER BY `raw_material` ASC"; 
+        $result = mysqli_query($con, $sql);
         ?>
+
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
-        <tr>
-          <th>#</th>
-          <th>RAW MATERIAL</th>
-          <th>CURRENT STOCK (Tons)</th>
-          <th>RE-ORDER POINT (Tons)</th>
-          <th>SUPPLIER</th>
-          <th>LEAD TIME (Days)</th>
-          <th>SAFETY STOCK (Tons)</th>
-          <th>UPDATE</th>
-          <th>DELETE</th>
-          <th>DOWNLOAD</th>
-        </tr>
-        <?php 
-        while($row=mysqli_fetch_array($sql)):
-        ?>
-        <tr>
-          <td><?php echo ++$number ?></td>
-          <td><?php echo $row['raw_material']?></td>
-          <td><?php echo $row['current_stock']?></td>
-          <td><?php echo $row['reorder_point']?></td>
-          <td><?php echo $row['supplier']?></td>
-          <td><?php echo $row['lead_time']?></td>
-          <td><?php echo $row['safety_stock']?></td>
-          <td>
-            <button class="update-btn"><a href="update-inventory.php?id=<?php echo $row['id'];?>">MODIFY</button>
-          </td>
-          <td>
-            <button class="delete-btn"><a href="delete-inventory.php?id=<?php echo $row['id'];?>">DELETE</button>
-          </td>
-          <td><button class="view-btn">
-            <a href="./pdf/inventory.php"><i class="fa-solid fa-circle-down"></i></a>
-          </button></td>
-        </tr>
-        <?php 
-        endwhile
-        ?>
-      </table>
+            <tr>
+                <th>#</th>
+                <th>RAW MATERIAL</th>
+                <th>CURRENT STOCK (Tons)</th>
+                <th>RE-ORDER POINT (Tons)</th>
+                <th>SUPPLIER</th>
+                <th>LEAD TIME (Days)</th>
+                <th>SAFETY STOCK (Tons)</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+                <th>DOWNLOAD</th>
+            </tr>
+            <?php 
+            if (mysqli_num_rows($result) > 0) {
+                $number = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $number++;
+            ?>
+            <tr>
+                <td><?php echo $number; ?></td>
+                <td><?php echo htmlspecialchars($row['raw_material']); ?></td>
+                <td><?php echo htmlspecialchars($row['current_stock']); ?></td>
+                <td><?php echo htmlspecialchars($row['reorder_point']); ?></td>
+                <td><?php echo htmlspecialchars($row['supplier']); ?></td>
+                <td><?php echo htmlspecialchars($row['lead_time']); ?></td>
+                <td><?php echo htmlspecialchars($row['safety_stock']); ?></td>
+                <td>
+                    <button class="update-btn">
+                        <a href="update-inventory.php?id=<?php echo $row['id']; ?>">MODIFY</a>
+                    </button>
+                </td>
+                <td>
+                    <button class="delete-btn">
+                        <a href="delete-inventory.php?id=<?php echo $row['id']; ?>">DELETE</a>
+                    </button>
+                </td>
+                <td>
+                    <button class="view-btn">
+                        <a href="./pdf/inventory.php"><i class="fa-solid fa-circle-down"></i></a>
+                    </button>
+                </td>
+            </tr>
+            <?php 
+                }
+            } else {
+                echo "<tr><td colspan='10'>No results found</td></tr>";
+            }
+            ?>
+        </table>
     </div>
-</div> 
-</div> 
+</div>
+
 
   
  <script>

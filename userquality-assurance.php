@@ -166,6 +166,11 @@ if (!empty($_SESSION["id"])) {
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
+          <div class="search__box">
+            <form method="GET">
+            <input type="text" placeholder="Search" name="search"/>
+        </form>
+      </div>
         </div> 
       </div>
       
@@ -194,41 +199,63 @@ if (!empty($_SESSION["id"])) {
 
        <div class="tablestotable">
     <div class="table-containment">
-    <?php
-        $sql=mysqli_query($con,"SELECT * FROM `assurance`");
-        $number=0;
+        <?php
+        $search = '';
+        if (isset($_GET['search'])) {
+            $search = mysqli_real_escape_string($con, $_GET['search']);
+        }
+
+        // Construct the SQL query
+        $sql = "SELECT * FROM `assurance`";
+        if (!empty($search)) {
+            $sql .= " WHERE 
+                        `aspect` LIKE '%$search%' OR 
+                        `method` LIKE '%$search%' OR 
+                        `testing` LIKE '%$search%' OR 
+                        `values` LIKE '%$search%' OR 
+                        `deviation` LIKE '%$search%' OR 
+                        `status` LIKE '%$search%'";
+        }
+        $sql .= " ORDER BY `aspect` ASC"; // Modify order as needed
+        $result = mysqli_query($con, $sql);
         ?>
+
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
-        <tr>
-          <th>#</th>
-          <th>ASPECT</th>
-          <th>TESTING METHOD</th>
-          <th>FREQUENCY TESTING</th>
-          <th>ACTUAL VALUES</th>
-          <th>DEVIATION</th>
-          <th>RESULT</th>
-        </tr>
-        <?php 
-        while($row=mysqli_fetch_array($sql)):
-        ?>
-        <tr>
-          <td><?php echo ++$number ?></td>
-          <td><?php echo $row['aspect']?></td>
-          <td><?php echo $row['method']?></td>
-          <td><?php echo $row['testing']?></td>
-          <td><?php echo $row['values']?></td>
-          <td><?php echo $row['deviation']?></td>
-          <td><?php echo $row['status']?></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <?php 
-        endwhile
-        ?>
-      </table>
-    </div> 
-</div> 
+            <tr>
+                <th>#</th>
+                <th>ASPECT</th>
+                <th>TESTING METHOD</th>
+                <th>FREQUENCY TESTING</th>
+                <th>ACTUAL VALUES</th>
+                <th>DEVIATION</th>
+                <th>RESULT</th>
+            </tr>
+            <?php 
+            if (mysqli_num_rows($result) > 0) {
+                $number = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $number++;
+            ?>
+            <tr>
+                <td><?php echo $number; ?></td>
+                <td><?php echo htmlspecialchars($row['aspect']); ?></td>
+                <td><?php echo htmlspecialchars($row['method']); ?></td>
+                <td><?php echo htmlspecialchars($row['testing']); ?></td>
+                <td><?php echo htmlspecialchars($row['values']); ?></td>
+                <td><?php echo htmlspecialchars($row['deviation']); ?></td>
+                <td><?php echo htmlspecialchars($row['status']); ?></td>
+            </tr>
+            <?php 
+                }
+            } else {
+                echo "<tr><td colspan='7'>No results found</td></tr>";
+            }
+            ?>
+        </table>
+    </div>
+</div>
+
 
 
   

@@ -350,11 +350,33 @@ ul li:hover ul.dropdown{
   background-color: #ecebf3;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
 .another-hastings{
   margin: 0 auto;
   margin-top: 5vh;
   padding:1rem;
 }
 
+
+.search__box {
+  padding: 0.5rem 0;
+  border-bottom: 2px solid var(--extra-light);
+}
+
+.search__box input {
+  color: var(--extra-light);
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 100%;
+  font-size:3vh;
+  padding:1rem
+}
+
+.search__box i {
+  color: var(--extra-light);
+  font-size: 1.0rem;
+  cursor: pointer;
+}
 
 
