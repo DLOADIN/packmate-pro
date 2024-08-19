@@ -183,20 +183,48 @@
        <div class="tablestotable">
     <div class="table-containment">
         <?php
+        // Connexion à la base de données
+        // Assurez-vous d'avoir une connexion $con
+
+        // Nombre de résultats par page
+        $results_per_page = 10;
+
+        // Page actuelle
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $results_per_page;
+
+        // Requête de recherche
         $search = '';
         if (isset($_GET['search'])) {
             $search = mysqli_real_escape_string($con, $_GET['search']);
         }
+
+        // Requête SQL
         $sql = "SELECT * FROM `myresources`";
         if (!empty($search)) {
-            $sql .= " WHERE `u_resources` LIKE '%$search%' OR 
+            $sql .= " WHERE 
+                        `u_resources` LIKE '%$search%' OR 
                         `descriptions` LIKE '%$search%' OR 
                         `quantity` LIKE '%$search%' OR 
                         `allocation` LIKE '%$search%' OR 
                         `statuss` LIKE '%$search%'";
         }
-        $sql .= " ORDER BY `u_resources` ASC"; // Modify order as needed
+        $sql .= " ORDER BY `u_resources` ASC LIMIT $offset, $results_per_page";
         $result = mysqli_query($con, $sql);
+
+        // Calculer le nombre total de résultats
+        $total_sql = "SELECT COUNT(*) FROM `myresources`";
+        if (!empty($search)) {
+            $total_sql .= " WHERE 
+                            `u_resources` LIKE '%$search%' OR 
+                            `descriptions` LIKE '%$search%' OR 
+                            `quantity` LIKE '%$search%' OR 
+                            `allocation` LIKE '%$search%' OR 
+                            `statuss` LIKE '%$search%'";
+        }
+        $total_result = mysqli_query($con, $total_sql);
+        $total_rows = mysqli_fetch_array($total_result)[0];
+        $total_pages = ceil($total_rows / $results_per_page);
         ?>
 
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
@@ -212,7 +240,7 @@
             </tr>
             <?php 
             if (mysqli_num_rows($result) > 0) {
-                $number = 0;
+                $number = $offset; // Commencer le comptage à l'offset
                 while ($row = mysqli_fetch_assoc($result)) {
                     $number++;
             ?>
@@ -232,10 +260,28 @@
             <?php 
                 }
             } else {
-                echo "<tr><td colspan='9'>No results found</td></tr>";
+                echo "<tr><td colspan='7'>No results found</td></tr>";
             }
             ?>
         </table>
+
+        <div class="pagination">
+            <?php
+            if ($page > 1) {
+                echo '<a href="?page=' . ($page - 1) . '&search=' . htmlspecialchars($search) . '">&laquo; Previous</a>';
+            }
+            for ($i = 1; $i <= $total_pages; $i++) {
+                if ($i == $page) {
+                    echo '<span class="current-page">' . $i . '</span>';
+                } else {
+                    echo '<a href="?page=' . $i . '&search=' . htmlspecialchars($search) . '">' . $i . '</a>';
+                }
+            }
+            if ($page < $total_pages) {
+                echo '<a href="?page=' . ($page + 1) . '&search=' . htmlspecialchars($search) . '">Next &raquo;</a>';
+            }
+            ?>
+        </div>
     </div>
 </div>
 

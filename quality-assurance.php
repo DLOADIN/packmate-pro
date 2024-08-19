@@ -221,9 +221,13 @@ if (isset($_GET['action']) && isset($_GET['table']) && isset($_GET['id'])) {
         </form>
        </div>
 
-<div class="tablestotable">
+       <div class="tablestotable">
     <div class="table-containment">
-    <?php
+        <?php
+        $limit = 10;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
+
         $search = '';
         if (isset($_GET['search'])) {
             $search = mysqli_real_escape_string($con, $_GET['search']);
@@ -239,52 +243,84 @@ if (isset($_GET['action']) && isset($_GET['table']) && isset($_GET['id'])) {
                         `deviation` LIKE '%$search%' OR 
                         `status` LIKE '%$search%'";
         }
-        $sql .= " ORDER BY `aspect` ASC"; 
+        $sql .= " ORDER BY `aspect` ASC LIMIT $limit OFFSET $offset";
         $result = mysqli_query($con, $sql);
+
+        $total_sql = "SELECT COUNT(*) as total FROM `assurance`";
+        if (!empty($search)) {
+            $total_sql .= " WHERE 
+                            `aspect` LIKE '%$search%' OR 
+                            `method` LIKE '%$search%' OR 
+                            `testing` LIKE '%$search%' OR 
+                            `values` LIKE '%$search%' OR 
+                            `deviation` LIKE '%$search%' OR 
+                            `status` LIKE '%$search%'";
+        }
+        $total_result = mysqli_query($con, $total_sql);
+        $total_row = mysqli_fetch_assoc($total_result);
+        $total_records = $total_row['total'];
+        $total_pages = ceil($total_records / $limit);
         ?>
+
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
-        <tr>
-          <th>#</th>
-          <th>ASPECT</th>
-          <th>TESTING METHOD</th>
-          <th>FREQUENCY TESTING</th>
-          <th>ACTUAL VALUES</th>
-          <th>DEVIATION</th>
-          <th>ACTION</th>
-        </tr>
-        <?php 
+            <tr>
+                <th>#</th>
+                <th>ASPECT</th>
+                <th>TESTING METHOD</th>
+                <th>FREQUENCY TESTING</th>
+                <th>ACTUAL VALUES</th>
+                <th>DEVIATION</th>
+                <th>ACTION</th>
+            </tr>
+            <?php 
             if (mysqli_num_rows($result) > 0) {
-                $number = 0;
+                $number = $offset + 1; // Adjust starting number for pagination
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $number++;
             ?>
-        <tr>
-          <td><?php echo ++$number ?></td>
-          <td><?php echo $row['aspect']?></td>
-          <td><?php echo $row['method']?></td>
-          <td><?php echo $row['testing']?></td>
-          <td><?php echo $row['values']?></td>
-          <td><?php echo $row['deviation']?></td>
-          <td class="td">
-                <?php if (strtolower($row['status']) == 'pending') { ?>
+            <tr>
+                <td><?php echo $number++; ?></td>
+                <td><?php echo htmlspecialchars($row['aspect']); ?></td>
+                <td><?php echo htmlspecialchars($row['method']); ?></td>
+                <td><?php echo htmlspecialchars($row['testing']); ?></td>
+                <td><?php echo htmlspecialchars($row['values']); ?></td>
+                <td><?php echo htmlspecialchars($row['deviation']); ?></td>
+                <td class="td">
+                    <?php if (strtolower($row['status']) == 'pending') { ?>
                         <a href="?id=<?php echo $row['id']; ?>&action=approve&table=assurance" class="fg-eric1">APPROVE</a>
                         <a href="?id=<?php echo $row['id']; ?>&action=disapprove&table=assurance" class="fg-eric2">DISAPPROVE</a>
                     <?php } else { ?>
                         <span><?php echo htmlspecialchars($row['status']); ?></span>
                     <?php } ?>
                 </td>
-        </tr>
-        <?php 
+            </tr>
+            <?php 
                 }
             } else {
                 echo "<tr><td colspan='7'>No results found</td></tr>";
             }
             ?>
-      </table>
+        </table>
+
+        <!-- Pagination Links -->
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?php echo $page - 1; ?>&search=<?php echo urlencode($search); ?>">&laquo; Previous</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>" <?php if ($i == $page) echo 'class="active"'; ?>>
+                    <?php echo $i; ?>
+                </a>
+            <?php endfor; ?>
+
+            <?php if ($page < $total_pages): ?>
+                <a href="?page=<?php echo $page + 1; ?>&search=<?php echo urlencode($search); ?>">Next &raquo;</a>
+            <?php endif; ?>
+        </div>
     </div>
-</div> 
-</div> 
+</div>
+
 
 
   

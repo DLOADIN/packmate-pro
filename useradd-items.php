@@ -190,15 +190,27 @@
        </div>
 
        
+       
        <div class="tablestotable">
     <div class="table-containment">
         <?php
+        // Connexion à la base de données
+        // Assurez-vous d'avoir une connexion $con
+
+        // Nombre de résultats par page
+        $results_per_page = 10;
+
+        // Page actuelle
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $results_per_page;
+
+        // Requête de recherche
         $search = '';
         if (isset($_GET['search'])) {
             $search = mysqli_real_escape_string($con, $_GET['search']);
         }
 
-        // Construct the SQL query
+        // Requête SQL pour la pagination
         $sql = "SELECT * FROM `equipments`";
         if (!empty($search)) {
             $sql .= " WHERE 
@@ -209,9 +221,25 @@
                         `last_maintenance` LIKE '%$search%' OR 
                         `status` LIKE '%$search%'";
         }
-        $sql .= " ORDER BY `equipment` ASC"; // Modify order as needed
+        $sql .= " ORDER BY `equipment` ASC LIMIT $offset, $results_per_page";
         $result = mysqli_query($con, $sql);
+
+        // Calculer le nombre total de résultats
+        $total_sql = "SELECT COUNT(*) FROM `equipments`";
+        if (!empty($search)) {
+            $total_sql .= " WHERE 
+                            `equipment` LIKE '%$search%' OR 
+                            `maintenance_task` LIKE '%$search%' OR 
+                            `frequency` LIKE '%$search%' OR 
+                            `first_maintenance` LIKE '%$search%' OR 
+                            `last_maintenance` LIKE '%$search%' OR 
+                            `status` LIKE '%$search%'";
+        }
+        $total_result = mysqli_query($con, $total_sql);
+        $total_rows = mysqli_fetch_array($total_result)[0];
+        $total_pages = ceil($total_rows / $results_per_page);
         ?>
+
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
             <tr>
@@ -228,7 +256,7 @@
             </tr>
             <?php 
             if (mysqli_num_rows($result) > 0) {
-                $number = 0;
+                $number = $offset; // Commencer le comptage à l'offset
                 while ($row = mysqli_fetch_assoc($result)) {
                     $number++;
             ?>
@@ -263,9 +291,28 @@
             }
             ?>
         </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <?php
+            if ($page > 1) {
+                echo '<a href="?page=' . ($page - 1) . '&search=' . htmlspecialchars($search) . '">&laquo; Previous</a>';
+            }
+            for ($i = 1; $i <= $total_pages; $i++) {
+                if ($i == $page) {
+                    echo '<span class="current-page">' . $i . '</span>';
+                } else {
+                    echo '<a href="?page=' . $i . '&search=' . htmlspecialchars($search) . '">' . $i . '</a>';
+                }
+            }
+            if ($page < $total_pages) {
+                echo '<a href="?page=' . ($page + 1) . '&search=' . htmlspecialchars($search) . '">Next &raquo;</a>';
+            }
+            ?>
+        </div>
     </div>
 </div>
-  
+
  <script>
     document.addEventListener('DOMContentLoaded', () => {
 const dropdowns = document.querySelectorAll('.ropdown');

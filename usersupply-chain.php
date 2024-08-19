@@ -182,12 +182,40 @@
        <div class="tablestotable">
     <div class="table-containment">
         <?php
+        // Define the number of results per page
+        $results_per_page = 10; // Adjust this value as needed
+
+        // Get the current page number from the URL, default is page 1
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+        // Calculate the starting record for the current page
+        $offset = ($page - 1) * $results_per_page;
+
+        // Get search term from URL
         $search = '';
         if (isset($_GET['search'])) {
             $search = mysqli_real_escape_string($con, $_GET['search']);
         }
 
-        // Construct the SQL query
+        // Construct the SQL query for total records
+        $total_sql = "SELECT COUNT(*) FROM `supply-chain`";
+        if (!empty($search)) {
+            $total_sql .= " WHERE 
+                            `u_productname` LIKE '%$search%' OR 
+                            `u_quantity` LIKE '%$search%' OR 
+                            `u_amount` LIKE '%$search%' OR 
+                            `u_supplier` LIKE '%$search%' OR 
+                            `u_distributor` LIKE '%$search%' OR 
+                            `date` LIKE '%$search%' OR 
+                            `status` LIKE '%$search%'";
+        }
+        $total_result = mysqli_query($con, $total_sql);
+        $total_rows = mysqli_fetch_array($total_result)[0];
+        
+        // Calculate total pages
+        $total_pages = ceil($total_rows / $results_per_page);
+
+        // Construct the SQL query with LIMIT and OFFSET
         $sql = "SELECT * FROM `supply-chain`";
         if (!empty($search)) {
             $sql .= " WHERE 
@@ -199,7 +227,7 @@
                         `date` LIKE '%$search%' OR 
                         `status` LIKE '%$search%'";
         }
-        $sql .= " ORDER BY `date` DESC"; // Modify order as needed
+        $sql .= " ORDER BY `date` DESC LIMIT $offset, $results_per_page";
         $result = mysqli_query($con, $sql);
         ?>
 
@@ -219,12 +247,11 @@
             </tr>
             <?php 
             if (mysqli_num_rows($result) > 0) {
-                $number = 0;
+                $number = $offset + 1; // Adjust the number based on offset
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $number++;
             ?>
             <tr>
-                <td><?php echo $number; ?></td>
+                <td><?php echo $number++; ?></td>
                 <td><?php echo htmlspecialchars($row['u_productname']); ?></td>
                 <td><?php echo htmlspecialchars($row['u_quantity']); ?></td>
                 <td><?php echo htmlspecialchars($row['u_amount']); ?></td>
@@ -250,6 +277,24 @@
             }
             ?>
         </table>
+
+        <!-- Pagination Links -->
+        <div class="pagination">
+            <?php if ($page > 1) { ?>
+                <a href="?page=<?php echo $page - 1; ?>&search=<?php echo urlencode($search); ?>">&laquo; Previous</a>
+            <?php } ?>
+            
+            <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+                <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>" 
+                   class="<?php echo $i == $page ? 'active' : ''; ?>">
+                   <?php echo $i; ?>
+                </a>
+            <?php } ?>
+            
+            <?php if ($page < $total_pages) { ?>
+                <a href="?page=<?php echo $page + 1; ?>&search=<?php echo urlencode($search); ?>">Next &raquo;</a>
+            <?php } ?>
+        </div>
     </div>
 </div>
 

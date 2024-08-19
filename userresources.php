@@ -178,23 +178,53 @@
        </div>
 
        
-
        <div class="tablestotable">
     <div class="table-containment">
         <?php
+        // Define the number of results per page
+        $results_per_page = 10; // Adjust as needed
+
+        // Get the current page number from the URL, default is page 1
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+        // Calculate the starting record for the current page
+        $offset = ($page - 1) * $results_per_page;
+
+        // Get search term from URL
         $search = '';
         if (isset($_GET['search'])) {
             $search = mysqli_real_escape_string($con, $_GET['search']);
         }
+
+        // Construct the SQL query for total records
+        $total_sql = "SELECT COUNT(*) FROM `myresources`";
+        if (!empty($search)) {
+            $total_sql .= " WHERE 
+                            `u_resources` LIKE '%$search%' OR 
+                            `descriptions` LIKE '%$search%' OR 
+                            `quantity` LIKE '%$search%' OR 
+                            `allocation` LIKE '%$search%' OR 
+                            `statuss` LIKE '%$search%'";
+        }
+        $total_result = mysqli_query($con, $total_sql);
+        $total_rows = mysqli_fetch_array($total_result)[0];
+        
+        // Calculate total pages
+        $total_pages = ceil($total_rows / $results_per_page);
+
+        // Construct the SQL query with LIMIT and OFFSET
         $sql = "SELECT * FROM `myresources`";
         if (!empty($search)) {
-            $sql .= " WHERE `u_resources` LIKE '%$search%' OR 
+            $sql .= " WHERE 
+                        `u_resources` LIKE '%$search%' OR 
                         `descriptions` LIKE '%$search%' OR 
                         `quantity` LIKE '%$search%' OR 
                         `allocation` LIKE '%$search%' OR 
                         `statuss` LIKE '%$search%'";
         }
-        $sql .= " ORDER BY `u_resources` ASC"; // Modify order as needed
+        $sql .= " ORDER BY `u_resources` ASC LIMIT $offset, $results_per_page";
+
+        // Execute the query
         $result = mysqli_query($con, $sql);
         ?>
 
@@ -213,12 +243,11 @@
             </tr>
             <?php 
             if (mysqli_num_rows($result) > 0) {
-                $number = 0;
+                $number = $offset + 1; // Adjust the number based on offset
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $number++;
             ?>
             <tr>
-                <td><?php echo $number; ?></td>
+                <td><?php echo $number++; ?></td>
                 <td><?php echo htmlspecialchars($row['u_resources']); ?></td>
                 <td><?php echo htmlspecialchars($row['descriptions']); ?></td>
                 <td><?php echo htmlspecialchars($row['quantity']); ?></td>
@@ -247,8 +276,27 @@
             }
             ?>
         </table>
+
+        <!-- Pagination Links -->
+        <div class="pagination">
+            <?php if ($page > 1) { ?>
+                <a href="?page=<?php echo $page - 1; ?>&search=<?php echo urlencode($search); ?>">&laquo; Previous</a>
+            <?php } ?>
+            
+            <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+                <a href="?page=<?php echo $i; ?>&search=<?php echo urlencode($search); ?>" 
+                   class="<?php echo $i == $page ? 'active' : ''; ?>">
+                   <?php echo $i; ?>
+                </a>
+            <?php } ?>
+            
+            <?php if ($page < $total_pages) { ?>
+                <a href="?page=<?php echo $page + 1; ?>&search=<?php echo urlencode($search); ?>">Next &raquo;</a>
+            <?php } ?>
+        </div>
     </div>
 </div>
+
 
   
  <script>

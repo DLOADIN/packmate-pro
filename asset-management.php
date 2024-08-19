@@ -191,9 +191,15 @@ if(isset($_POST['submit'])){
 
        
 
-       <div class="tablestotable">
+<div class="tablestotable">
     <div class="table-containment">
         <?php
+        // Pagination setup
+        $limit = 10; // Number of records per page
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
+
+        // Search term
         $search = '';
         if (isset($_GET['search'])) {
             $search = mysqli_real_escape_string($con, $_GET['search']);
@@ -207,8 +213,21 @@ if(isset($_POST['submit'])){
                         `status` LIKE '%$search%' OR 
                         `performance` LIKE '%$search%'";
         }
-        $sql .= " ORDER BY `location` ASC"; // Modify order as needed
+        $sql .= " ORDER BY `location` ASC LIMIT $limit OFFSET $offset";
         $result = mysqli_query($con, $sql);
+
+        // Get the total number of records for pagination
+        $total_sql = "SELECT COUNT(*) as total FROM `assets`";
+        if (!empty($search)) {
+            $total_sql .= " WHERE 
+                            `location` LIKE '%$search%' OR 
+                            `status` LIKE '%$search%' OR 
+                            `performance` LIKE '%$search%'";
+        }
+        $total_result = mysqli_query($con, $total_sql);
+        $total_row = mysqli_fetch_assoc($total_result);
+        $total_records = $total_row['total'];
+        $total_pages = ceil($total_records / $limit);
         ?>
 
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
@@ -221,12 +240,11 @@ if(isset($_POST['submit'])){
             </tr>
             <?php 
             if (mysqli_num_rows($result) > 0) {
-                $number = 0;
+                $number = $offset + 1; // Adjust starting number for pagination
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $number++;
             ?>
             <tr>
-                <td>00<?php echo $number; ?></td>
+                <td>00<?php echo $number++; ?></td>
                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                 <td><?php echo htmlspecialchars($row['status']); ?></td>
                 <td><?php echo htmlspecialchars($row['performance']); ?></td>
@@ -238,6 +256,23 @@ if(isset($_POST['submit'])){
             }
             ?>
         </table>
+
+        <!-- Pagination Links -->
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?page=<?php echo $page - 1; ?>">&laquo; Previous</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <a href="?page=<?php echo $i; ?>" <?php if ($i == $page) echo 'class="active"'; ?>>
+                    <?php echo $i; ?>
+                </a>
+            <?php endfor; ?>
+
+            <?php if ($page < $total_pages): ?>
+                <a href="?page=<?php echo $page + 1; ?>">Next &raquo;</a>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
   
