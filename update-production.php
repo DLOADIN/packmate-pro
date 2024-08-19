@@ -41,68 +41,6 @@
       text-align:center
     }
   </style>
-<div class="sidebar">
-      <!-- <ul class="menu">
-        <div class="logout">
-        <li>
-          <a href="dashboard.php">
-            <i class="fa-solid fa-house-chimney"></i>
-            <span>DASHBOARD</span>
-          </a>
-        </li>
-        <li>
-          <a href="production.php">
-            <i class="fa-brands fa-product-hunt"></i>
-            <span>PRODUCTION</span>
-          </a>
-        </li>
-        <li>
-          <a href="inventory.php">
-            <i class="fa-solid fa-warehouse"></i>
-            <span>INVENTORY</span>
-          </a>
-        </li>
-        <li>
-          <a href="quality-assurance.php">
-            <i class="fa-solid fa-medal"></i>
-            <span>QA ASSURANCE</span>
-          </a>
-        </li>
-        <div class="ropdown">
-          <div class="select">
-              <i class="fa-solid fa-wrench"></i>
-              <span class="selectee">EQUIPMENT MANTENANCE</span>
-              <div class="caret"></div>
-          </div>
-          <ul class="fireef">
-              <li>
-              <a href="add-items.php">ADD ITEMS </a></li>
-              <li>
-              <a href="asset-management.php">ASSET MANAGEMENT</a></li>
-              <li>
-              <a href="notifications.php">NOTIFICATIONS</a></li>
-          </ul>
-      </div>
-        <li>
-          <a href="supply-chain.php">
-          <i class="fa-solid fa-boxes-packing"></i>
-            <span>SUPPLY CHAIN</span>
-          </a>
-        </li>
-        <li>
-          <a href="regulations.php">
-          <i class="fa-solid fa-scale-balanced"></i>
-            <span>REGULATORY COMPLIANCE</span>
-          </a>
-        </li>
-        <li>
-          <a href="profile.php">
-          <i class="fa-solid fa-user"></i>
-            <span>PROFILE</span>
-          </a>
-        </li>
-    </ul> -->
-  </div>
 
 
     <div class="main-content content-right" id="main-contents">

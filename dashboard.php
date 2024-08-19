@@ -297,6 +297,7 @@ $tye = $div11['strt'];
           <th>#</th>
           <th>NAME</th>
           <th>EMAIL</th>
+          <th>PROFESSION</th>
           <th>DELETE</th>
         </tr>
         <?php 
@@ -306,6 +307,7 @@ $tye = $div11['strt'];
           <td><?php echo ++$number ?></td>
           <td><?php echo $row['u_name']?></td>
           <td><?php echo $row['u_email']?></td>
+          <td><?php echo $row['u_profession']?></td>
           <td>
             <button class="delete-btn"><a href="delete-user.php?id=<?php echo $row['id'];?>">DELETE</button>
           </td>

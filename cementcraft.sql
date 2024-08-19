@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2024 at 10:22 PM
+-- Generation Time: Aug 19, 2024 at 05:16 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -86,7 +86,7 @@ CREATE TABLE `equipments` (
 --
 
 INSERT INTO `equipments` (`id`, `equipment`, `maintenance_task`, `frequency`, `first_maintenance`, `last_maintenance`, `status`, `asset_id`) VALUES
-(9, 'Yari', 'Yari', 'Yari', '2024-08-15', '2024-08-20', 'In-progress', 1);
+(9, 'Yale', 'Yale', 'Yale', '2024-08-15', '2024-08-20', 'In-progress', 1);
 
 -- --------------------------------------------------------
 
@@ -150,13 +150,6 @@ CREATE TABLE `production` (
   `demand` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
---
--- Dumping data for table `production`
---
-
-INSERT INTO `production` (`id`, `raw_material`, `line_setup`, `qc_check`, `Batchdate`, `inventory_update`, `demand`) VALUES
-(1, 'London', 'Product one', '40', '2025-08-08', '40', '20');
-
 -- --------------------------------------------------------
 
 --
@@ -180,7 +173,7 @@ CREATE TABLE `supply-chain` (
 --
 
 INSERT INTO `supply-chain` (`id`, `u_productname`, `u_quantity`, `u_amount`, `u_supplier`, `u_distributor`, `date`, `status`, `u_tools`) VALUES
-(2, 'Beans', '200tons', '20000$', '$u_distributor', '$u_distributor', '2024-08-08', 'Delivered', '$u_distributor');
+(2, 'Matoke', '200tons', '90', '$u_distributor', '$u_distributor', '2024-08-08', 'N/A', '$u_distributor');
 
 -- --------------------------------------------------------
 
@@ -192,15 +185,18 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `u_name` varchar(80) NOT NULL,
   `u_email` varchar(80) NOT NULL,
-  `u_password` varchar(80) NOT NULL
+  `u_password` varchar(80) NOT NULL,
+  `u_profession` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `u_name`, `u_email`, `u_password`) VALUES
-(1, 'admin', 'admin@cementcraft.com', 'admin');
+INSERT INTO `users` (`id`, `u_name`, `u_email`, `u_password`, `u_profession`) VALUES
+(1, 'admin', 'admin@cementcraft.com', 'admin', 'admin'),
+(4, 'Manzi', 'manzidavid111@gmail.com', '12345', 'inspector'),
+(5, 'Manzi', 'm.david@alustudent.com', '9876', 'Inspector');
 
 --
 -- Indexes for dumped tables
@@ -305,7 +301,7 @@ ALTER TABLE `supply-chain`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

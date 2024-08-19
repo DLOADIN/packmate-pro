@@ -194,6 +194,7 @@
           <th>DISTRIBUTOR</th>
           <th>DATE</th>
           <th>STATUS</th>
+          <th>UPDATE</th>
           <th>DELETE</th>
         </tr>
         <?php 
@@ -209,6 +210,9 @@
           <td><?php echo $row['date']?></td>
           <td><?php echo $row['status']?></td>
           <td><?php echo $row['u_tools']?></td>
+          <td>
+            <button class="update-btn"><a href="update-supplychain.php?id=<?php echo $row['id'];?>">MODIFY</button>
+          </td>
           <td>
             <button class="delete-btn"><a href="delete-supplychain.php?id=<?php echo $row['id'];?>">DELETE</button>
           </td>

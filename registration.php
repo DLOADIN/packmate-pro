@@ -8,6 +8,7 @@
   <link rel="shortcut icon" href="./image/images.jpeg" type="image/x-icon">
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script src="./extension_remover.js"></script>
+  <script src="jsfile.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
   <title>REGISTER PAGE</title>
@@ -24,14 +25,14 @@
 <body>
   <div class="grided">
     <div class="grid-1">
-      <div class="text">
+      <!-- <div class="text">
       <h1>Welcome</h1>
         <H2>TO CEMENT MANUFACTURING<br>
         PROCESS SYSTEM</H2>
-      </div>
-      <button class="btn">
+      </div> -->
+      <!-- <button class="btn">
         <a href="login.php">SIGN IN</a>
-        </button>
+        </button> -->
     </div>
     <div class="grid-2">
       <div class="text-1">
@@ -53,6 +54,11 @@
           <ion-icon name="lock-closed-outline"></ion-icon>
           <input type="text" name="u_password" required>
           <label for="">PASSWORD</label></div>
+          
+          <div class="inputbox">
+          <ion-icon name="briefcase-outline"></ion-icon>
+          <input type="text" name="u_profession" required>
+          <label for="">TYPE</label></div>
 
           <button name="submit" type="submit" class="btn-2">SIGN UP</button>
         </form>
@@ -68,7 +74,8 @@
     $name = $_POST['u_name'];
     $email = $_POST['u_email'];
     $password = $_POST['u_password'];
-    $sql=mysqli_query($con,"INSERT INTO `users` VALUES('','$name','$email','$password')");
+    $type = $_POST['u_profession'];
+    $sql=mysqli_query($con,"INSERT INTO `users` VALUES('','$name','$email','$password','$type')");
     
     if($sql){
       echo "<script>alert('Registered Successfully| Please Head to the Login ')</script>";

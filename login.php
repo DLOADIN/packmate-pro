@@ -44,9 +44,9 @@
   <div id="grided">
   <div class="grid-1">
       <div class="text">
-      <h1>Welcome</h1>
-        <H2>TO CEMENT MANUFACTURING<br>
-        PROCESS SYSTEM</H2>
+      <h1></h1>
+        <H2><br>
+        </H2>
       </div>
     </div>
     <div class="grid-2">

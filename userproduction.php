@@ -260,6 +260,7 @@ while ($row = mysqli_fetch_array($sql)) {
           <th>BATCH PRODUCTION</th>
           <th>DEMAND FORECASTING UPDATE</th>
           <th>UPDATE</th>
+          <th>DELETE</th>
           <th>DOWNLOAD</th>
         </tr>
         <?php 
@@ -275,6 +276,9 @@ while ($row = mysqli_fetch_array($sql)) {
           <td><?php echo $row['demand']?>%</td>
           <td>
             <button class="update-btn"><a href="update-production.php?id=<?php echo $row['id'];?>">MODIFY</button>
+          </td>
+          <td>
+            <button class="delete-btn"><a href="delete-production.php?id=<?php echo $row['id'];?>">DELETE</button>
           </td>
           <td><button class="view-btn">
             <a href="./pdf/production.php"><i class="fa-solid fa-circle-down"></i></a>

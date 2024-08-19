@@ -57,7 +57,7 @@
               border-top: 1px solid black;
             }
             input[name="asset_id"]{
-              /* display:none; */
+              display:none;
             }
   </style>
 <div class="sidebar">
@@ -202,6 +202,7 @@
           <th>FIRST MANTENANCE</th>
           <th>LAST MANTENANCE</th>
           <th>STATUS</th>
+          <th>UPDATE</th>
           <th>DELETE</th>
           <th>DOWNLOAD</th>
         </tr>
@@ -216,6 +217,9 @@
           <td><?php echo $row['first_maintenance']?></td>
           <td><?php echo $row['last_maintenance']?></td>
           <td><?php echo $row['status']?></td>
+          <td>
+            <button class="update-btn"><a href="update-additems.php?id=<?php echo $row['id'];?>">MODIFY</button>
+          </td>
           <td>
             <button class="delete-btn"><a href="delete-items.php?id=<?php echo $row['id'];?>">DELETE</button>
           </td>

@@ -25,7 +25,7 @@
   <script src="jsfile.js"></script>
   <script src="./extension_remover.js"></script>
   <script scr="dropdown.js"></script>
-  <title>RESOURCES</title>
+  <title>EQUIPMENTS</title>
 </head>
 <body>
   <style>
@@ -44,16 +44,20 @@
     .logout i{
       color:black;
     }
+    
+    .form-form{
+      width:fit-content;
+      padding-right: 1rem;
+    }
     option{
               border-radius:20px
             }
             select{
               border-radius:15px;
               border-top: 1px solid black;
-              height:8vh
             }
             input[name="asset_id"]{
-              /* display:none; */
+              display:none;
             }
   </style>
 
@@ -61,7 +65,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>RESOURCES</h1>
+          <h1>ADD EQUIPMENTS</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -79,33 +83,79 @@
           </button>
         </div> 
       </div>
-      
+      <?php
+      if (isset($_GET['id'])) {
+        $item_id = intval($_GET['id']);
+        $sql = mysqli_query($con, "SELECT * FROM `equipments` WHERE id='$item_id'");
+        while ($row = mysqli_fetch_array($sql)) {
+    ?>
       <div class="catch">
         <form  method="post" class="form-form">
-        <?php
-           $id=$_GET['id'];
-           $sql=mysqli_query($con, "SELECT * from `myresources` WHERE id='$id'");
-           while($row=mysqli_fetch_array($sql)){
-            ?>
           <div class="formation-1">
-          <label for="">RESOURCES</label>
-          <input type="text" name="u_resources" id="" value="<?php echo $row['u_resources']?>" required>
-          <label for="">DESCRIPTION</label>
-          <input type="text" name="descriptions" id="" value="<?php echo $row['descriptions']?>" required>
-          <label for="">QUANTITY</label>
-          <input type="text" name="quantity" id="" required value="<?php echo $row['quantity']?>">
-          <label for="">ALLOCATED TO</label>
-          <input type="text" name="allocation" id="" value="<?php echo $row['allocation']?>" required>
+          <label for="">EQUIPMENT</label>
+          <input type="text" name="equipment" id="" value="<?php echo $row['equipment']?>" required>
+          <label for="">MAINTENANCE TASK</label>
+          <input type="text" name="maintenance_task" id="" required value="<?php echo $row['maintenance_task'] ?>">
+          <label for="">FREQUENCY</label>
+          <input type="text" name="frequency" id="" required value="<?php echo $row['frequency'] ?>">
+          <label for="">FIRST MAINTENANCE DATE</label>
+          <input type="text" name="first_maintenance" required value="<?php echo $row['first_maintenance']?>">
+          <label for="">LAST MAINTENANCE DATE</label>
+          <input type="date"  name="last_maintenance" required value="<?php echo $row['last_maintenance']?>">
           <label for="">STATUS</label>
-          <input type="text" name="statuss" id="" value="<?php echo $row['statuss']?>" required>
+          <select name="status" id="" value="<?php echo $row['status']?>">
+            <option value="N/A"></option>
+            <option value="scheduled">SCHEDULED</option>
+            <option value="In-progress">IN-PROGRESS</option>
+            <option value="completed">COMPLETED</option>
+          </select>
+          <input type="number"  name="asset_id" value="<?php echo $row['asset_id']?>" required>
         </div>
-        <?php }?>
           <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
           </button>
         </form>
        </div>
-
-       
+<?php
+        }}
+?>
+      <div class="tablestotable">
+    <div class="table-containment">
+    <?php
+        $sql=mysqli_query($con,"SELECT * FROM `equipments`");
+        $number=0;
+        ?>
+        <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
+        <table>
+        <tr>
+          <th>#</th>
+          <th>EQUIPMENTS</th>
+          <th>MANTENANCE TASK</th>
+          <th>FREQUENCY</th>
+          <th>FIRST MANTENANCE</th>
+          <th>LAST MANTENANCE</th>
+          <th>STATUS</th>
+          <th>DOWNLOAD</th>
+        </tr>
+        <?php 
+        while($row=mysqli_fetch_array($sql)):
+        ?>
+        <tr>
+          <td><?php echo ++$number ?></td>
+          <td><?php echo $row['equipment']?></td>
+          <td><?php echo $row['maintenance_task']?></td>
+          <td><?php echo $row['frequency']?></td>
+          <td><?php echo $row['first_maintenance']?></td>
+          <td><?php echo $row['last_maintenance']?></td>
+          <td><?php echo $row['status']?></td>
+          <td><button class="view-btn">
+            <a href="./pdf/items.php"><i class="fa-solid fa-circle-down"></i></a>
+          </button></td>
+        </tr>
+        <?php 
+        endwhile
+        ?>
+      </table>
+    </div>
 </div> 
 </div> 
 
@@ -146,12 +196,14 @@ menu.classList.remove('menu-open');
 </html>
 <?php
 if(isset($_POST['submit'])){
-  $raw_material=$_POST['u_resources'];
-  $line_setup=$_POST['descriptions'];
-  $qc_check=$_POST['quantity'];
-  $Batchdate=$_POST['allocation'];
-  $inventory_update=$_POST['statuss'];
-  $sql=mysqli_query($con,"UPDATE `myresources` SET u_resources='$raw_material', descriptions='$line_setup', quantity='$qc_check', allocation='$Batchdate', statuss='$inventory_update' ");
+  $raw_material=$_POST['equipment'];
+  $line_setup=$_POST['maintenance_task'];
+  $qc_check=$_POST['frequency'];
+  $Batchdate=$_POST['first_maintenance'];
+  $inventory_update=$_POST['last_maintenance'];
+  $demand=$_POST['status'];
+  $asset_id=$_POST['asset_id'];
+  $sql=mysqli_query($con,"UPDATE `equipments` SET equipment='$raw_material', maintenance_task='$line_setup', frequency='$qc_check', first_maintenance='$Batchdate', last_maintenance='$inventory_update', status='$demand', asset_id='$asset_id' ");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";

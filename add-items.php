@@ -57,7 +57,7 @@
               border-top: 1px solid black;
             }
             input[name="asset_id"]{
-              /* display:none; */
+              display:none;
             }
   </style>
 <div class="sidebar">
