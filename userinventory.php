@@ -166,7 +166,7 @@
 
        
 
-       <div class="tablestotable">
+    <div class="tablestotable">
     <div class="table-containment">
         <?php
         $search = '';

@@ -142,6 +142,11 @@
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
+          <div class="search__box">
+            <form method="GET">
+            <input type="text" placeholder="Search" name="search"/>
+        </form>
+      </div>
         </div> 
       </div>
       
@@ -179,48 +184,78 @@
 
        <div class="tablestotable">
     <div class="table-containment">
-    <?php
-        $sql=mysqli_query($con,"SELECT * FROM `supply-chain` ");
-        $number=0;
+        <?php
+        $search = '';
+        if (isset($_GET['search'])) {
+            $search = mysqli_real_escape_string($con, $_GET['search']);
+        }
+
+        // Construct the SQL query
+        $sql = "SELECT * FROM `supply-chain`";
+        if (!empty($search)) {
+            $sql .= " WHERE 
+                        `u_productname` LIKE '%$search%' OR 
+                        `u_quantity` LIKE '%$search%' OR 
+                        `u_amount` LIKE '%$search%' OR 
+                        `u_supplier` LIKE '%$search%' OR 
+                        `u_distributor` LIKE '%$search%' OR 
+                        `date` LIKE '%$search%' OR 
+                        `status` LIKE '%$search%'";
+        }
+        $sql .= " ORDER BY `date` DESC"; // Modify order as needed
+        $result = mysqli_query($con, $sql);
         ?>
+
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
-        <tr>
-          <th>#</th>
-          <th></th>
-          <th>PRODUCT NAME</th>
-          <th>QUANTITY</th>
-          <th>AMOUNT</th>
-          <th>SUPPLIER</th>
-          <th>DISTRIBUTOR</th>
-          <th>DATE</th>
-          <th>STATUS</th>
-          <!-- <th>DELETE</th> -->
-        </tr>
-        <?php 
-        while($row=mysqli_fetch_array($sql)):
-        ?>
-        <tr>
-          <td><?php echo ++$number ?></td>
-          <td><?php echo $row['u_productname']?></td>
-          <td><?php echo $row['u_quantity']?></td>
-          <td><?php echo $row['u_amount']?></td>
-          <td><?php echo $row['u_supplier']?></td>
-          <td><?php echo $row['u_distributor']?></td>
-          <td><?php echo $row['date']?></td>
-          <td><?php echo $row['status']?></td>
-          <td><?php echo $row['u_tools']?></td>
-          <!-- <td>
-            <button class="delete-btn"><a href="delete-supplychain.php?id=<?php echo $row['id'];?>">DELETE</button>
-          </td> -->
-        </tr>
-        <?php 
-        endwhile
-        ?>
-      </table>
+            <tr>
+                <th>#</th>
+                <th>PRODUCT NAME</th>
+                <th>QUANTITY</th>
+                <th>AMOUNT</th>
+                <th>SUPPLIER</th>
+                <th>DISTRIBUTOR</th>
+                <th>DATE</th>
+                <th>STATUS</th>
+                <th>UPDATE</th>
+                <th>DELETE</th>
+            </tr>
+            <?php 
+            if (mysqli_num_rows($result) > 0) {
+                $number = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $number++;
+            ?>
+            <tr>
+                <td><?php echo $number; ?></td>
+                <td><?php echo htmlspecialchars($row['u_productname']); ?></td>
+                <td><?php echo htmlspecialchars($row['u_quantity']); ?></td>
+                <td><?php echo htmlspecialchars($row['u_amount']); ?></td>
+                <td><?php echo htmlspecialchars($row['u_supplier']); ?></td>
+                <td><?php echo htmlspecialchars($row['u_distributor']); ?></td>
+                <td><?php echo htmlspecialchars($row['date']); ?></td>
+                <td><?php echo htmlspecialchars($row['status']); ?></td>
+                <td>
+                    <button class="update-btn">
+                        <a href="update-supplychain.php?id=<?php echo $row['id']; ?>">MODIFY</a>
+                    </button>
+                </td>
+                <td>
+                    <button class="delete-btn">
+                        <a href="delete-supplychain.php?id=<?php echo $row['id']; ?>">DELETE</a>
+                    </button>
+                </td>
+            </tr>
+            <?php 
+                }
+            } else {
+                echo "<tr><td colspan='10'>No results found</td></tr>";
+            }
+            ?>
+        </table>
     </div>
-</div> 
-</div> 
+</div>
+
 
   
  <script>

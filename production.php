@@ -135,6 +135,11 @@
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
+          <div class="search__box">
+            <form method="GET">
+            <input type="text" placeholder="Search" name="search"/>
+        </form>
+      </div>
         </div> 
       </div>
       <?php
@@ -243,50 +248,74 @@ while ($row = mysqli_fetch_array($sql)) {
 
        
 
+      
+       
+
        <div class="tablestotable">
     <div class="table-containment">
-    <?php
-        $sql=mysqli_query($con,"SELECT * FROM `production`");
-        $number=0;
+        <?php
+        $search = '';
+        if (isset($_GET['search'])) {
+            $search = mysqli_real_escape_string($con, $_GET['search']);
+        }
+
+        // Construct the SQL query
+        $sql = "SELECT * FROM `production`";
+        if (!empty($search)) {
+            $sql .= " WHERE 
+                        `raw_material` LIKE '%$search%' OR 
+                        `qc_check` LIKE '%$search%' OR 
+                        `inventory_update` LIKE '%$search%' OR 
+                        `line_setup` LIKE '%$search%' OR 
+                        `Batchdate` LIKE '%$search%' OR 
+                        `demand` LIKE '%$search%'";
+        }
+        $sql .= " ORDER BY `raw_material` ASC"; 
+        $result = mysqli_query($con, $sql);
         ?>
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
-        <tr>
-          <th>#</th>
-          <th>RAW MATERIAL</th>
-          <th>QC CHECK</th>
-          <th>INVENTORY UPDATE</th>
-          <th>PRODUCTION LINE SETUP</th>
-          <th>BATCH PRODUCTION</th>
-          <th>DEMAND FORECASTING UPDATE</th>
-          <!-- <th>UPDATE</th> -->
-          <th>DOWNLOAD</th>
-        </tr>
-        <?php 
-        while($row=mysqli_fetch_array($sql)):
-        ?>
-        <tr>
-          <td><?php echo ++$number ?></td>
-          <td><?php echo $row['raw_material']?></td>
-          <td><?php echo $row['line_setup']?></td>
-          <td><?php echo $row['qc_check']?>%</td>
-          <td><?php echo $row['Batchdate']?></td>
-          <td><?php echo $row['inventory_update']?>%</td>
-          <td><?php echo $row['demand']?>%</td>
-          <!-- <td>
-            <button class="update-btn"><a href="update-production.php?id=<?php echo $row['id'];?>">MODIFY</button>
-          </td> -->
-          <td><button class="view-btn">
-            <a href="./pdf/production.php"><i class="fa-solid fa-circle-down"></i></a>
-          </button></td>
-        </tr>
-        <?php 
-        endwhile
-        ?>
-      </table>
+            <tr>
+                <th>#</th>
+                <th>RAW MATERIAL</th>
+                <th>QC CHECK</th>
+                <th>INVENTORY UPDATE</th>
+                <th>PRODUCTION LINE SETUP</th>
+                <th>BATCH PRODUCTION</th>
+                <th>DEMAND FORECASTING UPDATE</th>
+                <th>DOWNLOAD</th>
+            </tr>
+            <?php 
+            if (mysqli_num_rows($result) > 0) {
+                $number = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $number++;
+            ?>
+            <tr>
+                <td><?php echo $number; ?></td>
+                <td><?php echo htmlspecialchars($row['raw_material']); ?></td>
+                <td><?php echo htmlspecialchars($row['line_setup']); ?></td>
+                <td><?php echo htmlspecialchars($row['qc_check']); ?>%</td>
+                <td><?php echo htmlspecialchars($row['Batchdate']); ?></td>
+                <td><?php echo htmlspecialchars($row['inventory_update']); ?>%</td>
+                <td><?php echo htmlspecialchars($row['demand']); ?>%</td>
+                
+                <td>
+                    <button class="view-btn">
+                        <a href="./pdf/production.php"><i class="fa-solid fa-circle-down"></i></a>
+                    </button>
+                </td>
+            </tr>
+            <?php 
+                }
+            } else {
+                echo "<tr><td colspan='10'>No results found</td></tr>";
+            }
+            ?>
+        </table>
     </div>
-</div> 
-</div> 
+</div>
+
 
   
  <script>

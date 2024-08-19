@@ -150,6 +150,11 @@
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
+          <div class="search__box">
+            <form method="GET">
+            <input type="text" placeholder="Search" name="search"/>
+        </form>
+      </div>
         </div> 
       </div>
       
@@ -185,51 +190,70 @@
        </div>
 
        
-
        <div class="tablestotable">
     <div class="table-containment">
-    <?php
-        $sql=mysqli_query($con,"SELECT * FROM `equipments`");
-        $number=0;
+        <?php
+        $search = '';
+        if (isset($_GET['search'])) {
+            $search = mysqli_real_escape_string($con, $_GET['search']);
+        }
+
+        // Construct the SQL query
+        $sql = "SELECT * FROM `equipments`";
+        if (!empty($search)) {
+            $sql .= " WHERE 
+                        `equipment` LIKE '%$search%' OR 
+                        `maintenance_task` LIKE '%$search%' OR 
+                        `frequency` LIKE '%$search%' OR 
+                        `first_maintenance` LIKE '%$search%' OR 
+                        `last_maintenance` LIKE '%$search%' OR 
+                        `status` LIKE '%$search%'";
+        }
+        $sql .= " ORDER BY `equipment` ASC"; // Modify order as needed
+        $result = mysqli_query($con, $sql);
         ?>
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
-        <tr>
-          <th>#</th>
-          <th>EQUIPMENTS</th>
-          <th>MANTENANCE TASK</th>
-          <th>FREQUENCY</th>
-          <th>FIRST MANTENANCE</th>
-          <th>LAST MANTENANCE</th>
-          <th>STATUS</th>
-          <!-- <th>DELETE</th> -->
-          <th>DOWNLOAD</th>
-        </tr>
-        <?php 
-        while($row=mysqli_fetch_array($sql)):
-        ?>
-        <tr>
-          <td><?php echo ++$number ?></td>
-          <td><?php echo $row['equipment']?></td>
-          <td><?php echo $row['maintenance_task']?></td>
-          <td><?php echo $row['frequency']?></td>
-          <td><?php echo $row['first_maintenance']?></td>
-          <td><?php echo $row['last_maintenance']?></td>
-          <td><?php echo $row['status']?></td>
-          <!-- <td>
-            <button class="delete-btn"><a href="delete-items.php?id=<?php echo $row['id'];?>">DELETE</button>
-          </td> -->
-          <td><button class="view-btn">
-            <a href="./pdf/items.php"><i class="fa-solid fa-circle-down"></i></a>
-          </button></td>
-        </tr>
-        <?php 
-        endwhile
-        ?>
-      </table>
+            <tr>
+                <th>#</th>
+                <th>EQUIPMENTS</th>
+                <th>MAINTENANCE TASK</th>
+                <th>FREQUENCY</th>
+                <th>FIRST MAINTENANCE</th>
+                <th>LAST MAINTENANCE</th>
+                <th>STATUS</th>
+                <th>DOWNLOAD</th>
+            </tr>
+            <?php 
+            if (mysqli_num_rows($result) > 0) {
+                $number = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $number++;
+            ?>
+            <tr>
+                <td><?php echo $number; ?></td>
+                <td><?php echo htmlspecialchars($row['equipment']); ?></td>
+                <td><?php echo htmlspecialchars($row['maintenance_task']); ?></td>
+                <td><?php echo htmlspecialchars($row['frequency']); ?></td>
+                <td><?php echo htmlspecialchars($row['first_maintenance']); ?></td>
+                <td><?php echo htmlspecialchars($row['last_maintenance']); ?></td>
+                <td><?php echo htmlspecialchars($row['status']); ?></td>
+                <td>
+                    <button class="view-btn">
+                        <a href="./pdf/items.php"><i class="fa-solid fa-circle-down"></i></a>
+                    </button>
+                </td>
+            </tr>
+            <?php 
+                }
+            } else {
+                echo "<tr><td colspan='10'>No results found</td></tr>";
+            }
+            ?>
+        </table>
     </div>
-</div> 
-</div> 
+</div>
+  
 
   
  <script>

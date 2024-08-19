@@ -146,6 +146,11 @@
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
+          <div class="search__box">
+            <form method="GET">
+            <input type="text" placeholder="Search" name="search"/>
+        </form>
+      </div>
         </div> 
       </div>
       
@@ -188,35 +193,53 @@ if(isset($_POST['submit'])){
 
        <div class="tablestotable">
     <div class="table-containment">
-    <?php
-        $sql=mysqli_query($con,"SELECT * FROM `assets`");
-        $number=0;
+        <?php
+        $search = '';
+        if (isset($_GET['search'])) {
+            $search = mysqli_real_escape_string($con, $_GET['search']);
+        }
+
+        // Construct the SQL query
+        $sql = "SELECT * FROM `assets`";
+        if (!empty($search)) {
+            $sql .= " WHERE 
+                        `location` LIKE '%$search%' OR 
+                        `status` LIKE '%$search%' OR 
+                        `performance` LIKE '%$search%'";
+        }
+        $sql .= " ORDER BY `location` ASC"; // Modify order as needed
+        $result = mysqli_query($con, $sql);
         ?>
+
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
-        <tr>
-          <th>#</th>
-          <th>LOCATION</th>
-          <th>STATUS</th>
-          <th>PERFORMANCE</th>
-        </tr>
-        <?php 
-        while($row=mysqli_fetch_array($sql)):
-        ?>
-        <tr>
-          <td>00<?php echo ++$number ?></td>
-          <td><?php echo $row['location']?></td>
-          <td><?php echo $row['status']?></td>
-          <td><?php echo $row['performance']?></td>
-        </tr>
-        <?php 
-        endwhile
-        ?>
-      </table>
+            <tr>
+                <th>#</th>
+                <th>LOCATION</th>
+                <th>STATUS</th>
+                <th>PERFORMANCE</th>
+            </tr>
+            <?php 
+            if (mysqli_num_rows($result) > 0) {
+                $number = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $number++;
+            ?>
+            <tr>
+                <td>00<?php echo $number; ?></td>
+                <td><?php echo htmlspecialchars($row['location']); ?></td>
+                <td><?php echo htmlspecialchars($row['status']); ?></td>
+                <td><?php echo htmlspecialchars($row['performance']); ?></td>
+            </tr>
+            <?php 
+                }
+            } else {
+                echo "<tr><td colspan='4'>No results found</td></tr>";
+            }
+            ?>
+        </table>
     </div>
-</div> 
-</div> 
-
+</div>
   
  <script>
     document.addEventListener('DOMContentLoaded', () => {

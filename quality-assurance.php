@@ -190,6 +190,11 @@ if (isset($_GET['action']) && isset($_GET['table']) && isset($_GET['id'])) {
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
+          <div class="search__box">
+            <form method="GET">
+            <input type="text" placeholder="Search" name="search"/>
+        </form>
+      </div>
         </div> 
       </div>
       
@@ -219,8 +224,23 @@ if (isset($_GET['action']) && isset($_GET['table']) && isset($_GET['id'])) {
 <div class="tablestotable">
     <div class="table-containment">
     <?php
-        $sql=mysqli_query($con,"SELECT * FROM `assurance`");
-        $number=0;
+        $search = '';
+        if (isset($_GET['search'])) {
+            $search = mysqli_real_escape_string($con, $_GET['search']);
+        }
+
+        $sql = "SELECT * FROM `assurance`";
+        if (!empty($search)) {
+            $sql .= " WHERE 
+                        `aspect` LIKE '%$search%' OR 
+                        `method` LIKE '%$search%' OR 
+                        `testing` LIKE '%$search%' OR 
+                        `values` LIKE '%$search%' OR 
+                        `deviation` LIKE '%$search%' OR 
+                        `status` LIKE '%$search%'";
+        }
+        $sql .= " ORDER BY `aspect` ASC"; 
+        $result = mysqli_query($con, $sql);
         ?>
         <h1>DETAILS ON THE PRODUCTION RATE OF OUR PRODUCTS</h1>
         <table>
@@ -234,8 +254,11 @@ if (isset($_GET['action']) && isset($_GET['table']) && isset($_GET['id'])) {
           <th>ACTION</th>
         </tr>
         <?php 
-        while($row=mysqli_fetch_array($sql)):
-        ?>
+            if (mysqli_num_rows($result) > 0) {
+                $number = 0;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $number++;
+            ?>
         <tr>
           <td><?php echo ++$number ?></td>
           <td><?php echo $row['aspect']?></td>
@@ -253,8 +276,11 @@ if (isset($_GET['action']) && isset($_GET['table']) && isset($_GET['id'])) {
                 </td>
         </tr>
         <?php 
-        endwhile
-        ?>
+                }
+            } else {
+                echo "<tr><td colspan='7'>No results found</td></tr>";
+            }
+            ?>
       </table>
     </div>
 </div> 
