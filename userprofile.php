@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="./CSS/form.css">
   <link rel="stylesheet" href="./CSS/gravity.css">
   <link rel="stylesheet" href="./CSS/dropdown.css">
-  <link rel="shortcut icon" href="./image/images.jpeg" type="image/x-icon">
+  <link rel="shortcut icon" href="./image/thebutcher-removebg-preview.png" type="image/x-icon">
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script src="jsfile.js"></script>
@@ -41,7 +41,7 @@
       padding-top: 10vh;
       }
       .btn-3{
-        background:#00BDD6;
+        background-color:#EC9124;
       }
       .sidebar i{
         color: black;
@@ -134,8 +134,8 @@
           </h3>
         <p>User</p></div> 
         <button name="submit" type="submit" class="btn-3" >
-          <a href="logout.php">LOGOUT</a>
-        </button>
+            <a href="logout.php">LOGOUT</a>
+          </button>
       </div>       
        </div>
        <div class="duke">
@@ -178,11 +178,9 @@
               <div class="real-form">
                 <label for="">PASSWORD</label>
                 <input type="password" name="u_password" required value="<?php echo $row['u_password']?>" readonly>
-              </div>
-                <div class="real-form">
                 <button name="submit" type="submit" class="btn-2" id="btns">SAVE</button></div>
+                
             </form>
-          </div>
 
          </div>
         </div>
@@ -192,7 +190,7 @@
 <style>
 .btn-2{
   margin:0 auto;
-  background-color:#00BDD6;
+  background-color:#EC9124;;
 }
 
 .modd{

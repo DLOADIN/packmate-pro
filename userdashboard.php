@@ -18,11 +18,10 @@
   <link rel="stylesheet" href="./CSS/dropdown.css">
   <link rel="stylesheet" href="./CSS/charts.css">
   <link rel="stylesheet" href="./CSS/tables.css">
-  <link rel="shortcut icon" href="./image/images.jpeg" type="image/x-icon">
+  <link rel="shortcut icon" href="./image/thebutcher-removebg-preview.png" type="image/x-icon">
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
-  <script src="./extension_remover.js"></script>
   <script scr="./dropdown.js"></script>
   <title>DASHBOARD</title>
 </head>
@@ -41,6 +40,9 @@
     }
     
   </style>
+  <script>
+    
+  </script>
 <div class="sidebar">
       <ul class="menu">
         <div class="logout">
@@ -274,7 +276,7 @@ $tye = $div11['strt'];
     .majjor i {
         font-size: 5.3rem; 
         margin:2rem 0rem 0rem 0rem;
-        color: #00BDD6;
+        color: #EC9124;
     }
     .comptia{
       text-align:center

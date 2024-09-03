@@ -1,23 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
 :root{
-  --primary-color: #00BDD6;
+  --first-color: #EC9124;
   --secondary-color: #fff;
   --tertiary-color: #000000;
+  --extra-light:grey;
 }
+
+@font-face {  
+  font-family: "San Francisco";  
+  font-weight: 400;  
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+} 
 
 *{
   margin:0;
   padding:0;
   box-sizing: border-box;
   border:none;
-  font-family: "Poppins", sans-serif;
-  font-optical-sizing: auto;
+  font-family: "San Francisco", sans-serif;  
   font-weight: bold;
   font-style: normal;
   font-variation-settings:
     "slnt" 0;
 }
+
 body{
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
@@ -69,6 +74,7 @@ body{
 .dropdown-li{
   list-style: none;
 }
+
 .dropdown-li:hover{
   padding-bottom:30vh
 }
@@ -195,7 +201,7 @@ ul li:hover ul.dropdown{
 }
 
 #i{
-  color: var(--primary-color);
+  color: var(--first-color);
   font-size:60px
 }
 
@@ -209,7 +215,7 @@ ul li:hover ul.dropdown{
 }
 
 .menu li:hover{
-  background-color: var(--primary-color);
+  background-color: var(--first-color);
   width: 120%;
   height: 6%;
 }
@@ -256,7 +262,7 @@ ul li:hover ul.dropdown{
 }
 
 .header-title{
-  color: var(--primary-color);
+  color: var(--first-color);
 }
 
 .gango{
@@ -292,7 +298,7 @@ ul li:hover ul.dropdown{
   margin: 1rem;
   height: 60px;
   border: none;
-  background-color: var(--primary-color);
+  background-color: var(--first-color);
   border: 3px solid #fff;
   color: aliceblue;
   cursor: pointer;
@@ -306,7 +312,7 @@ ul li:hover ul.dropdown{
   height: 50px;
   width:50px;
   border: none;
-  background-color: var(--primary-color);
+  background-color: var(--first-color);
   border: 3px solid #fff;
   color: aliceblue;
   cursor: pointer;
@@ -335,7 +341,7 @@ ul li:hover ul.dropdown{
 
 .btn-2{
   margin:0 auto;
-  background-color: var(--primary-color);
+  background-color: var(--first-color);
 }
 
 .modd{

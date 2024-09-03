@@ -279,7 +279,7 @@ $tye = $div11['strt'];
     .majjor i {
         font-size: 5.3rem; 
         margin:2rem 0rem 0rem 0rem;
-        color: #00BDD6;
+        color: #EC9124;
     }
     .comptia{
       text-align:center

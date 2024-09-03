@@ -8,7 +8,7 @@
     $query=mysqli_fetch_array($sql);
     
    if(mysqli_num_rows($sql) > 0){
-  if($password===$query["u_password"]) { // Add curly braces here
+  if($password===$query["u_password"]) { 
     $_SESSION["login"] = true;
     $_SESSION["id"] = $query["id"];
     if($name == 'admin' && $password == 'admin'){
@@ -32,26 +32,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./CSS/loginregistration.css">
-  <link rel="shortcut icon" href="./image/images.jpeg" type="image/x-icon">
+  <link rel="shortcut icon" href="./image/thebutcher-removebg-preview.png" type="image/x-icon">
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script src="./jsfile.js"></script>
-  <script src="./extension_remover.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
   <title>LOGIN PAGE</title>
 </head>
 <body>
   <div id="grided">
-  <div class="grid-1">
-      <div class="text">
-      <h1></h1>
-        <H2><br>
-        </H2>
-      </div>
-    </div>
     <div class="grid-2">
       <div class="text-1">
-      <img src="./image/images.jpeg" alt="">
+      <img src="./image/thebutcher-removebg-preview.png" alt="">
         <h1>LOGIN</h1>
         <form action="" method="post">
           
