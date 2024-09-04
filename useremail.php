@@ -15,20 +15,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./CSS/newfriend.css">
+  <link rel="stylesheet" href="./CSS/another-one.css">
   <link rel="stylesheet" href="./CSS/dropdown.css">
-  <link rel="stylesheet" href="./CSS/charts.css">
-  <link rel="stylesheet" href="./CSS/tables.css">
   <link rel="shortcut icon" href="./image/thebutcher-removebg-preview.png" type="image/x-icon">
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
   <script src="./dropdown.js"></script>
-  <title>DASHBOARD</title>
+  <title>USER FEEDBACK</title>
 </head>
 <body>
   <style>
     #main-contents{
-      height:fit-content;
+      height:170vh;
       overflow-y:auto;
       padding-bottom:3rem;
     }
@@ -38,11 +37,7 @@
     .ropdown{
       padding:1rem 0rem;
     }
-    
   </style>
-  <script>
-    
-  </script>
 <div class="sidebar">
       <ul class="menu">
         <div class="logout">
@@ -116,7 +111,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>DASHBOARD</h1>
+          <h1>USER FEEDBACK & EMAIL</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -132,8 +127,22 @@
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
+        </div> 
+      </div>
+      <div class="catch">
+        <form action="https://formsubmit.co/adayimfadoulhamid@gmail.com" method="post" class="form-form">
+          <div class="formation-1">
+          <label for="">NAMES</label>
+          <input type="text" name="name" id="" placeholder="YOUR NAMES" required>
+          <label for="">EMAIL</label>
+          <input type="text" name="email" id="" placeholder="YOUR EMAIL" required>
+          <label for="">MESSSAGE</label>
+          <textarea name="message" id="" cols="30" rows="10" placeholder="ANYTHING ON YOUR MIND"></textarea>
         </div>
-        </div>
+          <button name="submit" type="submit" class="btn-3" id="button-btn">SEND</a>
+          </button>
+        </form>
+</div>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

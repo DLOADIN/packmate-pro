@@ -53,22 +53,15 @@
         <li>
         <a href="userdashboard.php">
             <i class="fa-solid fa-house-chimney"></i>
-            <span>DASHBOARD</span>
+            <span>HOME</span>
           </a>
         </li>
-        <div class="ropdown">
-          <div class="select">
-          <i class="fa-brands fa-product-hunt"></i>
-              <span class="selectee">PRODUCTION</span>
-              <div class="caret"></div>
-          </div>
-          <ul class="fireef">
-              <li>
-              <a href="userproduction.php">PRODUCT PLANNING & SCHEDULING </a></li>
-              <li>
-              <a href="userresources.php">RESOURCES & DEMAND</a></li>
-          </ul>
-      </div>
+        <li>
+          <a href="userbatchmanagement.php">
+          <i class="fa-solid fa-bars-progress"></i>
+            <span>BATCH MANAGEMENT</span>
+          </a>
+        </li>
         <li>
           <a href="userinventory.php">
             <i class="fa-solid fa-warehouse"></i>
@@ -76,36 +69,42 @@
           </a>
         </li>
         <li>
-          <a href="userquality-assurance.php">
-            <i class="fa-solid fa-medal"></i>
-            <span>QA ASSURANCE</span>
+          <a href="userquality.php">
+          <i class="fa-solid fa-toggle-on"></i>
+            <span>QUALITY CONTROL</span>
+          </a>
+        </li>
+        <li>
+          <a href="usererpsystems.php">
+          <i class="fa-brands fa-ubuntu"></i>
+            <span>ERP SYSTEMS</span>
+          </a>
+        </li>
+        <li>
+          <a href="usertraceability.php">
+          <i class="fa-solid fa-shuffle"></i>
+            <span>TRACEABILITY</span>
           </a>
         </li>
         <div class="ropdown">
           <div class="select">
-              <i class="fa-solid fa-wrench"></i>
-              <span class="selectee">EQUIPMENT MANTENANCE</span>
+          <i class="fa-solid fa-box"></i>
+              <span class="selectee">SERVICES</span>
               <div class="caret"></div>
           </div>
           <ul class="fireef">
               <li>
-              <a href="useradd-items.php">ADD ITEMS </a></li>
+              <a href="usersupply.php">SUPPLY</a></li>
               <li>
-              <a href="userasset-management.php">ASSET MANAGEMENT</a></li>
+              <a href="usermaintenance.php">MANTENANCE</a></li>
               <li>
-              <a href="usernotifications.php">NOTIFICATIONS</a></li>
+              <a href="usertrainings.php">TRAININGS</a></li>
           </ul>
       </div>
         <li>
-          <a href="usersupply-chain.php">
-          <i class="fa-solid fa-boxes-packing"></i>
-            <span>SUPPLY CHAIN</span>
-          </a>
-        </li>
-        <li>
-          <a href="userregulations.php">
-          <i class="fa-solid fa-scale-balanced"></i>
-            <span>REGULATORY COMPLIANCE</span>
+          <a href="useremail.php">
+          <i class="fa-solid fa-envelope"></i>
+            <span>FEEDBACK</span>
           </a>
         </li>
         <li>
@@ -115,7 +114,7 @@
           </a>
         </li>
     </ul>
-  </div>
+</div>
 
   <div class="main-content" id="main-contents">
     <div class="header-wrapper">
@@ -141,7 +140,7 @@
        <div class="duke">
 
           <div class="hastings">
-            <img src="./image/images.jpeg" alt="">
+            <img src="./image/vector-users-icon.jpg" alt="">
             <?php $sql=mysqli_query($con,"SELECT * FROM `users` WHERE id='$id' ");
             $row = mysqli_num_rows($sql);
             if($row){
@@ -200,7 +199,6 @@
   margin: 0 auto;
   padding:1rem;
   height:65vh;
-  border-radius: 20px;
   background-color: #ecebf3;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }

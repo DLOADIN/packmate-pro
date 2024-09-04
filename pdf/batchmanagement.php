@@ -11,15 +11,15 @@
     $number++ => 'ID',
     'u_name' => 'NAME',
     'u_type' => 'TYPE',
-    'u_stock' => 'STOCK',
-    'u_level' => 'CURRENT LEVEL',
-    'u_supplier' => 'SUPPLIER',
-    'u_date' => 'LAST ORDER DATE',
+    'u_scans' => 'SCANS',
+    'faults' => 'FAULTS',
+    'u_date' => 'DATE',
+    // Add more as needed
 );
 
 require '../connection.php';
-$sql=mysqli_query($con," SELECT u_name, u_type, u_stock, u_level, u_supplier, u_date FROM `inventory` ");
-$tableName = "ALL INVENTORY REPORT";
+$sql=mysqli_query($con," SELECT u_name, u_type, u_scans, faults, u_date FROM `batchmanagement`");
+$tableName = "ALL BATCH REPORT";
 
 // Set font
 $pdf->SetFont('Arial', 'B', 16);

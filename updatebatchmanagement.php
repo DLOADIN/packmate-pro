@@ -22,7 +22,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
   <script src="./dropdown.js"></script>
-  <title>INVENTORY</title>
+  <title>BATCH MANAGEMENT</title>
 </head>
 <body>
   <style>
@@ -115,7 +115,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>INVENTORY</h1>
+          <h1>UPDATE BATCH MANAGEMENT</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -135,52 +135,60 @@
         </div>
 
         <section class="make-new">
-        <div class="catch">
-        <h1>INVENTORY MANAGEMENT FORM</h1>
+          <h2>SCANNER</h2>
+          <div class="make-new-1">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <div class="make-new-2">
+              <h2>Guide Of Use:</h2>
+              <li class="li">
+                <li>Take your Bottle</li>
+                <li>Drag close to your device camera position</li>
+              </li>
+            </div>
+          </div>
+          <div class="catch">
+        <h1>BATCH MANAGEMENT</h1>
         <form  method="post" class="form-form">
           <div class="formation-1">
+          <?php
+          $my_id=$_GET['id'];
+          $sqly = mysqli_query($con, "SELECT * FROM `batchmanagement` WHERE id='$my_id'");
+          while ($row = mysqli_fetch_array($sqly)):
+        ?>
           <label for="">NAME</label>
-          <input type="text" name="u_name" id="" required placeholder="PRODUCT NAME">
+          <input type="text" name="u_name" id="" value="<?php echo $row['u_name']?>" required placeholder="PRODUCT NAME">
           <label for="">TYPE</label>
-          <input type="text" name="u_type" id="" required placeholder="TYPE">
-          <label for="">STOCK</label>
-          <input type="text" name="u_stock" id="" required placeholder="NUMBER OF STOCK">
-          <label for="">LEVEL</label>
-          <select name="u_level" id="">
-            <option value=""></option>
-            <option value="LEVEL ONE">LEVEL ONE</option>
-            <option value="LEVEL TWO">LEVEL TWO</option>
-            <option value="LEVEL THREE">LEVEL THREE</option>
-            <option value="LEVEL FOUR">LEVEL FOUR</option>
-            <option value="LEVEL FIVE">LEVEL FIVE</option>
-          </select>
-          <label for="">SUPPLIER</label>
-          <input type="text"  name="u_supplier" id="" required placeholder="SUPPLIER'S NAME">
+          <input type="text" name="u_type" id=""  value="<?php echo $row['u_type']?>" required placeholder="TYPE">
+          <label for="">SCANS</label>
+          <input type="text" name="u_scans" id="" value="<?php echo $row['u_scans']?>" required placeholder="SCANS">
+          <label for="">FAULTS</label>
+          <input type="text"  name="faults" id="" value="<?php echo $row['faults']?>" required placeholder="FAULTS">
           <label for="">DATE</label>
-          <input type="text" name="u_date" id="" value="<?php echo date('y-m-d')?>" required>
+          <input type="text" name="u_date" id="" value="<?php echo $row['u_date']?>" required>
         </div>
-          <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
+          <button name="submit" type="submit" class="btn-3" id="button-btn">UPDATE</a>
           </button>
         </form>
+        <?php
+        endwhile;
+        ?>
        </div>
     <div class="tablestotable">
       <div class="table-containment">
-        <h1>DETAILS ON INVENTORY</h1>
+        <h1>DETAILS ON BATCH MANAGEMENT</h1>
         <table>
           <tr>
             <th>#</th>
             <th>PRODUCT NAME</th>
             <th>TYPE</th>
-            <th>STOCK</th>
-            <th>LEVEL</th>
-            <th>SUPPLIER</th>
+            <th>SCANS</th>
+            <th>FAULTS</th>
             <th>DATE</th>
             <th>MODIFY</th>
             <th>DELETE</th>
-            <th>DOWNLOAD</th>
           </tr>
           <?php
-          $sqly = mysqli_query($con, "SELECT * FROM `inventory`");
+          $sqly = mysqli_query($con, "SELECT * FROM `batchmanagement`");
           $number = 0;
         while ($row = mysqli_fetch_array($sqly)):
         ?>
@@ -188,22 +196,18 @@
             <td><?php echo ++$number; ?></td>
             <td><?php echo $row['u_name']; ?></td>
             <td><?php echo $row['u_type']; ?></td>
-            <td><?php echo $row['u_stock']; ?></td>
-            <td><?php echo $row['u_level']; ?></td>
-            <td><?php echo $row['u_supplier']; ?></td>
+            <td><?php echo $row['u_scans']; ?></td>
+            <td><?php echo $row['faults']; ?></td>
             <td><?php echo $row['u_date']; ?></td>
             <td>
             <button class="button-btn-2">
-              <a href="updateinventory.php?id=<?php echo $row['id']?>">UPDATE</a>
+              <a href="updatebatchmanagement.php?id=<?php echo $row['id']?>">UPDATE</a>
             </button>
             </td>
             <td>
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
-            <a href="deleteinventory.php?id=<?php echo $row['id']?>">REMOVE</a>
+            <a href="deletebatchmanagement.php?id=<?php echo $row['id']?>">REMOVE</a>
             </button>
-            </td>
-            <td>
-              <a href="./pdf/inventory.php"><i class="fa-solid fa-download"></i></a>
             </td>
           </tr>
           <?php
@@ -243,10 +247,6 @@
             color:#EC9124;
             font-size:50px;
           }
-          td i{
-            font-size:20px;
-            
-          }
           .make-new-2{
             width: 40vh;
             height: 35vh;
@@ -264,11 +264,10 @@
 if(isset($_POST['submit'])){
   $raw_material=$_POST['u_name'];
   $line_setup=$_POST['u_type'];
-  $qc_check=$_POST['u_stock'];
-  $Batchdate=$_POST['u_level'];
-  $u_supplier=$_POST['u_supplier'];
+  $qc_check=$_POST['u_scans'];
+  $Batchdate=$_POST['faults'];
   $inventory_update=$_POST['u_date'];
-  $sql=mysqli_query($con,"INSERT INTO inventory VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate','$u_supplier','$inventory_update')");
+  $sql=mysqli_query($con,"UPDATE batchmanagement SET u_name='$raw_material',u_type='$line_setup',u_scans='$qc_check',faults='$Batchdate',u_date='$inventory_update' WHERE id='$my_id'");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";

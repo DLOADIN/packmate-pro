@@ -136,32 +136,40 @@
 
         <section class="make-new">
         <div class="catch">
-        <h1>INVENTORY MANAGEMENT FORM</h1>
+        <h1>UPDATE & MODIFY INVENTORY MANAGEMENT FORM</h1>
         <form  method="post" class="form-form">
           <div class="formation-1">
+          <?php
+          $my_id=$_GET['id'];
+          $sqly = mysqli_query($con, "SELECT * FROM `inventory` WHERE id='$my_id'");
+          while ($row = mysqli_fetch_array($sqly)):
+        ?>
           <label for="">NAME</label>
-          <input type="text" name="u_name" id="" required placeholder="PRODUCT NAME">
+          <input type="text" name="u_name" id="" required value="<?php echo $row['u_name'] ?>">
           <label for="">TYPE</label>
-          <input type="text" name="u_type" id="" required placeholder="TYPE">
+          <input type="text" name="u_type" id="" required value="<?php echo $row['u_type'] ?>">
           <label for="">STOCK</label>
-          <input type="text" name="u_stock" id="" required placeholder="NUMBER OF STOCK">
+          <input type="text" name="u_stock" id="" required value="<?php echo $row['u_stock'] ?>">
           <label for="">LEVEL</label>
-          <select name="u_level" id="">
+          <select name="u_level" id="u_level">
             <option value=""></option>
-            <option value="LEVEL ONE">LEVEL ONE</option>
-            <option value="LEVEL TWO">LEVEL TWO</option>
-            <option value="LEVEL THREE">LEVEL THREE</option>
-            <option value="LEVEL FOUR">LEVEL FOUR</option>
-            <option value="LEVEL FIVE">LEVEL FIVE</option>
+            <option value="LEVEL ONE" <?php if ($row['u_level'] == 'LEVEL ONE') echo 'selected'; ?>>LEVEL ONE</option>
+            <option value="LEVEL TWO" <?php if ($row['u_level'] == 'LEVEL TWO') echo 'selected'; ?>>LEVEL TWO</option>
+            <option value="LEVEL THREE" <?php if ($row['u_level'] == 'LEVEL THREE') echo 'selected'; ?>>LEVEL THREE</option>
+            <option value="LEVEL FOUR" <?php if ($row['u_level'] == 'LEVEL FOUR') echo 'selected'; ?>>LEVEL FOUR</option>
+            <option value="LEVEL FIVE" <?php if ($row['u_level'] == 'LEVEL FIVE') echo 'selected'; ?>>LEVEL FIVE</option>
           </select>
           <label for="">SUPPLIER</label>
-          <input type="text"  name="u_supplier" id="" required placeholder="SUPPLIER'S NAME">
+          <input type="text"  name="u_supplier" id="" required value="<?php echo $row['u_supplier'] ?>">
           <label for="">DATE</label>
-          <input type="text" name="u_date" id="" value="<?php echo date('y-m-d')?>" required>
+          <input type="text" name="u_date" id="" value="<?php echo $row['u_date'] ?>" required>
         </div>
           <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
           </button>
         </form>
+        <?php
+        endwhile;
+        ?>
        </div>
     <div class="tablestotable">
       <div class="table-containment">
@@ -201,9 +209,6 @@
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
             <a href="deleteinventory.php?id=<?php echo $row['id']?>">REMOVE</a>
             </button>
-            </td>
-            <td>
-              <a href="./pdf/inventory.php"><i class="fa-solid fa-download"></i></a>
             </td>
           </tr>
           <?php
@@ -268,7 +273,7 @@ if(isset($_POST['submit'])){
   $Batchdate=$_POST['u_level'];
   $u_supplier=$_POST['u_supplier'];
   $inventory_update=$_POST['u_date'];
-  $sql=mysqli_query($con,"INSERT INTO inventory VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate','$u_supplier','$inventory_update')");
+  $sql=mysqli_query($con,"UPDATE `inventory` SET u_name='$raw_material',u_type='$line_setup',u_stock='$qc_check',u_level='$Batchdate',u_supplier='$u_supplier',u_date='$inventory_update' WHERE id=$id");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";
