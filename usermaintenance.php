@@ -22,7 +22,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
   <script src="./dropdown.js"></script>
-  <title>INVENTORY</title>
+  <title>MAINTENANCE</title>
 </head>
 <body>
   <style>
@@ -31,17 +31,133 @@
       overflow-y:auto;
       padding-bottom:3rem;
     }
+    .make-new .catch h1{
+            text-align:center;
+          }
     .caradan-products{
       text-decoration: none;
     }
     .ropdown{
       padding:1rem 0rem;
     }
-    
-  </style>
-  <script>
-    
-  </script>
+
+    .container {
+    width: 100%;
+    max-width: 80vh;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    gap:4rem;
+}
+
+.calendar-container {
+  display:grid;
+  place-items:center;
+  margin: 0 auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    width:50vh;
+}
+
+.calendar-header h3 {
+    margin: 0;
+    color: #FF9900; 
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.calendar {
+  display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center;   
+}
+
+.days div {
+    font-weight: bold;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.dates div {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.div-la{
+  display:grid;
+  place-items:center;
+}
+
+.dates div.selected {
+    background-color: #FF9900;
+    color: white;
+}
+
+.dates div:hover {
+    background-color: #ffe0b3;
+}
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-container label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    margin-left:5px
+}
+
+form input, form select {
+  border-radius: 6px;
+  height: 7vh;
+  padding: 15px;
+  width: 40%;
+  font-style: italic;
+  border-top: .5px solid #EC9124;
+}
+
+
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
+
+    .calendar-header button {
+        font-size: 18px;
+        padding: 6px 10px;
+    }
+
+    .calendar-header h3 {
+        font-size: 16px;
+    }
+}  </style>
 <div class="sidebar">
       <ul class="menu">
         <div class="logout">
@@ -115,7 +231,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>INVENTORY</h1>
+          <h1>MAINTENANCE</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -133,80 +249,88 @@
           </button>
         </div>
         </div>
-
         <section class="make-new">
         <div class="catch">
-        <h1>UPDATE & MODIFY INVENTORY MANAGEMENT FORM</h1>
-        <form  method="post" class="form-form">
-          <div class="formation-1">
-          <?php
-          $my_id=$_GET['id'];
-          $sqly = mysqli_query($con, "SELECT * FROM `inventory` WHERE id='$my_id'");
-          while ($row = mysqli_fetch_array($sqly)):
-        ?>
-          <label for="">NAME</label>
-          <input type="text" name="u_name" id="" required value="<?php echo $row['u_name'] ?>">
-          <label for="">TYPE</label>
-          <input type="text" name="u_type" id="" required value="<?php echo $row['u_type'] ?>">
-          <label for="">STOCK</label>
-          <input type="text" name="u_stock" id="" required value="<?php echo $row['u_stock'] ?>">
-          <label for="">LEVEL</label>
-          <select name="u_level" id="u_level">
-            <option value=""></option>
-            <option value="LEVEL ONE" <?php if ($row['u_level'] == 'LEVEL ONE') echo 'selected'; ?>>LEVEL ONE</option>
-            <option value="LEVEL TWO" <?php if ($row['u_level'] == 'LEVEL TWO') echo 'selected'; ?>>LEVEL TWO</option>
-            <option value="LEVEL THREE" <?php if ($row['u_level'] == 'LEVEL THREE') echo 'selected'; ?>>LEVEL THREE</option>
-            <option value="LEVEL FOUR" <?php if ($row['u_level'] == 'LEVEL FOUR') echo 'selected'; ?>>LEVEL FOUR</option>
-            <option value="LEVEL FIVE" <?php if ($row['u_level'] == 'LEVEL FIVE') echo 'selected'; ?>>LEVEL FIVE</option>
-          </select>
-          <label for="">SUPPLIER</label>
-          <input type="text"  name="u_supplier" id="" required value="<?php echo $row['u_supplier'] ?>">
-          <label for="">DATE</label>
-          <input type="text" name="u_date" id="" value="<?php echo $row['u_date'] ?>" required>
-        </div>
-          <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
-          </button>
+          <h1>MAINTENANCE FORM</h1>
+          <div class="container">
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button id="prev-month">&lt;</button>
+                <h3 id="current-month-year"></h3>
+                <button id="next-month">&gt;</button>
+            </div>
+            <div class="calendar">
+                <div class="days">
+                    <div>Su</div>
+                    <div>Mo</div>
+                    <div>Tu</div>
+                    <div>We</div>
+                    <div>Th</div>
+                    <div>Fr</div>
+                    <div>Sa</div>
+                </div>
+                <div class="dates" id="dates"></div>
+            </div>
+          </div>
+
+          <form action="" method="POST" class="form-container" >
+            <input type="hidden" id="selectedDate" name="date" required>
+
+            <div class="div-la">
+            <label for="machine">CHOOSE MACHINE</label>
+            <input type="text" name=u_machine id="machine" id="" required placeholder="ANY MACHINERY OF YOUR CHOICE">
+            </div>
+
+            <div class="div-la">
+            <label for="amount">AMOUNT</label>
+            <input type="text" id="amount" name="u_amount" required placeholder="ANY MACHINERY OF YOUR CHOICE">
+            </div>
+            <button type="submit" name="submit">SUBMIT</button>
+            <style>
+              .form-container button{
+                border-radius: 10px;
+                margin: 1rem;
+                height: 60px;
+                border:10px solid #fff;
+                background-color:  #EC9124;;
+                border: 3px solid #fff;
+                color: aliceblue;
+                cursor: pointer;
+                font-size: 1em;
+                font-weight: 800;
+                width:50%;
+                margin:0 auto;
+                padding:10px 15px
+              }
+            </style>
         </form>
-        <?php
-        endwhile;
-        ?>
        </div>
+
+
     <div class="tablestotable">
       <div class="table-containment">
-        <h1>DETAILS ON INVENTORY</h1>
+        <h1>DETAILS ON SUPPLY DATA</h1>
         <table>
           <tr>
-            <th>#</th>
-            <th>PRODUCT NAME</th>
-            <th>TYPE</th>
-            <th>STOCK</th>
-            <th>LEVEL</th>
-            <th>SUPPLIER</th>
-            <th>DATE</th>
-            <th>MODIFY</th>
+          <th>#</th>
+            <th>DATE OF SCHEDULE</th>
+            <th>MACHINE NAME</th>
+            <th>AMOUNT OF PRODUCTS</th>
             <th>DELETE</th>
           </tr>
           <?php
-          $sqly = mysqli_query($con, "SELECT * FROM `inventory`");
+          $sqly = mysqli_query($con, "SELECT * FROM `maintenance`");
           $number = 0;
         while ($row = mysqli_fetch_array($sqly)):
         ?>
           <tr>
             <td><?php echo ++$number; ?></td>
-            <td><?php echo $row['u_name']; ?></td>
-            <td><?php echo $row['u_type']; ?></td>
-            <td><?php echo $row['u_stock']; ?></td>
-            <td><?php echo $row['u_level']; ?></td>
-            <td><?php echo $row['u_supplier']; ?></td>
-            <td><?php echo $row['u_date']; ?></td>
-            <td>
-            <button class="button-btn-2">
-              <a href="updateinventory.php?id=<?php echo $row['id']?>">UPDATE</a>
-            </button>
-            </td>
+            <td><?php echo $row['date']; ?></td>
+            <td><?php echo $row['u_machine']; ?></td>
+            <td><?php echo $row['u_amount']; ?></td>
             <td>
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
-            <a href="deleteinventory.php?id=<?php echo $row['id']?>">REMOVE</a>
+            <a href="deletemaintenance.php?id=<?php echo $row['id']?>">REMOVE</a>
             </button>
             </td>
           </tr>
@@ -224,6 +348,10 @@
           }
           .button-btn-1{
             background:red
+          }
+          
+          .make-new .catch h1{
+            text-align:center;
           }
           .catch{
             margin-top:2rem;
@@ -266,13 +394,10 @@
 </html>
 <?php
 if(isset($_POST['submit'])){
-  $raw_material=$_POST['u_name'];
-  $line_setup=$_POST['u_type'];
-  $qc_check=$_POST['u_stock'];
-  $Batchdate=$_POST['u_level'];
-  $u_supplier=$_POST['u_supplier'];
-  $inventory_update=$_POST['u_date'];
-  $sql=mysqli_query($con,"UPDATE `inventory` SET u_name='$raw_material',u_type='$line_setup',u_stock='$qc_check',u_level='$Batchdate',u_supplier='$u_supplier',u_date='$inventory_update' WHERE id=$id");
+  $raw_material=$_POST['date'];
+  $line_setup=$_POST['u_machine'];
+  $qc_check=$_POST['u_amount'];
+  $sql=mysqli_query($con,"INSERT INTO `maintenance` VALUES('','$raw_material','$line_setup','$qc_check')");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";
@@ -283,3 +408,5 @@ if(isset($_POST['submit'])){
 
 }
 ?>
+<script src="./calendar.js"></script>
+

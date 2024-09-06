@@ -17,6 +17,7 @@
   padding:0;
   box-sizing: border-box;
   border:none;
+  scroll-behavior: smooth;
   font-family: "San Francisco", sans-serif;  
   font-weight: bold;
   font-style: normal;

@@ -22,7 +22,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
   <script src="./dropdown.js"></script>
-  <title>INVENTORY</title>
+  <title>TRACEABILITY</title>
 </head>
 <body>
   <style>
@@ -31,6 +31,9 @@
       overflow-y:auto;
       padding-bottom:3rem;
     }
+    .make-new .catch h1{
+            text-align:center;
+          }
     .caradan-products{
       text-decoration: none;
     }
@@ -115,7 +118,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>INVENTORY</h1>
+          <h1>TRACEABILITY</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -133,81 +136,73 @@
           </button>
         </div>
         </div>
-
         <section class="make-new">
         <div class="catch">
-        <h1>UPDATE & MODIFY INVENTORY MANAGEMENT FORM</h1>
+        <h1>UPDATE TRACEABILITY FORM</h1>
         <form  method="post" class="form-form">
-          <div class="formation-1">
-          <?php
+          <?php 
           $my_id=$_GET['id'];
-          $sqly = mysqli_query($con, "SELECT * FROM `inventory` WHERE id='$my_id'");
-          while ($row = mysqli_fetch_array($sqly)):
-        ?>
-          <label for="">NAME</label>
-          <input type="text" name="u_name" id="" required value="<?php echo $row['u_name'] ?>">
-          <label for="">TYPE</label>
-          <input type="text" name="u_type" id="" required value="<?php echo $row['u_type'] ?>">
-          <label for="">STOCK</label>
-          <input type="text" name="u_stock" id="" required value="<?php echo $row['u_stock'] ?>">
-          <label for="">LEVEL</label>
-          <select name="u_level" id="u_level">
-            <option value=""></option>
-            <option value="LEVEL ONE" <?php if ($row['u_level'] == 'LEVEL ONE') echo 'selected'; ?>>LEVEL ONE</option>
-            <option value="LEVEL TWO" <?php if ($row['u_level'] == 'LEVEL TWO') echo 'selected'; ?>>LEVEL TWO</option>
-            <option value="LEVEL THREE" <?php if ($row['u_level'] == 'LEVEL THREE') echo 'selected'; ?>>LEVEL THREE</option>
-            <option value="LEVEL FOUR" <?php if ($row['u_level'] == 'LEVEL FOUR') echo 'selected'; ?>>LEVEL FOUR</option>
-            <option value="LEVEL FIVE" <?php if ($row['u_level'] == 'LEVEL FIVE') echo 'selected'; ?>>LEVEL FIVE</option>
-          </select>
-          <label for="">SUPPLIER</label>
-          <input type="text"  name="u_supplier" id="" required value="<?php echo $row['u_supplier'] ?>">
+          $sqly=mysqli_query($con,"SELECT * FROM `traceability` WHERE id='$my_id'");
+          while($rowy=mysqli_fetch_array($sqly)):
+          ?>
+          <div class="formation-1">
+          <label for="">PACKAGE CONTENT</label>
+          <input type="text" name="u_name" id="" required value="<?php echo $rowy['u_name'] ?>">
+          <label for="">PACKAGE RECEIVER</label>
+          <input type="text" name="u_receiver" id="" required value="<?php echo $rowy['u_receiver'] ?>">
           <label for="">DATE</label>
-          <input type="text" name="u_date" id="" value="<?php echo $row['u_date'] ?>" required>
+          <input type="text" name="u_date" id="" required value="<?php echo $rowy['u_date'] ?>">
+          <label for="">STATUS</label>
+          <select name="u_status" id="">
+            <option value=""></option>
+            <option value="PENDING" <?php if($rowy['u_status'] =='PENDING'){echo "selected";} ?>>PENDING</option>
+            <option value="SUCCESSFULL" <?php if($rowy['u_status'] =='PENDING'){echo "selected";} ?>>SUCCESSFULL</option>
+          </select>
+          <?php
+            endwhile;
+          ?>
         </div>
-          <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
+          <button name="submit" type="submit" class="s 5" id="button-btn">SUBMIT</a>
           </button>
         </form>
-        <?php
-        endwhile;
-        ?>
        </div>
     <div class="tablestotable">
       <div class="table-containment">
-        <h1>DETAILS ON INVENTORY</h1>
+        <h1>DETAILS ON TRACEABILITY</h1>
         <table>
           <tr>
             <th>#</th>
             <th>PRODUCT NAME</th>
-            <th>TYPE</th>
-            <th>STOCK</th>
-            <th>LEVEL</th>
-            <th>SUPPLIER</th>
+            <th>PRODUCT RECEIVER</th>
+            <th>STATUS</th>
             <th>DATE</th>
             <th>MODIFY</th>
             <th>DELETE</th>
+            <th>DOWNLOAD</th>
           </tr>
           <?php
-          $sqly = mysqli_query($con, "SELECT * FROM `inventory`");
+          $sqly = mysqli_query($con, "SELECT * FROM `traceability`");
           $number = 0;
         while ($row = mysqli_fetch_array($sqly)):
         ?>
           <tr>
             <td><?php echo ++$number; ?></td>
             <td><?php echo $row['u_name']; ?></td>
-            <td><?php echo $row['u_type']; ?></td>
-            <td><?php echo $row['u_stock']; ?></td>
-            <td><?php echo $row['u_level']; ?></td>
-            <td><?php echo $row['u_supplier']; ?></td>
+            <td><?php echo $row['u_receiver']; ?></td>
+            <td><?php echo $row['u_status']; ?></td>
             <td><?php echo $row['u_date']; ?></td>
             <td>
             <button class="button-btn-2">
-              <a href="updateinventory.php?id=<?php echo $row['id']?>">UPDATE</a>
+              <a href="updatetraceability.php?id=<?php echo $row['id']?>">UPDATE</a>
             </button>
             </td>
             <td>
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
-            <a href="deleteinventory.php?id=<?php echo $row['id']?>">REMOVE</a>
+            <a href="deletetraceability.php?id=<?php echo $row['id']?>">REMOVE</a>
             </button>
+            </td>
+            <td>
+              <a href="./pdf/traceability.php"><i class="fa-solid fa-download"></i></a>
             </td>
           </tr>
           <?php
@@ -224,6 +219,10 @@
           }
           .button-btn-1{
             background:red
+          }
+          
+          .make-new .catch h1{
+            text-align:center;
           }
           .catch{
             margin-top:2rem;
@@ -267,12 +266,10 @@
 <?php
 if(isset($_POST['submit'])){
   $raw_material=$_POST['u_name'];
-  $line_setup=$_POST['u_type'];
-  $qc_check=$_POST['u_stock'];
-  $Batchdate=$_POST['u_level'];
-  $u_supplier=$_POST['u_supplier'];
-  $inventory_update=$_POST['u_date'];
-  $sql=mysqli_query($con,"UPDATE `inventory` SET u_name='$raw_material',u_type='$line_setup',u_stock='$qc_check',u_level='$Batchdate',u_supplier='$u_supplier',u_date='$inventory_update' WHERE id=$id");
+  $line_setup=$_POST['u_receiver'];
+  $qc_check=$_POST['u_status'];
+  $Batchdate=$_POST['u_date'];
+  $sql=mysqli_query($con,"UPDATE `traceability` SET u_name='$raw_material',u_receiver='$line_setup',u_status='$qc_check',u_date='$Batchdate' WHERE id='$id'");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";

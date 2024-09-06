@@ -74,12 +74,12 @@
             <span>QUALITY CONTROL</span>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="usererpsystems.php">
           <i class="fa-brands fa-ubuntu"></i>
             <span>ERP SYSTEMS</span>
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="usertraceability.php">
           <i class="fa-solid fa-shuffle"></i>
