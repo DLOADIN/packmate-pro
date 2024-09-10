@@ -20,6 +20,8 @@
   <link rel="shortcut icon" href="./image/thebutcher-removebg-preview.png" type="image/x-icon">
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="./CSS/alert.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="jsfile.js"></script>
   <script src="./dropdown.js"></script>
   <title>INVENTORY</title>
@@ -131,6 +133,30 @@
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
+          <button class="mybutton">
+        <i class="fa-solid fa-bell" id="fa-bell"></i>
+    </button>
+    <div class="alert hide">
+        <span class="msg"><i class="fa-solid fa-circle-exclamation"></i>NOTIFICATIONS</span>
+        <span class="close-btn">
+            <span class="fas"><i class="fa-solid fa-xmark"></i></span>
+        </span>
+
+        <?php
+          $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)");
+          while($row = mysqli_fetch_array($sql)):
+              $msg = $row['u_message'];
+              $date = $row['u_date'];
+              $msg1 = nl2br(htmlspecialchars($msg, ENT_QUOTES, 'UTF-8'));
+              $date = htmlspecialchars($date, ENT_QUOTES, 'UTF-8');
+          ?>
+          <div class="para-paragrraph">
+          <h3>DATE: <?php echo $date?></h3>
+          <p><?php echo $msg1?></p></div>
+          <?php
+          endwhile;
+        ?>
+    </div>
         </div>
         </div>
 

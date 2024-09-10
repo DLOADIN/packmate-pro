@@ -1,0 +1,82 @@
+#fa-bell {
+  font-size: 35px;
+  margin-left: 1rem;
+}
+
+#fa-bell:hover {
+  cursor: pointer;
+  color: #EC9124;
+  transition: all .3s linear;
+}
+
+.alert {
+  background: #EC9124;
+  opacity: 0.935;
+  padding: 20px 40px;
+  right: 0;
+  top: 10px;
+  border-left: 10px solid #ffa502;
+  border-radius: 10px;
+  min-width: 420px;
+  position: absolute;
+  display: none; /* Hide by default */
+}
+
+.alert .msg {
+  text-align:center;
+  font-size: 24px;
+  padding:25px
+}
+
+.alert .close-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 20px 18px;
+  background: none;
+  cursor: pointer;
+}
+
+.close-btn i:hover {
+  transform: scale(1.1);
+}
+
+.fa-circle-exclamation{
+margin-right:1rem;
+}
+
+.close-btn i {
+  font-size: 20px;
+}
+
+.alert.show {
+  animation: show_slide .9s forwards linear;
+  display: block; /* Show the alert when class `show` is added */
+}
+
+.alert.hide {
+  display: none; /* Hide the alert when class `hide` is added */
+}
+
+.para-paragrraph {
+text-align:center;
+padding:1.34234rem 0rem;
+}
+@keyframes show_slide {
+  0% {
+      transform: translateX(100%);
+  }
+
+  40% {
+      transform: translateX(-10%);
+  }
+
+  80% {
+      transform: translateX(0%);
+  }
+
+  100% {
+      transform: translateX(-10px);
+  }
+}

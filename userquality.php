@@ -62,6 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
   <script src="./dropdown.js"></script>
+  <link rel="stylesheet" href="./CSS/alert.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <title>QUALITY ASSURANCE</title>
 </head>
 <body>
@@ -87,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <li><a href="userbatchmanagement.php"><i class="fa-solid fa-bars-progress"></i><span>BATCH MANAGEMENT</span></a></li>
         <li><a href="userinventory.php"><i class="fa-solid fa-warehouse"></i><span>INVENTORY</span></a></li>
         <li><a href="userquality.php"><i class="fa-solid fa-toggle-on"></i><span>QUALITY CONTROL</span></a></li>
-        <li><a href="usererpsystems.php"><i class="fa-brands fa-ubuntu"></i><span>ERP SYSTEMS</span></a></li>
+        <!-- <li><a href="usererpsystems.php"><i class="fa-brands fa-ubuntu"></i><span>ERP SYSTEMS</span></a></li> -->
         <li><a href="usertraceability.php"><i class="fa-solid fa-shuffle"></i><span>TRACEABILITY</span></a></li>
         <div class="ropdown">
           <div class="select"><i class="fa-solid fa-box"></i><span class="selectee">SERVICES</span><div class="caret"></div></div>
@@ -119,6 +121,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button class="btn-3">
           <a href="logout.php">LOGOUT</a>
         </button>
+        <button class="mybutton">
+        <i class="fa-solid fa-bell" id="fa-bell"></i>
+    </button>
+    <div class="alert hide">
+        <span class="msg"><i class="fa-solid fa-circle-exclamation"></i>NOTIFICATIONS</span>
+        <span class="close-btn">
+            <span class="fas"><i class="fa-solid fa-xmark"></i></span>
+        </span>
+        <script>
+            $(document).ready(function() {
+            $('.mybutton').click(function() {
+                $('.alert').removeClass("hide").addClass("show");
+            });
+
+            $('.close-btn').click(function() {
+                $('.alert').removeClass("show").addClass("hide");
+            });
+        });
+        </script>
+        <?php
+          $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)");
+          while($row = mysqli_fetch_array($sql)):
+              $msg = $row['u_message'];
+              $date = $row['u_date'];
+              $msg1 = nl2br(htmlspecialchars($msg, ENT_QUOTES, 'UTF-8'));
+              $date = htmlspecialchars($date, ENT_QUOTES, 'UTF-8');
+          ?>
+          <div class="para-paragrraph">
+          <h3>DATE: <?php echo $date?></h3>
+          <p><?php echo $msg1?></p></div>
+          <?php
+          endwhile;
+        ?>
+    </div>
       </div>
     </div>
 
