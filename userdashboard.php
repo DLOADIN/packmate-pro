@@ -32,7 +32,7 @@
     #main-contents{
       height:fit-content;
       overflow-y:auto;
-      padding-bottom:3rem;
+      padding-bottom:30rem;
     }
     .caradan-products{
       text-decoration: none;
@@ -169,6 +169,35 @@
         ?>
     </div>
         </div>
+        </div>
+        <style>
+          .major-data{
+            display:flex;
+            gap:3rem;
+            justify-content:center;
+            align-items:center
+          }
+          .dattaa1,.dattaa2,.dattaa3,.dattaa4{
+            border:solid 1px black;
+            background-color:white;
+            border-radius:20px;
+            width:40vh;
+            height:20vh;
+          }
+        </style>
+        <div class="major-data">
+            <div class="dattaa1">
+              <canvas id="seal"></canvas>
+            </div>
+            <div class="dattaa2">
+              <canvas id="seal"></canvas>
+            </div>
+            <div class="dattaa3">
+              <canvas id="seal"></canvas>
+            </div>
+            <div class="dattaa4">
+              <canvas id="seal"></canvas>
+            </div>
         </div>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
