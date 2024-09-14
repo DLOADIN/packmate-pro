@@ -206,7 +206,7 @@
             <form action="" method="post" class="formation">
               <div class="real-form">
                 <label for="">YOUR NAMES</label>
-                <input type="text" name="u_name" value="<?php echo $row['u_name']?>" required readonly>
+                <input type="text" name="u_name" value="<?php echo $row['u_name']?>" required >
                 <label for="">E-MAIL</label>
                 <input type="email" name="u_email" value="<?php echo $row['u_email']?>" required>
               </div>

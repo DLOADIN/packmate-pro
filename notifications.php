@@ -27,13 +27,17 @@
   <script src="./dropdown.js"></script>
   <link rel="stylesheet" href="./CSS/alert.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <title>YOUR PERSONAL DETAILS</title>
+  <title>NOTIFICATIONS</title>
 </head>
 <body>
   <style>
     
     #main-contents{
       height: 250vh;
+    }
+    .form-form{
+      width:90%;
+      padding-right:2rem;
     }
     .formation-1{
       display: grid;
@@ -84,7 +88,7 @@
   <div class="main-content" id="main-contents">
     <div class="header-wrapper">
       <div class="header-title">
-      <h2 class="h2">SETTINGS</h2>
+      <h2 class="h2">NOTIFICATIONS</h2>
       </div>
       <div class="user-info">
       <div class="gango">
@@ -136,96 +140,35 @@
     </div>
       </div>       
        </div>
-       <div class="duke">
-
-          <div class="hastings">
-            <img src="./image/vector-users-icon.jpg" alt="">
-            <?php $sql=mysqli_query($con,"SELECT * FROM `users` WHERE id='$id' ");
-            $row = mysqli_num_rows($sql);
-            if($row){
-              while($row=mysqli_fetch_array($sql))
-              { ?>
-            <h2><?php echo $row['u_name']?></h2>
-            <hr>
-            <h3><i class="fa-solid fa-person"></i>SYSTEM ADMIN</h3>
-            <hr>
-            <h3><i class="fa-solid fa-phone"></i>+91 7048119291</h3>
-            <h3><i class="fa-regular fa-envelope"></i><?php echo $row['u_email'];?></h3>
-            <?php 
-              }
-            }
-            ?>
-          </div>
-
-          <div class="hastings-1">
-            <H1>YOUR OVERALL INFORMATION</H1>
-            <?php
-          if(isset($_GET['id'])){
-          $id=$_GET['id'];
-        }
-          $sql=mysqli_query($con,"SELECT * FROM `users` WHERE id='$id' ");
-          $row = mysqli_fetch_array($sql);
-          ?>
-            <form action="" method="post" class="formation">
-              <div class="real-form">
-                <label for="">YOUR NAMES</label>
-                <input type="text" name="u_name" value="<?php echo $row['u_name']?>" required >
-                <label for="">E-MAIL</label>
-                <input type="email" name="u_email" value="<?php echo $row['u_email']?>" required>
-              </div>
-              <div class="real-form">
-                <label for="">PASSWORD</label>
-                <input type="password" name="u_password" required value="<?php echo $row['u_password']?>" readonly>
-                <button name="submit" type="submit" class="btn-2" id="btns">SAVE</button></div>
-                
-            </form>
-
-         </div>
+       <div class="catch">
+        <form  method="post" class="form-form">
+          <div class="formation-1">
+            
+          <label for="">MESSSAGE</label>
+          <textarea name="u_message" id="" cols="30" rows="10" placeholder="NOTIFY OUR USERS"></textarea>
+          <label for="">TODAY'S DATE</label>
+          <input type="text" name="u_date" id="" value="<?php echo date('y-m-d')?>" required read-only>
+        </div>
+          <button name="submit" type="submit" class="btn-3" id="button-btn">SEND</a>
+          </button>
+        </form>
         </div>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<style>
-.btn-2{
-  margin:0 auto;
-  background-color:#EC9124;;
-}
-
-.modd{
-  margin:0 auto;
-}
-.hastings-1{
-  margin: 0 auto;
-  padding:1rem;
-  height:65vh;
-  background-color: #ecebf3;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-}
-.another-hastings{
-  margin: 0 auto;
-  margin-top: 5vh;
-  padding:1rem;
-}
-h3 i{
-  color:black
-}
-</style>
 </body>
 </html>
-
 <?php
   if(isset($_POST['submit'])){
-    $name = $_POST['u_name'];
-    $email = $_POST['u_email'];
-    $address = $_POST['u_address'];
-    $password = $_POST['u_password'];
-    $sql=mysqli_query($con,"UPDATE `admin` SET u_name='$name', u_email ='$email', u_password='$password' WHERE id='$id' ");
-    
-    if($sql){
-      echo "<script>alert('Updated Successfully')</script>";
+    $u_message=$_POST['u_message'];
+    $u_date=$_POST['u_date'];
+    $sql="INSERT INTO `notifications` VALUES ('','$u_message','$u_date')";
+    $mysql=mysqli_query($con,$sql);
+    if($mysql){
+      echo "<script>alert('Notification sent Successfully')</script>";
     }
     else{
-      echo "<script>alert('failed to update')</script>";
+      echo "<script>alert('failed to notify')</script>";
     }
   }
 ?>
