@@ -335,8 +335,41 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
                     </div>
                   </div>
               </div>
-              
+              <div class="tablestotable">
+      <div class="table-containment">
+        <h1>DETAILS ON INVENTORY</h1>
+        <table>
+          <tr>
+            <th>#</th>
+            <th>USER NAME</th>
+            <th>USER EMAIL</th>
+            <th>DELETE</th>
+          </tr>
+          <?php
+          $sqly = mysqli_query($con, "SELECT * FROM `users` WHERE `u_name` != 'admin';");
+          $number = 0;
+        while ($row = mysqli_fetch_array($sqly)):
+        ?>
+          <tr>
+            <td><?php echo ++$number; ?></td>
+            <td><?php echo $row['u_name']; ?></td>
+            <td><?php echo $row['u_email']; ?></td>
+            <td>
+            <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
+            <a href="deleteuser.php?id=<?php echo $row['id']?>">REMOVE</a>
+            </button>
+            </td>
+          </tr>
+          <?php
+          endwhile;
+          ?>
+        </table>
+      </div>
+    </div>
+      
             </div>
+            
+    
             <style>
               .fitt{
                 display:flex;
@@ -395,6 +428,19 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
                 border: none;
                 border-radius:20px
               }
+              .button-btn-1 a, .button-btn-2 a{
+            color:white;
+            text-decoration:none;
+          }
+          .button-btn-1{
+            background:red;
+            padding:10px 20px;
+            font-size:18px;
+            border-radius:10px
+          }
+          th{
+            background:#EC9124;
+          }
             </style>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
