@@ -24,6 +24,7 @@
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script src="jsfile.js"></script>
   <script src="./extension_remover.js"></script>
+  <script src="./sidebar.js"></script>
   <script src="./dropdown.js"></script>
   <link rel="stylesheet" href="./CSS/alert.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -33,9 +34,14 @@
   <style>
     
     #main-contents{
-      height: fit-content;
+      height: 200vh;
       padding-bottom:10vh;
 
+    }
+    .sidebar{
+      padding: 0rem 1.7rem 0rem 1.7rem;
+      width: 68px;
+      height: 70vh;
     }
     .form-form{
       width:90%;

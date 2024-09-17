@@ -14,6 +14,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="./CSS/newfriend.css">
   <link rel="stylesheet" href="./CSS/another-one.css">
   <link rel="stylesheet" href="./CSS/form.css">
@@ -35,9 +36,14 @@
     #main-contents{
       height: 250vh;
     }
+    .sidebar{
+      padding: 0rem 1.7rem 0rem 1.7rem;
+      width: 68px;
+      height: 70vh;
+    }
     .formation-1{
       display: grid;
-      grid-template-columns: 130px 700px 150px 300px;
+      grid-template-columns: 130px 700px 150px 300px; 
       row-gap: 30px;
       column-gap: 30px;
       padding-top: 10vh;
@@ -48,36 +54,45 @@
       .sidebar i{
         color: black;
       }
+    .sidebar .menu a.active {
+      color: #EC9124;
+    }
+    .sidebar .menu a.active i {
+      color: #EC9124;
+    }
   </style>
+  </div>
+
+  <script src="./sidebar.js"></script>
+
 <div class="sidebar">
-      <ul class="menu">
-        <div class="logout">
+    <ul class="menu">
+      <div class="logout">
         <li>
-        <a href="dashboard.php">
+          <a href="dashboard.php"> 
             <i class="fa-solid fa-house-chimney"></i>
             <span>HOME</span>
           </a>
         </li>
         <li>
           <a href="usererpsystems.php">
-          <i class="fa-brands fa-ubuntu"></i>
+            <i class="fa-brands fa-ubuntu"></i>
             <span>ERP SYSTEMS</span>
           </a>
         </li>
-        
         <li>
           <a href="notifications.php">
-          <i class="fa-solid fa-circle-exclamation"></i>
+            <i class="fa-solid fa-circle-exclamation"></i>
             <span>NOTIFICATIONS</span>
           </a>
         </li>
-        
         <li>
           <a href="profile.php">
-          <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-user"></i>
             <span>PROFILE</span>
           </a>
         </li>
+      </div>
     </ul>
   </div>
 

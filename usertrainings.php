@@ -24,6 +24,7 @@
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
+  <script src="./sidebar.js"></script>
   <script src="./dropdown.js"></script>
   <title>TRAININGS</title>
 </head>

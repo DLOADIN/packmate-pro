@@ -59,6 +59,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
   <script src="./dropdown.js"></script>
   <link rel="stylesheet" href="./CSS/alert.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./sidebar.js"></script>
   <title>DASHBOARD</title>
 </head>
 <body>
@@ -73,6 +74,11 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
     }
     .ropdown{
       padding:1rem 0rem;
+    }
+    .sidebar{
+      padding: 0rem 1.7rem 0rem 1.7rem;
+      width: 68px;
+      height: 70vh;
     }
     
   </style>
@@ -110,7 +116,6 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
         </li>
     </ul>
   </div>
-
 
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">

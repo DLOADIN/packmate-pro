@@ -386,4 +386,9 @@ ul li:hover ul.dropdown{
   cursor: pointer;
 }
 
-
+.sidebar .menu a.active {
+  color: #EC9124;
+}
+.sidebar .menu a.active i {
+  color: #EC9124;
+}

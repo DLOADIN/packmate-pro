@@ -56,6 +56,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
+  <script src="./sidebar.js"></script>
   <script src="./dropdown.js"></script>
   <link rel="stylesheet" href="./CSS/alert.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -74,10 +75,15 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
     .ropdown{
       padding:1rem 0rem;
     }
+    .sidebar{
+      padding: 0rem 1.7rem 0rem 1.7rem;
+      width: 68px;
+      height: 70vh;
+    }
     
   </style>
   
-<div class="sidebar">
+  <div class="sidebar">
       <ul class="menu">
         <div class="logout">
         <li>
@@ -109,11 +115,10 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
     </ul>
   </div>
 
-
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>DASHBOARD</h1>
+          <h1>ERP SYSTEMS</h1>
         </div>
         <div class="user-info">
         <div class="gango">
