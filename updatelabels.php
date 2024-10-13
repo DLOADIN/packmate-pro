@@ -26,7 +26,7 @@
   <script src="./dropdown.js"></script>
   <link rel="stylesheet" href="./CSS/alert.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <title>LABELLING & SEALING</title>
+  <title>UPDATE LABELLING & SEALING</title>
 </head>
 <body>
   <style>
@@ -125,7 +125,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>LABELLING & SEALING</h1>
+          <h1>UPDATE LABELLING & SEALING</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -178,28 +178,36 @@
         </div>
         
         </div>
-        <section class="make-new">
+         <section class="make-new">
         <div class="catch">
-        <h1>LABELLING & SEALING FORM</h1>
+        <h1>UPDATING THE LABELLING & SEALING FORM</h1>
+        <?php
+          $my_id=$_GET['id'];
+          $sqly = mysqli_query($con, "SELECT * FROM `labels` WHERE id='$my_id'");
+          while ($row = mysqli_fetch_array($sqly)):
+        ?>
         <form  method="post" class="form-form">
           <div class="formation-1">
           <label for="">NAME</label>
-          <input type="text" name="u_name" id="" required placeholder="BEVERAGE NAME">
+          <input type="text" name="u_name" id="" required placeholder="BEVERAGE NAME" value="<?php echo $row['u_name']?>">
           <label for="">TYPE</label>
-          <select name="u_type" id="">
+          <select name="u_type" id=""  value=<?php echo $row['u_type']?>>
             <option value=""></option>
             <option value="Non-alcoholic">NON-ALCOHOLIC</option>
             <option value="Alcoholic">ALCOHOLIC</option>
           </select>
           <label for="">LABELS</label>
-          <input type="number" name="u_label" id="" required>
+          <input type="number" name="u_label" id="" required  value=<?php echo $row['u_label']?>>
           <label for="">FAULT QR</label>
-          <input type="text"  name="u_fault" id="" required placeholder="FAULT QR CODE">
+          <input type="text"  name="u_fault" id="" required  value=<?php echo $row['u_fault']?>>
           <label for="">CORRECT QR</label>
-          <input type="text"  name="u_correct" id="" required placeholder="CORRECT QR CODE">
+          <input type="text"  name="u_correct" id="" required  value=<?php echo $row['u_correct']?>>
           <label for="">DATE</label>
-          <input type="text" name="u_date" id="" value="<?php echo date('y-m-d')?>" required>
+          <input type="text" name="u_date" id=""  value=<?php echo $row['u_date']?> required>
         </div>
+        <?php 
+        endwhile
+        ?>
           <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
           </button>
         </form>
@@ -310,7 +318,7 @@ if(isset($_POST['submit'])){
   $fault=$_POST['u_fault'];
   $correct=$_POST['u_correct'];
   $date=$_POST['u_date'];
-  $sql="INSERT into `labels` VALUES('','$name','$type','$label','$fault','$correct','$date')";
+  $sql="UPDATE `labels` SET u_name='$name', u_type='$type',u_label='$label', u_fault='$fault',u_correct='$correct',u_date='$date' WHERE `labels`.`id` = '$my_id'";
   $integrated=mysqli_query($con,$sql);
   if (!$sql) {
     echo 'The error is: ' . mysqli_error($integrated);

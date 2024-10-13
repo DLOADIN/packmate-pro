@@ -183,31 +183,23 @@
         <h1>LABELLING & SEALING FORM</h1>
         <form  method="post" class="form-form">
           <div class="formation-1">
-          <?php
-          $my_id=$_GET['id'];
-          $sqly = mysqli_query($con, "SELECT * FROM `labels` WHERE id='$my_id'");
-          while ($row = mysqli_fetch_array($sqly)):
-        ?>
           <label for="">NAME</label>
-          <input type="text" name="u_name" id="" required value=<?php echo $row['u_name']?>>
+          <input type="text" name="u_name" id="" required placeholder="BEVERAGE NAME">
           <label for="">TYPE</label>
-          <select name="u_type" id=""  value=<?php echo $row['u_type']?>>
+          <select name="u_type" id="">
             <option value=""></option>
             <option value="Non-alcoholic">NON-ALCOHOLIC</option>
             <option value="Alcoholic">ALCOHOLIC</option>
           </select>
           <label for="">LABELS</label>
-          <input type="number" name="u_label" id="" required  value=<?php echo $row['u_label']?>>
+          <input type="number" name="u_label" id="" required>
           <label for="">FAULT QR</label>
-          <input type="text"  name="u_fault" id="" required  value=<?php echo $row['u_fault']?>>
+          <input type="text"  name="u_fault" id="" required placeholder="FAULT QR CODE">
           <label for="">CORRECT QR</label>
-          <input type="text"  name="u_correct" id="" required  value=<?php echo $row['u_correct']?>>
+          <input type="text"  name="u_correct" id="" required placeholder="CORRECT QR CODE">
           <label for="">DATE</label>
-          <input type="text" name="u_date" id=""  value=<?php echo $row['u_date']?> required>
+          <input type="text" name="u_date" id="" value="<?php echo date('y-m-d')?>" required>
         </div>
-        <?php 
-        endwhile
-        ?>
           <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
           </button>
         </form>
