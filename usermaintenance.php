@@ -177,6 +177,12 @@ form input, form select {
           </a>
         </li>
         <li>
+          <a href="userlabelling.php">
+          <i class="fa-solid fa-bottle-water"></i>
+            <span>LABELLING & SEALING</span>
+          </a>
+        </li>
+        <li>
           <a href="userinventory.php">
             <i class="fa-solid fa-warehouse"></i>
             <span>INVENTORY</span>

@@ -16,27 +16,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./CSS/newfriend.css">
   <link rel="stylesheet" href="./CSS/dropdown.css">
-  <link rel="stylesheet" href="./CSS/another-one.css">
+  <link rel="stylesheet" href="./CSS/charts.css">
+  <link rel="stylesheet" href="./CSS/tables.css">
   <link rel="shortcut icon" href="./image/thebutcher-removebg-preview.png" type="image/x-icon">
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="jsfile.js"></script>
-  <link rel="stylesheet" href="./CSS/alert.css">
-  <script src="./sidebar.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="./dropdown.js"></script>
-  <title>TRACEABILITY</title>
+  <link rel="stylesheet" href="./CSS/alert.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>LABELLING & SEALING</title>
 </head>
 <body>
   <style>
     #main-contents{
       height:fit-content;
       overflow-y:auto;
-      padding-bottom:3rem;
+      padding-bottom:40rem;
     }
-    .make-new .catch h1{
-            text-align:center;
-          }
     .caradan-products{
       text-decoration: none;
     }
@@ -127,7 +124,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>TRACEABILITY</h1>
+          <h1>LABELLING & SEALING</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -178,24 +175,32 @@
         ?>
     </div>
         </div>
+        
         </div>
         <section class="make-new">
         <div class="catch">
-        <h1>TRACEABILITY FORM</h1>
+        <h1>INVENTORY MANAGEMENT FORM</h1>
         <form  method="post" class="form-form">
           <div class="formation-1">
-          <label for="">PACKAGE CONTENT</label>
+          <label for="">NAME</label>
           <input type="text" name="u_name" id="" required placeholder="PRODUCT NAME">
-          <label for="">PACKAGE RECEIVER</label>
-          <input type="text" name="u_receiver" id="" required placeholder="PRODUCT RECEIVER">
-          <label for="">DATE</label>
-          <input type="text" name="u_date" id="" required value="<?php echo date('y-m-d')?>">
-          <label for="">STATUS</label>
-          <select name="u_status" id="">
+          <label for="">TYPE</label>
+          <input type="text" name="u_type" id="" required placeholder="TYPE">
+          <label for="">STOCK</label>
+          <input type="text" name="u_stock" id="" required placeholder="NUMBER OF STOCK">
+          <label for="">LEVEL</label>
+          <select name="u_level" id="">
             <option value=""></option>
-            <option value="PENDING">PENDING</option>
-            <option value="SUCCESSFULL">SUCCESSFULL</option>
+            <option value="LEVEL ONE">LEVEL ONE</option>
+            <option value="LEVEL TWO">LEVEL TWO</option>
+            <option value="LEVEL THREE">LEVEL THREE</option>
+            <option value="LEVEL FOUR">LEVEL FOUR</option>
+            <option value="LEVEL FIVE">LEVEL FIVE</option>
           </select>
+          <label for="">SUPPLIER</label>
+          <input type="text"  name="u_supplier" id="" required placeholder="SUPPLIER'S NAME">
+          <label for="">DATE</label>
+          <input type="text" name="u_date" id="" value="<?php echo date('y-m-d')?>" required>
         </div>
           <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
           </button>
@@ -203,41 +208,45 @@
        </div>
     <div class="tablestotable">
       <div class="table-containment">
-        <h1>DETAILS ON TRACEABILITY</h1>
+        <h1>DETAILS ON INVENTORY</h1>
         <table>
           <tr>
-          <th>#</th>
+            <th>#</th>
             <th>PRODUCT NAME</th>
-            <th>PRODUCT RECEIVER</th>
-            <th>STATUS</th>
+            <th>TYPE</th>
+            <th>STOCK</th>
+            <th>LEVEL</th>
+            <th>SUPPLIER</th>
             <th>DATE</th>
             <th>MODIFY</th>
             <th>DELETE</th>
             <th>DOWNLOAD</th>
           </tr>
           <?php
-          $sqly = mysqli_query($con, "SELECT * FROM `traceability`");
+          $sqly = mysqli_query($con, "SELECT * FROM `inventory`");
           $number = 0;
         while ($row = mysqli_fetch_array($sqly)):
         ?>
           <tr>
             <td><?php echo ++$number; ?></td>
             <td><?php echo $row['u_name']; ?></td>
-            <td><?php echo $row['u_receiver']; ?></td>
-            <td><?php echo $row['u_status']; ?></td>
+            <td><?php echo $row['u_type']; ?></td>
+            <td><?php echo $row['u_stock']; ?></td>
+            <td><?php echo $row['u_level']; ?></td>
+            <td><?php echo $row['u_supplier']; ?></td>
             <td><?php echo $row['u_date']; ?></td>
             <td>
             <button class="button-btn-2">
-              <a href="updatetraceability.php?id=<?php echo $row['id']?>">UPDATE</a>
+              <a href="updateinventory.php?id=<?php echo $row['id']?>">UPDATE</a>
             </button>
             </td>
             <td>
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
-            <a href="deletetraceability.php?id=<?php echo $row['id']?>">REMOVE</a>
+            <a href="deleteinventory.php?id=<?php echo $row['id']?>">REMOVE</a>
             </button>
             </td>
             <td>
-              <a href="./pdf/traceability.php"><i class="fa-solid fa-download"></i></a>
+              <a href="./pdf/inventory.php"><i class="fa-solid fa-download"></i></a>
             </td>
           </tr>
           <?php
@@ -254,10 +263,6 @@
           }
           .button-btn-1{
             background:red
-          }
-          
-          .make-new .catch h1{
-            text-align:center;
           }
           .catch{
             margin-top:2rem;
@@ -296,22 +301,29 @@
         </style>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="./sidebar.js"></script>
 </body>
 </html>
-<?php
-if(isset($_POST['submit'])){
-  $raw_material=$_POST['u_name'];
-  $line_setup=$_POST['u_receiver'];
-  $qc_check=$_POST['u_status'];
-  $Batchdate=$_POST['u_date'];
-  $sql=mysqli_query($con,"INSERT INTO `traceability` VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate')");
-
-  if($sql){
-    echo "<script>alert('Documented Successfully')</script>";
-  }
-  else{
-    echo "<script>alert('failed to document')</script>";
-  }
-
-}
-?>
+<script>
+const ctx = document.getElementById('myBarChart').getContext('2d');
+const myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Inventory', 'Maintenance', 'Quality', 'Traceability', 'Supply'],
+        datasets: [{
+            label: 'Total Counts',
+            data: [<?php echo $inventory_count; ?>, <?php echo $maintenance_count; ?>, <?php echo $quality_count; ?>, <?php echo $traceability_count; ?>, <?php echo $supply_count; ?>], 
+            backgroundColor: '#EC9124',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 0
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>

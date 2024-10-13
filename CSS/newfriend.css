@@ -328,7 +328,6 @@ ul li:hover ul.dropdown{
 .btn-4:hover{
   width: 60%;
   transition:all .7s linear;
-  transform: scaleX(1.1) scaleY(1.1);
 }
 
 .btn-3 a,.btn-4 a{

@@ -139,6 +139,11 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
           <button class="mybutton">
         <i class="fa-solid fa-bell" id="fa-bell"></i>
     </button>
+    <button name="submit" type="submit" class="btn-4" >
+            <a href="registration.php">
+            <i class="fa-solid fa-plus"></i>  
+            </a>
+          </button>
     <div class="alert hide">
         <span class="msg"><i class="fa-solid fa-circle-exclamation"></i>NOTIFICATIONS</span>
         <span class="close-btn">
