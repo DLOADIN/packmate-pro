@@ -312,5 +312,8 @@ if(isset($_POST['submit'])){
   $date=$_POST['u_date'];
   $sql="INSERT into `labels` VALUES('','$name','$type','$label','$fault','$correct','$date')";
   $integrated=mysqli_query($con,$sql);
+  if (!$sql) {
+    echo 'The error is: ' . mysqli_error($integrated);
+}
 }
 ?>
