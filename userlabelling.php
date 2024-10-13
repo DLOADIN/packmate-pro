@@ -212,16 +212,16 @@
             <th>#</th>
             <th>PRODUCT NAME</th>
             <th>TYPE</th>
-            <th>STOCK</th>
-            <th>LEVEL</th>
-            <th>SUPPLIER</th>
+            <th>LABELS</th>
+            <th>FAULT QR</th>
+            <th>CORRECT QR</th>
             <th>DATE</th>
             <th>MODIFY</th>
             <th>DELETE</th>
             <th>DOWNLOAD</th>
           </tr>
           <?php
-          $sqly = mysqli_query($con, "SELECT * FROM `inventory`");
+          $sqly = mysqli_query($con, "SELECT * FROM `labels`");
           $number = 0;
         while ($row = mysqli_fetch_array($sqly)):
         ?>
@@ -229,18 +229,18 @@
             <td><?php echo ++$number; ?></td>
             <td><?php echo $row['u_name']; ?></td>
             <td><?php echo $row['u_type']; ?></td>
-            <td><?php echo $row['u_stock']; ?></td>
-            <td><?php echo $row['u_level']; ?></td>
-            <td><?php echo $row['u_supplier']; ?></td>
+            <td><?php echo $row['u_label']; ?></td>
+            <td><?php echo $row['u_fault']; ?></td>
+            <td><?php echo $row['u_correct']; ?></td>
             <td><?php echo $row['u_date']; ?></td>
             <td>
             <button class="button-btn-2">
-              <a href="updateinventory.php?id=<?php echo $row['id']?>">UPDATE</a>
+              <a href="updatelabels.php?id=<?php echo $row['id']?>">UPDATE</a>
             </button>
             </td>
             <td>
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
-            <a href="deleteinventory.php?id=<?php echo $row['id']?>">REMOVE</a>
+            <a href="deletelabels.php?id=<?php echo $row['id']?>">REMOVE</a>
             </button>
             </td>
             <td>
@@ -302,26 +302,15 @@
 <script src="./sidebar.js"></script>
 </body>
 </html>
-<script>
-const ctx = document.getElementById('myBarChart').getContext('2d');
-const myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Inventory', 'Maintenance', 'Quality', 'Traceability', 'Supply'],
-        datasets: [{
-            label: 'Total Counts',
-            data: [<?php echo $inventory_count; ?>, <?php echo $maintenance_count; ?>, <?php echo $quality_count; ?>, <?php echo $traceability_count; ?>, <?php echo $supply_count; ?>], 
-            backgroundColor: '#EC9124',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 0
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-</script>
+<?php 
+if(isset($_POST['submit'])){
+  $name=$_POST['u_name'];
+  $type=$_POST['u_type'];
+  $label=$_POST['u_label'];
+  $fault=$_POST['u_fault'];
+  $correct=$_POST['u_correct'];
+  $date=$_POST['u_date'];
+  $sql="INSERT into `labels` VALUES('','$name','$type','$label','$fault','$correct','$date')";
+  $integrated=mysqli_query($con,$sql);
+}
+?>
