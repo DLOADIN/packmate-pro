@@ -244,7 +244,7 @@
             </button>
             </td>
             <td>
-              <a href="./pdf/inventory.php"><i class="fa-solid fa-download"></i></a>
+              <a href="./pdf/labels.php"><i class="fa-solid fa-download"></i></a>
             </td>
           </tr>
           <?php
