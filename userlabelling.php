@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="./CSS/dropdown.css">
   <link rel="stylesheet" href="./CSS/charts.css">
   <link rel="stylesheet" href="./CSS/tables.css">
+  <link rel="stylesheet" href="./CSS/another-one.css">
   <link rel="shortcut icon" href="./image/thebutcher-removebg-preview.png" type="image/x-icon">
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -179,26 +180,23 @@
         </div>
         <section class="make-new">
         <div class="catch">
-        <h1>INVENTORY MANAGEMENT FORM</h1>
+        <h1>LABELLING & SEALING FORM</h1>
         <form  method="post" class="form-form">
           <div class="formation-1">
           <label for="">NAME</label>
-          <input type="text" name="u_name" id="" required placeholder="PRODUCT NAME">
+          <input type="text" name="u_name" id="" required placeholder="BEVERAGE NAME">
           <label for="">TYPE</label>
-          <input type="text" name="u_type" id="" required placeholder="TYPE">
-          <label for="">STOCK</label>
-          <input type="text" name="u_stock" id="" required placeholder="NUMBER OF STOCK">
-          <label for="">LEVEL</label>
-          <select name="u_level" id="">
+          <select name="u_type" id="">
             <option value=""></option>
-            <option value="LEVEL ONE">LEVEL ONE</option>
-            <option value="LEVEL TWO">LEVEL TWO</option>
-            <option value="LEVEL THREE">LEVEL THREE</option>
-            <option value="LEVEL FOUR">LEVEL FOUR</option>
-            <option value="LEVEL FIVE">LEVEL FIVE</option>
+            <option value="Non-alcoholic">NON-ALCOHOLIC</option>
+            <option value="Alcoholic">ALCOHOLIC</option>
           </select>
-          <label for="">SUPPLIER</label>
-          <input type="text"  name="u_supplier" id="" required placeholder="SUPPLIER'S NAME">
+          <label for="">LABELS</label>
+          <input type="number" name="u_label" id="" required>
+          <label for="">FAULT QR</label>
+          <input type="text"  name="u_fault" id="" required placeholder="FAULT QR CODE">
+          <label for="">CORRECT QR</label>
+          <input type="text"  name="u_correct" id="" required placeholder="CORRECT QR CODE">
           <label for="">DATE</label>
           <input type="text" name="u_date" id="" value="<?php echo date('y-m-d')?>" required>
         </div>
@@ -208,7 +206,7 @@
        </div>
     <div class="tablestotable">
       <div class="table-containment">
-        <h1>DETAILS ON INVENTORY</h1>
+        <h1>DETAILS ON LABELS & SEALS</h1>
         <table>
           <tr>
             <th>#</th>
