@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2024 at 11:02 PM
+-- Generation Time: Oct 13, 2024 at 11:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -66,6 +66,29 @@ CREATE TABLE `inventory` (
 
 INSERT INTO `inventory` (`id`, `u_name`, `u_type`, `u_stock`, `u_level`, `u_supplier`, `u_date`) VALUES
 (1, 'product', 'Not Good', '200', 'LEVEL ONE', '$u_distributor', '24-09-04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `labels`
+--
+
+CREATE TABLE `labels` (
+  `id` int(11) NOT NULL,
+  `u_name` varchar(80) NOT NULL,
+  `u_type` varchar(80) NOT NULL,
+  `u_label` int(11) NOT NULL,
+  `u_fault` varchar(80) NOT NULL,
+  `u_correct` varchar(80) NOT NULL,
+  `u_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `labels`
+--
+
+INSERT INTO `labels` (`id`, `u_name`, `u_type`, `u_label`, `u_fault`, `u_correct`, `u_date`) VALUES
+(2, 'Hennessy', 'Alcoholic', 200, '1278', '6127', '2024-10-13');
 
 -- --------------------------------------------------------
 
@@ -209,6 +232,12 @@ ALTER TABLE `inventory`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `labels`
+--
+ALTER TABLE `labels`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `maintenance`
 --
 ALTER TABLE `maintenance`
@@ -259,6 +288,12 @@ ALTER TABLE `batchmanagement`
 --
 ALTER TABLE `inventory`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `labels`
+--
+ALTER TABLE `labels`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `maintenance`
