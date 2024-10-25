@@ -205,7 +205,7 @@
             endwhile;
           ?>
         </div>
-          <button name="submit" type="submit" class="s 5" id="button-btn">SUBMIT</a>
+        <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
           </button>
         </form>
        </div>
