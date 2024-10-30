@@ -56,6 +56,11 @@
           <ion-icon name="lock-closed-outline"></ion-icon>
           <input type="text" name="u_password" required>
           <label for="">PASSWORD</label></div>
+          
+          <div class="inputbox">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input type="text" name="u_type" required>
+          <label for="">JOB TITLE</label></div>
 
           <button name="submit" type="submit" class="btn-2">SIGN IN</button>
         </form>

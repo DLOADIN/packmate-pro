@@ -165,45 +165,9 @@ form input, form select {
       <ul class="menu">
         <div class="logout">
         <li>
-        <a href="userdashboard.php">
+        <a href="userdashboardservicemanager.php">
             <i class="fa-solid fa-house-chimney"></i>
             <span>HOME</span>
-          </a>
-        </li>
-        <li>
-          <a href="userbatchmanagement.php">
-          <i class="fa-solid fa-bars-progress"></i>
-            <span>BATCH MANAGEMENT</span>
-          </a>
-        </li>
-        <li>
-          <a href="userlabelling.php">
-          <i class="fa-solid fa-bottle-water"></i>
-            <span>LABELLING & SEALING</span>
-          </a>
-        </li>
-        <li>
-          <a href="userinventory.php">
-            <i class="fa-solid fa-warehouse"></i>
-            <span>INVENTORY</span>
-          </a>
-        </li>
-        <li>
-          <a href="userquality.php">
-          <i class="fa-solid fa-toggle-on"></i>
-            <span>QUALITY CONTROL</span>
-          </a>
-        </li>
-        <!-- <li>
-          <a href="usererpsystems.php">
-          <i class="fa-brands fa-ubuntu"></i>
-            <span>ERP SYSTEMS</span>
-          </a>
-        </li> -->
-        <li>
-          <a href="usertraceability.php">
-          <i class="fa-solid fa-shuffle"></i>
-            <span>TRACEABILITY</span>
           </a>
         </li>
         <div class="ropdown">
@@ -221,12 +185,6 @@ form input, form select {
               <a href="usertrainings.php">TRAININGS</a></li>
           </ul>
       </div>
-        <li>
-          <a href="useremail.php">
-          <i class="fa-solid fa-envelope"></i>
-            <span>FEEDBACK</span>
-          </a>
-        </li>
         <li>
           <a href="userprofile.php">
           <i class="fa-solid fa-user"></i>
