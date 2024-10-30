@@ -81,6 +81,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
   <script>
     
   </script>
+
 <div class="sidebar">
       <ul class="menu">
         <div class="logout">
@@ -106,14 +107,13 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
           </ul>
       </div>
         <li>
-          <a href="userprofile.php">
+          <a href="userprofileservicemanager.php">
           <i class="fa-solid fa-user"></i>
             <span>PROFILE</span>
           </a>
         </li>
     </ul>
   </div>
-
 
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">

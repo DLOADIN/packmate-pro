@@ -50,6 +50,7 @@
     
   </script>
 
+
 <div class="sidebar">
       <ul class="menu">
         <div class="logout">
@@ -75,7 +76,7 @@
           </ul>
       </div>
         <li>
-          <a href="userprofile.php">
+          <a href="userprofileservicemanager.php">
           <i class="fa-solid fa-user"></i>
             <span>PROFILE</span>
           </a>

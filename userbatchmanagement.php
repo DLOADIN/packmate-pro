@@ -73,7 +73,7 @@
           </a>
         </li>
         <li>
-          <a href="userprofile.php">
+          <a href="userprofilebatchmanagement.php">
           <i class="fa-solid fa-user"></i>
             <span>PROFILE</span>
           </a>
