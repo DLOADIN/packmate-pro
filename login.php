@@ -10,18 +10,13 @@
       echo "<script>alert('Please fill in all the fields: Username, Password, and Job Type.')</script>";
     }
     else {
-      // Query to check if username, password, and job type match
       $sql = mysqli_query($con, "SELECT * FROM `users` WHERE u_name = '$name' AND u_password = '$password' AND u_type = '$job'");
-      
       if(mysqli_num_rows($sql) > 0){
-        $query = mysqli_fetch_array($sql);
-        
-        // Check job type after validating username and password
+        $query = mysqli_fetch_array($sql);  
         if($job === $query['u_type']) {
           $_SESSION["login"] = true;
-          $_SESSION["id"] = $query["id"]; // Store user ID in session
+          $_SESSION["id"] = $query["id"]; 
 
-          // Redirect based on job role
           if($name == 'admin' && $password == 'admin' && $job == 'administrator'){
             header('Location: dashboard.php');
           }
