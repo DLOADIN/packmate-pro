@@ -198,7 +198,7 @@ form input, form select {
   <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>TRAININGS</h1>
+          <h1>MAINTENANCE</h1>
         </div>
         <div class="user-info">
         <div class="gango">

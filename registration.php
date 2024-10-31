@@ -57,6 +57,11 @@
           <label for="">JOB TITLE</label></div>
 
           <button name="submit" type="submit" class="btn-2">SIGN UP</button>
+          <div class="buttton-bttn">
+            <a href="login.php">
+              <button class="btn-2">LOGIN</button>
+            </a>
+          </div>
         </form>
       </div>
     </div>
