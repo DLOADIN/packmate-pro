@@ -58,8 +58,14 @@
           <label for="">PASSWORD</label></div>
           
           <div class="inputbox">
-          <ion-icon name="lock-closed-outline"></ion-icon>
-          <input type="text" name="u_type" required>
+          <ion-icon name="briefcase-outline"></ion-icon>
+          <select name="job" id="">
+            <option value=""></option>
+            <option value="Admin">Administrator</option>
+            <option value="Service Manager">Service Manager</option>
+            <option value="Batch Manager">Service Manager</option>
+            <option value="Control & Traceability Manager">Service Manager</option>
+          </select>
           <label for="">JOB TITLE</label></div>
 
           <button name="submit" type="submit" class="btn-2">SIGN IN</button>
