@@ -93,14 +93,15 @@
         <div class="user-info">
         <div class="gango">
           <?php
-            $sql=mysqli_query($con, "SELECT u_name from `users` WHERE id='$id'");
+            $sql=mysqli_query($con, "SELECT u_name,u_type from `users` WHERE id='$id'");
             $row=mysqli_fetch_array($sql);
             $attorney=$row['u_name'];
+            $name=$row['u_type'];
             ?>
           <h2 class="my-account-header">
           <?php echo $attorney?>
             </h2>
-          <p>User</p></div> 
+          <p><?php echo $name?></p></div> 
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>

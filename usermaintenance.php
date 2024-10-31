@@ -195,13 +195,27 @@ form input, form select {
     </ul>
   </div>
 
-    <div class="main-content content-right" id="main-contents">
+  <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>MAINTENANCE</h1>
+          <h1>TRAININGS</h1>
         </div>
         <div class="user-info">
-        <button class="mybutton">
+        <div class="gango">
+          <?php
+            $sql=mysqli_query($con, "SELECT u_name,u_type from `users` WHERE id='$id'");
+            $row=mysqli_fetch_array($sql);
+            $attorney=$row['u_name'];
+            $name=$row['u_type'];
+            ?>
+          <h2 class="my-account-header">
+          <?php echo $attorney?>
+            </h2>
+          <p><?php echo $name?></p></div> 
+          <button name="submit" type="submit" class="btn-3" >
+            <a href="logout.php">LOGOUT</a>
+          </button>
+          <button class="mybutton">
         <i class="fa-solid fa-bell" id="fa-bell"></i>
     </button>
     <div class="alert hide">
@@ -209,17 +223,7 @@ form input, form select {
         <span class="close-btn">
             <span class="fas"><i class="fa-solid fa-xmark"></i></span>
         </span>
-        <script>
-            $(document).ready(function() {
-            $('.mybutton').click(function() {
-                $('.alert').removeClass("hide").addClass("show");
-            });
 
-            $('.close-btn').click(function() {
-                $('.alert').removeClass("show").addClass("hide");
-            });
-        });
-        </script>
         <?php
           $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)");
           while($row = mysqli_fetch_array($sql)):
@@ -235,19 +239,6 @@ form input, form select {
           endwhile;
         ?>
     </div>
-        <div class="gango">
-          <?php
-            $sql=mysqli_query($con, "SELECT u_name from `users` WHERE id='$id'");
-            $row=mysqli_fetch_array($sql);
-            $attorney=$row['u_name'];
-            ?>
-          <h2 class="my-account-header">
-          <?php echo $attorney?>
-            </h2>
-          <p>User</p></div> 
-          <button name="submit" type="submit" class="btn-3" >
-            <a href="logout.php">LOGOUT</a>
-          </button>
         </div>
         </div>
         <section class="make-new">

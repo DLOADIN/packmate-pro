@@ -100,14 +100,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="header-wrapper">
       <div class="header-title"><h1>QUALITY ASSURANCE & QUALITY CONTROL</h1></div>
       <div class="user-info">
-        <div class="gango">
+      <div class="gango">
           <?php
-            $sql = mysqli_query($con, "SELECT u_name FROM `users` WHERE id='$id'");
-            $row = mysqli_fetch_array($sql);
-            $attorney = $row['u_name'];
-          ?>
-          <h2 class="my-account-header"><?php echo $attorney; ?></h2>
-          <p>User</p>
+            $sql=mysqli_query($con, "SELECT u_name,u_type from `users` WHERE id='$id'");
+            $row=mysqli_fetch_array($sql);
+            $attorney=$row['u_name'];
+            $name=$row['u_type'];
+            ?>
+          <h2 class="my-account-header">
+          <?php echo $attorney?>
+            </h2>
+          <p><?php echo $name?></p>
         </div> 
         <button class="btn-3">
           <a href="logout.php">LOGOUT</a>
