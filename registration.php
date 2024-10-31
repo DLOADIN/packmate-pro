@@ -44,6 +44,18 @@
           <input type="text" name="u_password" required>
           <label for="">PASSWORD</label></div>
 
+            
+          <div class="inputbox">
+          <ion-icon name="briefcase-outline"></ion-icon>
+          <select name="u_type" id="">
+            <option value=""></option>
+            <option value="Admin">Administrator</option>
+            <option value="service manager">Service Manager</option>
+            <option value="batch manager">Batch Manager</option>
+            <option value="control & traceability manager">Control & Traceability Manager</option>
+          </select>
+          <label for="">JOB TITLE</label></div>
+
           <button name="submit" type="submit" class="btn-2">SIGN UP</button>
         </form>
       </div>
@@ -58,7 +70,8 @@
     $name = $_POST['u_name'];
     $email = $_POST['u_email'];
     $password = $_POST['u_password'];
-    $sql=mysqli_query($con,"INSERT INTO `users` VALUES('','$name','$email','$password')");
+    $job = $_POST['u_type'];
+    $sql=mysqli_query($con,"INSERT INTO `users` VALUES('','$name','$email','$password','$job')");
     
     if($sql){
       echo "<script>alert('Registered Successfully| Please Head to the Login ')</script>";
