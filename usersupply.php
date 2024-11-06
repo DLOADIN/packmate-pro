@@ -179,7 +179,7 @@
         <table>
           <tr>
           <th>#</th>
-            <th>AVAILABLE SUPPLIER</th>
+            <th>PACKAGE CONTENT</th>
             <th>PRODUCT NAME</th>
             <th>AMOUNT OF PRODUCTS</th>
             <th>BEST BEFORE</th>
