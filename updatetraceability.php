@@ -251,7 +251,7 @@ if(isset($_POST['submit'])){
   $line_setup=$_POST['u_receiver'];
   $qc_check=$_POST['u_status'];
   $Batchdate=$_POST['u_date'];
-  $sql=mysqli_query($con,"UPDATE `traceability` SET u_name='$raw_material',u_receiver='$line_setup',u_status='$qc_check',u_date='$Batchdate' WHERE id='$id'");
+  $sql=mysqli_query($con,"UPDATE `traceability` SET u_name='$raw_material',u_receiver='$line_setup',u_status='$qc_check',u_date='$Batchdate' WHERE id='$my_id'");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";

@@ -62,7 +62,7 @@
           </a>
         </li>
         <li>
-          <a href="userlabellingbatchmanagement.php">
+          <a href="userlabelling.php">
           <i class="fa-solid fa-bottle-water"></i>
             <span>LABELLING & SEALING</span>
           </a>
