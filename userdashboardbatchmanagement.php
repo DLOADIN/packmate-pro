@@ -158,7 +158,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
         });
         </script>
         <?php
-          $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)");
+          $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)");
           while($row = mysqli_fetch_array($sql)):
               $msg = $row['u_message'];
               $date = $row['u_date'];

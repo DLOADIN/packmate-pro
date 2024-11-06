@@ -163,7 +163,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
         });
         </script>
         <?php
-          $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)");
+          $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)");
           while($row = mysqli_fetch_array($sql)):
               $msg = $row['u_message'];
               $date = $row['u_date'];
@@ -355,6 +355,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
             <th>#</th>
             <th>USER NAME</th>
             <th>USER EMAIL</th>
+            <th>JOB DESCRIPTION</th>
             <th>DELETE</th>
           </tr>
           <?php
@@ -366,6 +367,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
             <td><?php echo ++$number; ?></td>
             <td><?php echo $row['u_name']; ?></td>
             <td><?php echo $row['u_email']; ?></td>
+            <td><?php echo $row['u_type']; ?></td>
             <td>
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
             <a href="deleteuser.php?id=<?php echo $row['id']?>">REMOVE</a>
