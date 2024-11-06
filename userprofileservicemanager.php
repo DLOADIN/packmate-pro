@@ -176,11 +176,14 @@
                 <input type="text" name="u_name" value="<?php echo $row['u_name']?>" required >
                 <label for="">E-MAIL</label>
                 <input type="email" name="u_email" value="<?php echo $row['u_email']?>" required>
+                
               </div>
               <div class="real-form">
+              <label for="">JOB DESCRIPTION</label>
+              <input type="text" name="u_type" value="<?php echo $row['u_type']?>" required readonly>
                 <label for="">PASSWORD</label>
                 <input type="password" name="u_password" required value="<?php echo $row['u_password']?>" readonly>
-                <button name="submit" type="submit" class="btn-2" id="btns">SAVE</button></div>
+                <button name="submit" type="submit" class="btn-2">SAVE</button></div>
                 
             </form>
 
@@ -191,7 +194,7 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <style>
 .btn-2{
-  margin:0 auto;
+  margin-top:100px;
   background-color:#EC9124;;
 }
 
@@ -223,7 +226,7 @@ h3 i{
     $email = $_POST['u_email'];
     $address = $_POST['u_address'];
     $password = $_POST['u_password'];
-    $sql=mysqli_query($con,"UPDATE `admin` SET u_name='$name', u_email ='$email', u_password='$password' WHERE id='$id' ");
+    $sql=mysqli_query($con,"UPDATE `users` SET u_name='$name', u_email ='$email', u_password='$password' WHERE id='$id' ");
     
     if($sql){
       echo "<script>alert('Updated Successfully')</script>";
