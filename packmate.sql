@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2024 at 11:43 PM
+-- Generation Time: Nov 06, 2024 at 11:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -108,8 +108,8 @@ CREATE TABLE `maintenance` (
 --
 
 INSERT INTO `maintenance` (`id`, `date`, `u_machine`, `u_amount`) VALUES
-(1, '2024-09-07', 'tractor', '20000$'),
-(2, '2024-09-24', 'tractor', '90');
+(2, '2024-09-24', 'tractor', '90'),
+(3, '2024-11-20', 'tractor', '20000$');
 
 -- --------------------------------------------------------
 
@@ -183,16 +183,20 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `u_name` varchar(80) NOT NULL,
   `u_email` varchar(80) NOT NULL,
-  `u_password` varchar(80) NOT NULL
+  `u_password` varchar(80) NOT NULL,
+  `u_type` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `u_name`, `u_email`, `u_password`) VALUES
-(1, 'Manzi', 'manzi@gmail.com', '12345'),
-(2, 'admin', 'admin@admin.admin', 'admin');
+INSERT INTO `users` (`id`, `u_name`, `u_email`, `u_password`, `u_type`) VALUES
+(1, 'Manzi', 'manzidav@gmail.com', '12345', 'service manager'),
+(2, 'admin', 'admin@admin.admin', 'admin', 'administrator'),
+(3, 'fadoul', 'fadoul@gmail.com', '12345', 'batch manager'),
+(4, 'Ganza', 'ganzaatauca@gmail.com', 'password', 'control & traceability manager'),
+(5, 'Gatesi', 'gatesi_1@gmail.com', '12345', 'control & traceability manager');
 
 -- --------------------------------------------------------
 
@@ -299,7 +303,7 @@ ALTER TABLE `labels`
 -- AUTO_INCREMENT for table `maintenance`
 --
 ALTER TABLE `maintenance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -323,7 +327,7 @@ ALTER TABLE `traceability`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_quality`
