@@ -266,7 +266,7 @@ if(isset($_POST['submit'])){
   $Batchdate=$_POST['u_level'];
   $u_supplier=$_POST['u_supplier'];
   $inventory_update=$_POST['u_date'];
-  $sql=mysqli_query($con,"UPDATE `inventory` SET u_name='$raw_material',u_type='$line_setup',u_stock='$qc_check',u_level='$Batchdate',u_supplier='$u_supplier',u_date='$inventory_update' WHERE id=$id");
+  $sql=mysqli_query($con,"UPDATE `inventory` SET u_name='$raw_material',u_type='$line_setup',u_stock='$qc_check',u_level='$Batchdate',u_supplier='$u_supplier',u_date='$inventory_update' WHERE id='$my_id' ");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";
