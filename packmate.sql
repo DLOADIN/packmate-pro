@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2024 at 11:50 AM
+-- Generation Time: Nov 06, 2024 at 07:18 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -41,7 +41,7 @@ CREATE TABLE `batchmanagement` (
 --
 
 INSERT INTO `batchmanagement` (`id`, `u_name`, `u_type`, `u_scans`, `faults`, `u_date`) VALUES
-(1, 'Bottle', 'scan', 'scan', 'scan', '2024-09-04'),
+(1, 'Coconut Water', 'scan', 'scan', 'scan', '2024-09-04'),
 (3, 'Mshippers', 'Very Good', 'scan', 'scan', '2024-09-06');
 
 -- --------------------------------------------------------
@@ -65,7 +65,10 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`id`, `u_name`, `u_type`, `u_stock`, `u_level`, `u_supplier`, `u_date`) VALUES
-(1, 'product', 'Not Good', '200', 'LEVEL ONE', '$u_distributor', '24-09-04');
+(2, 'Pepsi', 'Conditional', '200', 'LEVEL FOUR', 'Fablab', '24-11-06'),
+(3, 'Cocoa', 'Moderate', '241', 'LEVEL FOUR', 'Bowler Ltd', '24-11-06'),
+(4, 'Coconut Water', 'Very Good', '162', 'LEVEL THREE', 'West India Company', '24-11-06'),
+(5, 'Apple Juice', 'Very Good', '293', 'LEVEL FOUR', 'Gastro', '24-11-06');
 
 -- --------------------------------------------------------
 
@@ -88,7 +91,10 @@ CREATE TABLE `labels` (
 --
 
 INSERT INTO `labels` (`id`, `u_name`, `u_type`, `u_label`, `u_fault`, `u_correct`, `u_date`) VALUES
-(2, 'Hennessy', 'Alcoholic', 200, '1278', '6127', '2024-10-13');
+(2, 'Heineken', 'Alcoholic', 200, '1278', '6127', '2024-10-13'),
+(3, 'Lassi', 'Non-alcoholic', 20, '1278', '6127', '2024-11-06'),
+(4, 'Starbucks Frappuccino', 'Non-alcoholic', 301, '1278', '629', '2024-11-06'),
+(5, 'V8 Juice', 'Non-alcoholic', 76, '1278', '1982', '2024-11-06');
 
 -- --------------------------------------------------------
 
@@ -108,8 +114,8 @@ CREATE TABLE `maintenance` (
 --
 
 INSERT INTO `maintenance` (`id`, `date`, `u_machine`, `u_amount`) VALUES
-(2, '2024-09-24', 'tractor', '90'),
-(3, '2024-11-20', 'tractor', '20000$');
+(3, '2024-11-20', 'tractor', '20000$'),
+(5, '2024-11-20', 'Primus', '90000 $');
 
 -- --------------------------------------------------------
 
@@ -150,7 +156,11 @@ CREATE TABLE `supply` (
 --
 
 INSERT INTO `supply` (`id`, `u_supplier`, `u_name`, `u_productnumber`, `u_date`) VALUES
-(2, '$u_distributor', 'Coca-cola', '101 - 1000', '2025-03-05');
+(2, 'Distri Rwa', 'Coca-cola', '101 - 1000', '2025-03-05'),
+(3, 'Fablab', 'Mshippers', '101 - 1000', '2025-05-06'),
+(4, 'Tickle', 'Coca-cola', '1 - 100', '2025-05-06'),
+(5, 'Mycellin', 'Sprite', '1001 - 10000', '2025-05-06'),
+(6, 'Gastro', 'AG1', '1 - 100', '2025-05-06');
 
 -- --------------------------------------------------------
 
@@ -171,7 +181,9 @@ CREATE TABLE `traceability` (
 --
 
 INSERT INTO `traceability` (`id`, `u_name`, `u_receiver`, `u_status`, `u_date`) VALUES
-(1, 'Mountain Dew', 'JP Morgan Chase', 'SUCCESSFULL', '2024-09-05');
+(1, 'San Pellegrino Sparkling Water ', 'JP Morgan Chase', 'PENDING', '2024-09-05'),
+(2, 'Minute Maid', 'Capital One', 'PENDING', '2024-11-06'),
+(3, '7UP', 'Blackstone', 'SUCCESSFULL', '2024-11-06');
 
 -- --------------------------------------------------------
 
@@ -195,7 +207,7 @@ INSERT INTO `users` (`id`, `u_name`, `u_email`, `u_password`, `u_type`) VALUES
 (1, 'Manzi', 'manzidav@gmail.com', '12345', 'service manager'),
 (2, 'admin', 'admin@admin.admin', 'admin', 'administrator'),
 (3, 'fadoul', 'fadoul@gmail.com', '12345', 'batch manager'),
-(4, 'Ganza', 'ganzaatauca@gmail.com', 'password', 'control & traceability manager'),
+(4, 'Ganza ', 'ganzaatauca@gmail.com', 'password', 'control & traceability manager'),
 (5, 'Gatesi', 'gatesi_1@gmail.com', '12345', 'control & traceability manager');
 
 -- --------------------------------------------------------
@@ -217,7 +229,8 @@ CREATE TABLE `user_quality` (
 --
 
 INSERT INTO `user_quality` (`id`, `u_name`, `u_diagram`, `u_score`, `u_bottlenecks`) VALUES
-(2, 'Coca-cola', '100', 'suihqwuiq', 'Capture.JPG');
+(2, 'Coca-cola', '100', 'suihqwuiq', 'Capture.JPG'),
+(3, 'AriZona Iced Tea', '89', '100', 'vlcsnap-2022-02-25-13h54m50s893.png');
 
 --
 -- Indexes for dumped tables
@@ -285,25 +298,25 @@ ALTER TABLE `user_quality`
 -- AUTO_INCREMENT for table `batchmanagement`
 --
 ALTER TABLE `batchmanagement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `labels`
 --
 ALTER TABLE `labels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `maintenance`
 --
 ALTER TABLE `maintenance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -315,13 +328,13 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `supply`
 --
 ALTER TABLE `supply`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `traceability`
 --
 ALTER TABLE `traceability`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -333,7 +346,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_quality`
 --
 ALTER TABLE `user_quality`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
