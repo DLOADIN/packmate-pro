@@ -50,7 +50,7 @@
   </script>
 
 <div class="sidebar">
-      <ul class="menu">
+<ul class="menu">
         <div class="logout">
         <li>
         <a href="userdashboardservicemanager.php">
@@ -58,7 +58,21 @@
             <span>HOME</span>
           </a>
         </li>
-        >
+        <div class="ropdown">
+          <div class="select">
+          <i class="fa-solid fa-box"></i>
+              <span class="selectee">SERVICES</span>
+              <div class="caret"></div>
+          </div>
+          <ul class="fireef">
+              <li>
+              <a href="usersupply.php">SUPPLY</a></li>
+              <!-- <li>
+              <a href="usermaintenance.php">MANTENANCE</a></li> -->
+              <li>
+              <a href="usertrainings.php">TRAININGS</a></li>
+          </ul>
+      </div>
         <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
         <li>
           <a href="userprofileservicemanager.php">
@@ -130,25 +144,20 @@
           <h1>SUPPLY FORM</h1>
         <form  method="post" class="form-form">
           <div class="formation-1">
-          <label for="">PACKAGE CONTENT</label>
-          <input type="text" name="u_supplier" id="" required placeholder="SUPPLIER'S NAME">
-          <label for="">PRODUCT NAME</label>
-          <input type="text" name="u_name" id="" required placeholder="PRODUCT NAME">
-          <label for="">AMOUNT OF PRODUCTS</label>
-          <select name="u_productnumber" id="">
-            <option value=""></option>
-            <option value="1 - 100">1 - 100</option>
-            <option value="101 - 1000">101 - 1000</option>
-            <option value="1001 - 10000">1001 - 10000</option>
-            <option value="10001 - 100000">10001 - 100000</option>
-          </select>
-          <label for="">BEST BEFORE</label>
-          <?php 
-            $date = new DateTime();
-            $date->modify('+6 months');
-            $formattedDate = $date->format('Y-m-d');
-          ?>
-          <input type="date" name="u_date" id="" required value="<?php echo $formattedDate;?>">
+          <label for="">EQUIPMENT NAME</label>
+          <input type="text" name="u_equipment" id="" required placeholder="EQUIPMENT NAME">
+          <label for="">TASK TYPE</label>
+          <input type="text" name="u_type" id="" required placeholder="TASK TYPE">
+          <label for="">SCHEDULED DATE</label>
+          <input type="date" name="s_date" id="" required placeholder="PRODUCT NAME">
+          <label for="">END DATE</label>
+          <input type="date" name="e_date" id="" required placeholder="PRODUCT NAME">
+          <label for="">STATUS</label>
+          <input type="text" name="status" id="" required placeholder="TASK STATUS">
+          <label for="">ASSIGNED TECHNICIAN</label>
+          <input type="text" name="u_technician	" id="" required placeholder="ASSIGNED TECHNICIAN">
+          <label for="">NOTES</label>
+          <input type="text" name="u_notes" id="" required placeholder="TASK STATUS">
           <button name="submit" type="submit" class="btn-3 cruel-btn" id="button-btn" >SUBMIT</a>
           </button>
           <style>
