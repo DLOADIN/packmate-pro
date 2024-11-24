@@ -22,10 +22,10 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="./sidebar.js"></script>
   <script src="jsfile.js"></script>
-  <script src="./dropdown.js"></script>
   <link rel="stylesheet" href="./CSS/alert.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <title>INVENTORY</title>
+  <script src="./dropdown.js"></script>
+  <title>SUPPLY & DEMAND</title>
 </head>
 <body>
   <style>
@@ -34,6 +34,9 @@
       overflow-y:auto;
       padding-bottom:3rem;
     }
+    .make-new .catch h1{
+            text-align:center;
+          }
     .caradan-products{
       text-decoration: none;
     }
@@ -45,7 +48,6 @@
   <script>
     
   </script>
-
 
 <div class="sidebar">
       <ul class="menu">
@@ -87,7 +89,7 @@
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">
-          <h1>INVENTORY</h1>
+          <h1>SUPPLY</h1>
         </div>
         <div class="user-info">
         <div class="gango">
@@ -140,77 +142,78 @@
     </div>
         </div>
         </div>
-
         <section class="make-new">
         <div class="catch">
-        <h1>INVENTORY MANAGEMENT FORM</h1>
+          <h1>SUPPLY FORM</h1>
         <form  method="post" class="form-form">
           <div class="formation-1">
-          <label for="">NAME</label>
+          <label for="">PACKAGE CONTENT</label>
+          <input type="text" name="u_supplier" id="" required placeholder="SUPPLIER'S NAME">
+          <label for="">PRODUCT NAME</label>
           <input type="text" name="u_name" id="" required placeholder="PRODUCT NAME">
-          <label for="">TYPE</label>
-          <input type="text" name="u_type" id="" required placeholder="TYPE">
-          <label for="">STOCK</label>
-          <input type="text" name="u_stock" id="" required placeholder="NUMBER OF STOCK">
-          <label for="">LEVEL</label>
-          <select name="u_level" id="">
+          <label for="">AMOUNT OF PRODUCTS</label>
+          <select name="u_productnumber" id="">
             <option value=""></option>
-            <option value="LEVEL ONE">LEVEL ONE</option>
-            <option value="LEVEL TWO">LEVEL TWO</option>
-            <option value="LEVEL THREE">LEVEL THREE</option>
-            <option value="LEVEL FOUR">LEVEL FOUR</option>
-            <option value="LEVEL FIVE">LEVEL FIVE</option>
+            <option value="1 - 100">1 - 100</option>
+            <option value="101 - 1000">101 - 1000</option>
+            <option value="1001 - 10000">1001 - 10000</option>
+            <option value="10001 - 100000">10001 - 100000</option>
           </select>
-          <label for="">SUPPLIER</label>
-          <input type="text"  name="u_supplier" id="" required placeholder="SUPPLIER'S NAME">
-          <label for="">DATE</label>
-          <input type="text" name="u_date" id="" value="<?php echo date('y-m-d')?>" required>
-        </div>
-          <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
+          <label for="">BEST BEFORE</label>
+          <?php 
+            $date = new DateTime();
+            $date->modify('+6 months');
+            $formattedDate = $date->format('Y-m-d');
+          ?>
+          <input type="date" name="u_date" id="" required value="<?php echo $formattedDate;?>">
+          <button name="submit" type="submit" class="btn-3 cruel-btn" id="button-btn" >SUBMIT</a>
           </button>
+          <style>
+            .cruel-btn{
+              width:100px;
+              margin:0 auto;
+            }
+          </style>
+        </div>
         </form>
        </div>
     <div class="tablestotable">
       <div class="table-containment">
-        <h1>DETAILS ON INVENTORY</h1>
+        <h1>DETAILS ON SUPPLY DATA</h1>
         <table>
           <tr>
-            <th>#</th>
+          <th>#</th>
+            <th>PACKAGE CONTENT</th>
             <th>PRODUCT NAME</th>
-            <th>TYPE</th>
-            <th>STOCK</th>
-            <th>LEVEL</th>
-            <th>SUPPLIER</th>
-            <th>DATE</th>
+            <th>AMOUNT OF PRODUCTS</th>
+            <th>BEST BEFORE</th>
             <th>MODIFY</th>
             <th>DELETE</th>
             <th>DOWNLOAD</th>
           </tr>
           <?php
-          $sqly = mysqli_query($con, "SELECT * FROM `inventory`");
+          $sqly = mysqli_query($con, "SELECT * FROM `supply`");
           $number = 0;
         while ($row = mysqli_fetch_array($sqly)):
         ?>
           <tr>
             <td><?php echo ++$number; ?></td>
-            <td><?php echo $row['u_name']; ?></td>
-            <td><?php echo $row['u_type']; ?></td>
-            <td><?php echo $row['u_stock']; ?></td>
-            <td><?php echo $row['u_level']; ?></td>
             <td><?php echo $row['u_supplier']; ?></td>
+            <td><?php echo $row['u_name']; ?></td>
+            <td><?php echo $row['u_productnumber']; ?></td>
             <td><?php echo $row['u_date']; ?></td>
             <td>
             <button class="button-btn-2">
-              <a href="updateinventory.php?id=<?php echo $row['id']?>">UPDATE</a>
+              <a href="updatesupply.php?id=<?php echo $row['id']?>">UPDATE</a>
             </button>
             </td>
             <td>
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
-            <a href="deleteinventory.php?id=<?php echo $row['id']?>">REMOVE</a>
+            <a href="deletesupply.php?id=<?php echo $row['id']?>">REMOVE</a>
             </button>
             </td>
             <td>
-              <a href="./pdf/inventory.php"><i class="fa-solid fa-download"></i></a>
+              <a href="./pdf/supply.php"><i class="fa-solid fa-download"></i></a>
             </td>
           </tr>
           <?php
@@ -227,6 +230,10 @@
           }
           .button-btn-1{
             background:red
+          }
+          
+          .make-new .catch h1{
+            text-align:center;
           }
           .catch{
             margin-top:2rem;
@@ -269,13 +276,11 @@
 </html>
 <?php
 if(isset($_POST['submit'])){
-  $raw_material=$_POST['u_name'];
-  $line_setup=$_POST['u_type'];
-  $qc_check=$_POST['u_stock'];
-  $Batchdate=$_POST['u_level'];
-  $u_supplier=$_POST['u_supplier'];
-  $inventory_update=$_POST['u_date'];
-  $sql=mysqli_query($con,"INSERT INTO inventory VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate','$u_supplier','$inventory_update')");
+  $raw_material=$_POST['u_supplier'];
+  $line_setup=$_POST['u_name'];
+  $qc_check=$_POST['u_productnumber'];
+  $Batchdate=$_POST['u_date'];
+  $sql=mysqli_query($con,"INSERT INTO `supply` VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate')");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";

@@ -92,13 +92,13 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
             <span>HOME</span>
           </a>
         </li>
-        <!-- <li>
-          <a href="userbatchmanagement.php">
-          <i class="fa-solid fa-bars-progress"></i>
-            <span>BATCH MANAGEMENT</span>
+         <li>
+          <a href="usersupplyinventory.php">
+          <i class="fa-solid fa-truck"></i>
+          <span>SUPPLY </span>
           </a>
         </li>
-        <li>
+        <!--<li>
           <a href="userlabelling.php">
           <i class="fa-solid fa-bottle-water"></i>
             <span>LABELLING & SEALING</span>
