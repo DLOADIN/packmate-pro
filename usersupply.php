@@ -179,10 +179,13 @@
         <table>
           <tr>
           <th>#</th>
-            <th>PACKAGE CONTENT</th>
-            <th>PRODUCT NAME</th>
-            <th>AMOUNT OF PRODUCTS</th>
-            <th>BEST BEFORE</th>
+            <th>EQUIPMENT NAME</th>
+            <th>TASK TYPE</th>
+            <th>SCHEDULED DATE</th>
+            <th>END DATE</th>
+            <th>STATUS</th>
+            <th>TECHNICIAN</th>
+            <th>NOTES</th>
             <th>MODIFY</th>
             <th>DELETE</th>
             <th>DOWNLOAD</th>
@@ -194,10 +197,13 @@
         ?>
           <tr>
             <td><?php echo ++$number; ?></td>
-            <td><?php echo $row['u_supplier']; ?></td>
-            <td><?php echo $row['u_name']; ?></td>
-            <td><?php echo $row['u_productnumber']; ?></td>
-            <td><?php echo $row['u_date']; ?></td>
+            <td><?php echo $row['u_equipment']; ?></td>
+            <td><?php echo $row['u_type']; ?></td>
+            <td><?php echo $row['s_date']; ?></td>
+            <td><?php echo $row['e_date']; ?></td>
+            <td><?php echo $row['status']; ?></td>
+            <td><?php echo $row['u_technician']; ?></td>
+            <td><?php echo $row['u_notes']; ?></td>
             <td>
             <button class="button-btn-2">
               <a href="updatesupply.php?id=<?php echo $row['id']?>">UPDATE</a>

@@ -9,14 +9,17 @@
   $pdf->AddPage();
   $customHeaderNames = array(
     $number++ => 'ID',
-    'u_supplier' => 'PACKAGE NAME',
-    'u_name' => 'PACKAGE RECEIVER',
-    'u_productnumber' => 'STATUS',
-    'u_date' => 'BEST BEFORE',
+    'u_notes' => 'EQUIPMENT NAME',
+    'u_type' => 'TASK TYPE',
+    's_date' => 'SCHEDULED DATE',
+    'e_date' => 'END DATE',
+    'status' => 'STATUS',
+    'u_technician' => 'TECHNICIAN',
+    'u_notes' => 'NOTES',
 );
 
 require '../connection.php';
-$sql=mysqli_query($con," SELECT u_name, u_supplier, u_productnumber, u_date FROM `supply` ");
+$sql=mysqli_query($con," SELECT u_notes, u_type, s_date, e_date, status, u_technician, u_notes  FROM `supply` ");
 $tableName = "THE SUPPLY CHAIN REPORT";
 
 // Set font
