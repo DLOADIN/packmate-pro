@@ -81,43 +81,20 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
   <script>
     
   </script>
+
+  
 <div class="sidebar">
-      <ul class="menu">
-        <div class="logout">
-        <li>
-        <a href="userdashboardbatchmanagement.php">
-            <i class="fa-solid fa-house-chimney"></i>
-            <span>HOME</span>
-          </a>
-        </li>
-        <li>
-          <a href="userbatchmanagement.php">
-          <i class="fa-solid fa-bars-progress"></i>
-            <span>BATCH MANAGEMENT</span>
-          </a>
-        </li>
-        <li>
-          <a href="userlabelling.php">
-          <i class="fa-solid fa-bottle-water"></i>
-            <span>LABELLING & SEALING</span>
-          </a>
-        </li>
-        <!-- <li>
-          <a href="userinventory.php">
-            <i class="fa-solid fa-warehouse"></i>
-            <span>INVENTORY</span>
-          </a>
-        </li> -->
+    <ul class="menu">
+      <div class="logout">
+        <li><a href="userdashboardqualitymanager.php"><i class="fa-solid fa-house-chimney"></i><span>HOME</span></a></li>
+        <li><a href="userquality.php"><i class="fa-solid fa-toggle-on"></i><span>QUALITY CONTROL</span></a></li>
+        <!-- <li><a href="usererpsystems.php"><i class="fa-brands fa-ubuntu"></i><span>ERP SYSTEMS</span></a></li> -->
+        <!-- <li><a href="usertraceability.php"><i class="fa-solid fa-shuffle"></i><span>TRACEABILITY</span></a></li> -->
         <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
-        <li>
-          <a href="userprofilebatchmanagement.php">
-          <i class="fa-solid fa-user"></i>
-            <span>PROFILE</span>
-          </a>
-        </li>
+        <li><a href="userprofilequalitymanager.php"><i class="fa-solid fa-user"></i><span>PROFILE</span></a></li>
+      </div>
     </ul>
   </div>
-
 
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
@@ -135,7 +112,8 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
           <h2 class="my-account-header">
           <?php echo $attorney?>
             </h2>
-          <p><?php echo $name?></p></div> 
+          <p><?php echo $name?></p>
+        </div> 
           <button name="submit" type="submit" class="btn-3" >
             <a href="logout.php">LOGOUT</a>
           </button>
@@ -159,7 +137,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
         });
         </script>
         <?php
-          $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)");
+         $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)");
           while($row = mysqli_fetch_array($sql)):
               $msg = $row['u_message'];
               $date = $row['u_date'];

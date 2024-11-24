@@ -71,12 +71,13 @@
             <span>LABELLING & SEALING</span>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="userinventory.php">
             <i class="fa-solid fa-warehouse"></i>
             <span>INVENTORY</span>
           </a>
-        </li>
+        </li> -->
+        <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
         <li>
           <a href="userprofilebatchmanagement.php">
           <i class="fa-solid fa-user"></i>

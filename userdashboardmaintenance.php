@@ -81,43 +81,36 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
   <script>
     
   </script>
+
 <div class="sidebar">
       <ul class="menu">
         <div class="logout">
         <li>
-        <a href="userdashboardbatchmanagement.php">
+        <a href="userdashboardmaintenance.php">
             <i class="fa-solid fa-house-chimney"></i>
             <span>HOME</span>
           </a>
         </li>
-        <li>
-          <a href="userbatchmanagement.php">
-          <i class="fa-solid fa-bars-progress"></i>
-            <span>BATCH MANAGEMENT</span>
-          </a>
-        </li>
-        <li>
-          <a href="userlabelling.php">
-          <i class="fa-solid fa-bottle-water"></i>
-            <span>LABELLING & SEALING</span>
-          </a>
-        </li>
-        <!-- <li>
-          <a href="userinventory.php">
-            <i class="fa-solid fa-warehouse"></i>
-            <span>INVENTORY</span>
-          </a>
-        </li> -->
+        <div class="ropdown">
+          <div class="select">
+          <i class="fa-solid fa-box"></i>
+              <span class="selectee">SERVICES</span>
+              <div class="caret"></div>
+          </div>
+          <ul class="fireef">
+              <li>
+              <a href="usermaintenance.php">MANTENANCE</a></li>
+          </ul>
+      </div>
         <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
         <li>
-          <a href="userprofilebatchmanagement.php">
+          <a href="userprofilemaintenance.php">
           <i class="fa-solid fa-user"></i>
             <span>PROFILE</span>
           </a>
         </li>
     </ul>
   </div>
-
 
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
@@ -159,7 +152,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
         });
         </script>
         <?php
-          $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)");
+         $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)");
           while($row = mysqli_fetch_array($sql)):
               $msg = $row['u_message'];
               $date = $row['u_date'];

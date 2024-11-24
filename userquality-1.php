@@ -86,12 +86,96 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="sidebar">
     <ul class="menu">
       <div class="logout">
-        <li><a href="userdashboardqualitymanager.php"><i class="fa-solid fa-house-chimney"></i><span>HOME</span></a></li>
-        <li><a href="userquality.php"><i class="fa-solid fa-toggle-on"></i><span>QUALITY CONTROL</span></a></li>
-        <!-- <li><a href="usererpsystems.php"><i class="fa-brands fa-ubuntu"></i><span>ERP SYSTEMS</span></a></li> -->
-        <!-- <li><a href="usertraceability.php"><i class="fa-solid fa-shuffle"></i><span>TRACEABILITY</span></a></li> -->
-        <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
-        <li><a href="userprofilequalitymanager.php"><i class="fa-solid fa-user"></i><span>PROFILE</span></a></li>
+      <div class="sidebar">
+  <style>
+    .sidebar{
+  position: sticky;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 68px;
+  height: 100vh;
+  padding: 35rem 1.7rem 0rem 1.7rem;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s linear;
+  background: #fff;
+  animation: waveAnimation 4s infinite;
+  box-shadow: none;
+  background-position: center;
+  background-size: cover;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+  </style>
+      <ul class="menu">
+        <div class="logout">
+        <li>
+        <a href="dashboard.php">
+            <i class="fa-solid fa-house-chimney"></i>
+            <span>HOME</span>
+          </a>
+        </li>
+        <li>
+          <a href="userbatchmanagement-1.php">
+          <i class="fa-solid fa-bars-progress"></i>
+            <span>BATCH MANAGEMENT</span>
+          </a>
+        </li>
+        <li>
+          <a href="usererpsystems.php">
+          <i class="fa-brands fa-ubuntu"></i>
+            <span>ERP SYSTEMS</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="notifications.php">
+          <i class="fa-solid fa-circle-exclamation"></i>
+            <span>NOTIFICATIONS</span>
+          </a>
+        </li>
+        <li>
+          <a href="userlabelling-1.php">
+          <i class="fa-solid fa-bottle-water"></i>
+            <span>LABELLING & SEALING</span>
+          </a>
+        </li>
+        <li>
+          <a href="userinventory-1.php">
+            <i class="fa-solid fa-warehouse"></i>
+            <span>INVENTORY</span>
+          </a>
+        </li>
+        <div class="ropdown">
+          <div class="select">
+          <i class="fa-solid fa-box"></i>
+              <span class="selectee">SERVICES</span>
+              <div class="caret"></div>
+          </div>
+          <ul class="fireef">
+              <li>
+              <a href="usersupply-1.php">SUPPLY</a></li>
+              
+              <li>
+              <a href="userquality-1.php">QUALITY CONTROL</a></li>
+              <li>
+              <a href="usermaintenance-1.php">MANTENANCE</a></li>
+              <li>
+              <a href="usertrainings-1.php">TRAININGS</a></li>
+          </ul>
+      </div>
+        <li><a href="usertraceability-1.php"><i class="fa-solid fa-shuffle"></i><span>TRACEABILITY</span></a></li>
+        <li>
+          <a href="profile.php">
+          <i class="fa-solid fa-user"></i>
+            <span>PROFILE</span>
+          </a>
+        </li>
+    </ul>
+  </div>
+
       </div>
     </ul>
   </div>
@@ -153,7 +237,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="catch">
-      <form method="post" class="form-form" enctype="multipart/form-data">
+      <!-- <form method="post" class="form-form" enctype="multipart/form-data">
         <div class="formation-1">
           <label for="">LINE NAME</label>
           <input type="text" name="u_name" required placeholder="PRODUCT NAME">
@@ -165,7 +249,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <input type="text" name="u_bottlenecks" required placeholder="BOTTLENECKS">
         </div>
         <button type="submit" class="btn-3" id="button-btn">SUBMIT</button>
-      </form>
+      </form> -->
     </div>
 
     <div class="tablestotable">
@@ -178,7 +262,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <th>DIAGRAM</th>
             <th>SCORE</th>
             <th>BOTTLENECKS</th>
-            <th>ACTION</th>
           </tr>
           <?php
           $sqly = mysqli_query($con, "SELECT * FROM `user_quality`");
@@ -191,11 +274,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <td><?php echo $row['u_diagram']; ?></td>
             <td><?php echo $row['u_score']; ?></td>
             <td><?php echo $row['u_bottlenecks']; ?></td>
-            <td>
+            <!-- <td>
               <button class="button-btn-1" onclick="return confirm('ARE YOU SURE YOU WANT TO DELETE THIS RECORD?')">
                 <a href="deletequality.php?id=<?php echo $row['id']; ?>">REMOVE</a>
               </button>
-            </td>
+            </td> -->
           </tr>
           <?php endwhile; ?>
         </table>

@@ -100,12 +100,13 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
           <ul class="fireef">
               <li>
               <a href="usersupply.php">SUPPLY</a></li>
-              <li>
-              <a href="usermaintenance.php">MANTENANCE</a></li>
+              <!-- <li>
+              <a href="usermaintenance.php">MANTENANCE</a></li> -->
               <li>
               <a href="usertrainings.php">TRAININGS</a></li>
           </ul>
       </div>
+        <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>  
         <li>
           <a href="userprofileservicemanager.php">
           <i class="fa-solid fa-user"></i>

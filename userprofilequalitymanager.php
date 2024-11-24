@@ -14,7 +14,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="./CSS/newfriend.css">
   <link rel="stylesheet" href="./CSS/another-one.css">
   <link rel="stylesheet" href="./CSS/form.css">
@@ -25,6 +24,7 @@
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script src="jsfile.js"></script>
   <script src="./extension_remover.js"></script>
+  <script src="./sidebar.js"></script>
   <script src="./dropdown.js"></script>
   <link rel="stylesheet" href="./CSS/alert.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -36,14 +36,9 @@
     #main-contents{
       height: 250vh;
     }
-    .sidebar{
-      padding: 0rem 1.7rem 0rem 1.7rem;
-      width: 68px;
-      height: 70vh;
-    }
     .formation-1{
       display: grid;
-      grid-template-columns: 130px 700px 150px 300px; 
+      grid-template-columns: 130px 700px 150px 300px;
       row-gap: 30px;
       column-gap: 30px;
       padding-top: 10vh;
@@ -54,101 +49,17 @@
       .sidebar i{
         color: black;
       }
-    .sidebar .menu a.active {
-      color: #EC9124;
-    }
-    .sidebar .menu a.active i {
-      color: #EC9124;
-    }
   </style>
-  </div>
-
-  <script src="./sidebar.js"></script>
-
-  <div class="sidebar">
-  <style>
-    .sidebar{
-  position: sticky;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 68px;
-  height: 100vh;
-  padding: 35rem 1.7rem 0rem 1.7rem;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  overflow: hidden;
-  transition: all 0.5s linear;
-  background: #fff;
-  animation: waveAnimation 4s infinite;
-  box-shadow: none;
-  background-position: center;
-  background-size: cover;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-  </style>
-      <ul class="menu">
-        <div class="logout">
-        <li>
-        <a href="dashboard.php">
-            <i class="fa-solid fa-house-chimney"></i>
-            <span>HOME</span>
-          </a>
-        </li>
-        <li>
-          <a href="userbatchmanagement-1.php">
-          <i class="fa-solid fa-bars-progress"></i>
-            <span>BATCH MANAGEMENT</span>
-          </a>
-        </li>
-        <li>
-          <a href="usererpsystems.php">
-          <i class="fa-brands fa-ubuntu"></i>
-            <span>ERP SYSTEMS</span>
-          </a>
-        </li>
-        
-        <li>
-          <a href="notifications.php">
-          <i class="fa-solid fa-circle-exclamation"></i>
-            <span>NOTIFICATIONS</span>
-          </a>
-        </li>
-        <li>
-          <a href="userlabelling-1.php">
-          <i class="fa-solid fa-bottle-water"></i>
-            <span>LABELLING & SEALING</span>
-          </a>
-        </li>
-        <li>
-          <a href="userinventory-1.php">
-            <i class="fa-solid fa-warehouse"></i>
-            <span>INVENTORY</span>
-          </a>
-        </li>
-        <div class="ropdown">
-          <div class="select">
-          <i class="fa-solid fa-box"></i>
-              <span class="selectee">SERVICES</span>
-              <div class="caret"></div>
-          </div>
-          <ul class="fireef">
-              <li>
-              <a href="usersupply-1.php">SUPPLY</a></li>
-              <li>
-              <a href="usermaintenance-1.php">MANTENANCE</a></li>
-              <li>
-              <a href="usertrainings-1.php">TRAININGS</a></li>
-          </ul>
+ <div class="sidebar">
+    <ul class="menu">
+      <div class="logout">
+        <li><a href="userdashboardtraceabilitymanager.php"><i class="fa-solid fa-house-chimney"></i><span>HOME</span></a></li>
+        <li><a href="userquality.php"><i class="fa-solid fa-toggle-on"></i><span>QUALITY CONTROL</span></a></li>
+        <!-- <li><a href="usererpsystems.php"><i class="fa-brands fa-ubuntu"></i><span>ERP SYSTEMS</span></a></li> -->
+        <!-- <li><a href="usertraceability.php"><i class="fa-solid fa-shuffle"></i><span>TRACEABILITY</span></a></li> -->
+        <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
+        <li><a href="userprofilequalitymanager.php"><i class="fa-solid fa-user"></i><span>PROFILE</span></a></li>
       </div>
-        <li><a href="usertraceability-1.php"><i class="fa-solid fa-shuffle"></i><span>TRACEABILITY</span></a></li>
-        <li>
-          <a href="profile.php">
-          <i class="fa-solid fa-user"></i>
-            <span>PROFILE</span>
-          </a>
-        </li>
     </ul>
   </div>
 
@@ -192,7 +103,7 @@
         });
         </script>
         <?php
-         $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)");
+          $sql = mysqli_query($con, "SELECT * FROM `notifications` WHERE `u_date` >= DATE_SUB(CURDATE(), INTERVAL 90 DAY)");
           while($row = mysqli_fetch_array($sql)):
               $msg = $row['u_message'];
               $date = $row['u_date'];
@@ -219,7 +130,7 @@
               { ?>
             <h2><?php echo $row['u_name']?></h2>
             <hr>
-            <h3><i class="fa-solid fa-person"></i>SYSTEM ADMIN</h3>
+            <h3><i class="fa-solid fa-person"></i>SYSTEM USER</h3>
             <hr>
             <h3><i class="fa-solid fa-phone"></i>+91 7048119291</h3>
             <h3><i class="fa-regular fa-envelope"></i><?php echo $row['u_email'];?></h3>
@@ -244,13 +155,17 @@
                 <input type="text" name="u_name" value="<?php echo $row['u_name']?>" required >
                 <label for="">E-MAIL</label>
                 <input type="email" name="u_email" value="<?php echo $row['u_email']?>" required>
+                
               </div>
               <div class="real-form">
+              <label for="">JOB DESCRIPTION</label>
+              <input type="text" name="u_type" value="<?php echo $row['u_type']?>" required readonly>
                 <label for="">PASSWORD</label>
                 <input type="password" name="u_password" required value="<?php echo $row['u_password']?>" readonly>
-                <button name="submit" type="submit" class="btn-2" id="btns">SAVE</button></div>
+                <button name="submit" type="submit" class="btn-2">SAVE</button></div>
                 
             </form>
+
 
          </div>
         </div>
@@ -259,7 +174,7 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <style>
 .btn-2{
-  margin:0 auto;
+  margin:100px;
   background-color:#EC9124;;
 }
 
@@ -291,7 +206,7 @@ h3 i{
     $email = $_POST['u_email'];
     $address = $_POST['u_address'];
     $password = $_POST['u_password'];
-    $sql=mysqli_query($con,"UPDATE `admin` SET u_name='$name', u_email ='$email', u_password='$password' WHERE id='$id' ");
+    $sql=mysqli_query($con,"UPDATE `users` SET u_name='$name', u_email ='$email', u_password='$password' WHERE id='$id' ");
     
     if($sql){
       echo "<script>alert('Updated Successfully')</script>";

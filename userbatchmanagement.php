@@ -66,12 +66,13 @@
             <span>LABELLING & SEALING</span>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="userinventory.php">
             <i class="fa-solid fa-warehouse"></i>
             <span>INVENTORY</span>
           </a>
-        </li>
+        </li> -->
+        <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
         <li>
           <a href="userprofilebatchmanagement.php">
           <i class="fa-solid fa-user"></i>
@@ -156,7 +157,12 @@
         <form  method="post" class="form-form">
           <div class="formation-1">
           <label for="">NAME</label>
-          <input type="text" name="u_name" id="" required placeholder="PRODUCT NAME">
+          <!-- <input type="text" name="u_name" id="" required placeholder="PRODUCT NAME"> -->
+           <select name="u_name" id="">
+            <option value=" 1000000"> 1000000</option>
+            <option value=" 2000000"> 2000000</option>
+            <option value=" 4000000"> 3000000</option>
+           </select>
           <label for="">TYPE</label>
           <input type="text" name="u_type" id="" required placeholder="TYPE">
           <label for="">SCANS</label>

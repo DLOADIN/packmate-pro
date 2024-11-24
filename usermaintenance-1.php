@@ -30,7 +30,7 @@
 <body>
   <style>
     #main-contents{
-      height:fit-content;
+      height:200vh;
       overflow-y:auto;
       padding-bottom:3rem;
     }
@@ -163,12 +163,65 @@ form input, form select {
 }  </style>
 
 <div class="sidebar">
+  <style>
+    .sidebar{
+  position: sticky;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 68px;
+  height: 100vh;
+  padding: 35rem 1.7rem 0rem 1.7rem;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s linear;
+  background: #fff;
+  animation: waveAnimation 4s infinite;
+  box-shadow: none;
+  background-position: center;
+  background-size: cover;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+  </style>
       <ul class="menu">
         <div class="logout">
         <li>
-        <a href="userdashboardmaintenance.php">
+        <a href="dashboard.php">
             <i class="fa-solid fa-house-chimney"></i>
             <span>HOME</span>
+          </a>
+        </li>
+        <li>
+          <a href="userbatchmanagement-1.php">
+          <i class="fa-solid fa-bars-progress"></i>
+            <span>BATCH MANAGEMENT</span>
+          </a>
+        </li>
+        <li>
+          <a href="usererpsystems.php">
+          <i class="fa-brands fa-ubuntu"></i>
+            <span>ERP SYSTEMS</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="notifications.php">
+          <i class="fa-solid fa-circle-exclamation"></i>
+            <span>NOTIFICATIONS</span>
+          </a>
+        </li>
+        <li>
+          <a href="userlabelling-1.php">
+          <i class="fa-solid fa-bottle-water"></i>
+            <span>LABELLING & SEALING</span>
+          </a>
+        </li>
+        <li>
+          <a href="userinventory-1.php">
+            <i class="fa-solid fa-warehouse"></i>
+            <span>INVENTORY</span>
           </a>
         </li>
         <div class="ropdown">
@@ -179,18 +232,26 @@ form input, form select {
           </div>
           <ul class="fireef">
               <li>
-              <a href="usermaintenance.php">MANTENANCE</a></li>
+              <a href="usersupply-1.php">SUPPLY</a></li>
+              
+              <li>
+              <a href="userquality-1.php">QUALITY CONTROL</a></li>
+              <li>
+              <a href="usermaintenance-1.php">MANTENANCE</a></li>
+              <li>
+              <a href="usertrainings-1.php">TRAININGS</a></li>
           </ul>
       </div>
-        <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
+        <li><a href="usertraceability-1.php"><i class="fa-solid fa-shuffle"></i><span>TRACEABILITY</span></a></li>
         <li>
-          <a href="userprofilemaintenance.php">
+          <a href="profile.php">
           <i class="fa-solid fa-user"></i>
             <span>PROFILE</span>
           </a>
         </li>
     </ul>
   </div>
+
 
   <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
@@ -240,7 +301,7 @@ form input, form select {
         </div>
         <section class="make-new">
         <div class="catch">
-          <h1>MAINTENANCE FORM</h1>
+          <!-- <h1>MAINTENANCE FORM</h1>
           <div class="container">
         <div class="calendar-container">
             <div class="calendar-header">
@@ -292,7 +353,7 @@ form input, form select {
                 padding:10px 15px
               }
             </style>
-        </form>
+        </form> -->
        </div>
 
 
@@ -305,7 +366,7 @@ form input, form select {
             <th>DATE OF SCHEDULE</th>
             <th>MACHINE NAME</th>
             <th>AMOUNT OF PRODUCTS</th>
-            <th>DELETE</th>
+            <!-- <th>DELETE</th> -->
           </tr>
           <?php
           $sqly = mysqli_query($con, "SELECT * FROM `maintenance`");
@@ -317,11 +378,11 @@ form input, form select {
             <td><?php echo $row['date']; ?></td>
             <td><?php echo $row['u_machine']; ?></td>
             <td><?php echo $row['u_amount']; ?></td>
-            <td>
+            <!-- <td>
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
             <a href="deletemaintenance.php?id=<?php echo $row['id']?>">REMOVE</a>
             </button>
-            </td>
+            </td> -->
           </tr>
           <?php
           endwhile;

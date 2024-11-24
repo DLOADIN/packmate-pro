@@ -42,20 +42,6 @@
       padding:1rem 0rem;
     }
   </style>
-
-<div class="sidebar">
-    <ul class="menu">
-      <div class="logout">
-        <li><a href="userdashboardtraceabilitymanager.php"><i class="fa-solid fa-house-chimney"></i><span>HOME</span></a></li>
-        <li><a href="userquality.php"><i class="fa-solid fa-toggle-on"></i><span>QUALITY CONTROL</span></a></li>
-        <!-- <li><a href="usererpsystems.php"><i class="fa-brands fa-ubuntu"></i><span>ERP SYSTEMS</span></a></li> -->
-        <li><a href="usertraceability.php"><i class="fa-solid fa-shuffle"></i><span>TRACEABILITY</span></a></li>
-        <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
-        <li><a href="userprofiletraceabilitymanager.php"><i class="fa-solid fa-user"></i><span>PROFILE</span></a></li>
-      </div>
-    </ul>
-  </div>
-  
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
         <div class="header-title">

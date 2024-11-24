@@ -58,21 +58,8 @@
             <span>HOME</span>
           </a>
         </li>
-        <div class="ropdown">
-          <div class="select">
-          <i class="fa-solid fa-box"></i>
-              <span class="selectee">SERVICES</span>
-              <div class="caret"></div>
-          </div>
-          <ul class="fireef">
-              <li>
-              <a href="usersupply.php">SUPPLY</a></li>
-              <li>
-              <a href="usermaintenance.php">MANTENANCE</a></li>
-              <li>
-              <a href="usertrainings.php">TRAININGS</a></li>
-          </ul>
-      </div>
+        >
+        <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
         <li>
           <a href="userprofileservicemanager.php">
           <i class="fa-solid fa-user"></i>

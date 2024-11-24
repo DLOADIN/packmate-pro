@@ -62,12 +62,40 @@
       }
   </style>
 <div class="sidebar">
+  <style>
+    .sidebar{
+  position: sticky;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 68px;
+  height: 100vh;
+  padding: 35rem 1.7rem 0rem 1.7rem;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s linear;
+  background: #fff;
+  animation: waveAnimation 4s infinite;
+  box-shadow: none;
+  background-position: center;
+  background-size: cover;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+  </style>
       <ul class="menu">
         <div class="logout">
         <li>
         <a href="dashboard.php">
             <i class="fa-solid fa-house-chimney"></i>
             <span>HOME</span>
+          </a>
+        </li>
+        <li>
+          <a href="userbatchmanagement-1.php">
+          <i class="fa-solid fa-bars-progress"></i>
+            <span>BATCH MANAGEMENT</span>
           </a>
         </li>
         <li>
@@ -83,7 +111,36 @@
             <span>NOTIFICATIONS</span>
           </a>
         </li>
-        
+        <li>
+          <a href="userlabelling-1.php">
+          <i class="fa-solid fa-bottle-water"></i>
+            <span>LABELLING & SEALING</span>
+          </a>
+        </li>
+        <li>
+          <a href="userinventory-1.php">
+            <i class="fa-solid fa-warehouse"></i>
+            <span>INVENTORY</span>
+          </a>
+        </li>
+        <div class="ropdown">
+          <div class="select">
+          <i class="fa-solid fa-box"></i>
+              <span class="selectee">SERVICES</span>
+              <div class="caret"></div>
+          </div>
+          <ul class="fireef">
+              <li>
+              <a href="usersupply-1.php">SUPPLY</a></li>
+              <li>
+              <a href="userquality-1.php">QUALITY CONTROL</a></li>
+              <li>
+              <a href="usermaintenance-1.php">MANTENANCE</a></li>
+              <li>
+              <a href="usertrainings-1.php">TRAININGS</a></li>
+          </ul>
+      </div>
+        <li><a href="usertraceability-1.php"><i class="fa-solid fa-shuffle"></i><span>TRACEABILITY</span></a></li>
         <li>
           <a href="profile.php">
           <i class="fa-solid fa-user"></i>
@@ -92,7 +149,7 @@
         </li>
     </ul>
   </div>
-
+  
   <div class="main-content" id="main-contents">
     <div class="header-wrapper">
       <div class="header-title">

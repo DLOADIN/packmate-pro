@@ -26,8 +26,17 @@
           else if($job == 'batch manager'){
             header('Location: userdashboardbatchmanagement.php');
           }
-          else if($job == 'control & traceability manager'){
+          else if($job == 'quality control manager'){
+            header('Location: userdashboardqualitymanager.php');
+          }
+          else if($job == 'Maintenance Manager'){
+            header('Location: userdashboardmaintenance.php');
+          }
+          else if($job == 'Traceability Manager'){
             header('Location: userdashboardtraceabilitymanager.php');
+          }
+          else if($job == 'Inventory Manager'){
+            header('Location: userdashboardinventorymanagement.php');
           }
           else{
             header('Location: userdashboard.php');
@@ -82,7 +91,10 @@
               <option value="administrator">Administrator</option>
               <option value="service manager">Service Manager</option>
               <option value="batch manager">Batch Manager</option>
-              <option value="control & traceability manager">Control & Traceability Manager</option>
+              <option value="quality control manager">Quality Control Manager</option>
+              <option value="Maintenance Manager">Maintenance Manager</option>
+              <option value="Traceability Manager">Traceability Manager</option>
+              <option value="Inventory Manager">Inventory Manager</option>
             </select>
             <label for="u_type">JOB TITLE</label>
           </div>

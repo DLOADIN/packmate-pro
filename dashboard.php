@@ -51,6 +51,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
   <link rel="stylesheet" href="./CSS/newfriend.css">
   <link rel="stylesheet" href="./CSS/dropdown.css">
   <link rel="stylesheet" href="./CSS/charts.css">
+  <link rel="stylesheet" href="./CSS/another-one.css">
   <link rel="stylesheet" href="./CSS/tables.css">
   <link rel="shortcut icon" href="./image/thebutcher-removebg-preview.png" type="image/x-icon">
   <script src="https://kit.fontawesome.com/14ff3ea278.js" crossorigin="anonymous"></script>
@@ -86,12 +87,40 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
     
   </script>
 <div class="sidebar">
+  <style>
+    .sidebar{
+  position: sticky;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 68px;
+  height: 100vh;
+  padding: 35rem 1.7rem 0rem 1.7rem;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s linear;
+  background: #fff;
+  animation: waveAnimation 4s infinite;
+  box-shadow: none;
+  background-position: center;
+  background-size: cover;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+  </style>
       <ul class="menu">
         <div class="logout">
         <li>
         <a href="dashboard.php">
             <i class="fa-solid fa-house-chimney"></i>
             <span>HOME</span>
+          </a>
+        </li>
+        <li>
+          <a href="userbatchmanagement-1.php">
+          <i class="fa-solid fa-bars-progress"></i>
+            <span>BATCH MANAGEMENT</span>
           </a>
         </li>
         <li>
@@ -107,7 +136,36 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
             <span>NOTIFICATIONS</span>
           </a>
         </li>
-        
+        <li>
+          <a href="userlabelling-1.php">
+          <i class="fa-solid fa-bottle-water"></i>
+            <span>LABELLING & SEALING</span>
+          </a>
+        </li>
+        <li>
+          <a href="userinventory-1.php">
+            <i class="fa-solid fa-warehouse"></i>
+            <span>INVENTORY</span>
+          </a>
+        </li>
+        <div class="ropdown">
+          <div class="select">
+          <i class="fa-solid fa-box"></i>
+              <span class="selectee">SERVICES</span>
+              <div class="caret"></div>
+          </div>
+          <ul class="fireef">
+              <li>
+              <a href="usersupply-1.php">SUPPLY</a></li>
+              <li>
+              <a href="userquality-1.php">QUALITY CONTROL</a></li>
+              <li>
+              <a href="usermaintenance-1.php">MANTENANCE</a></li>
+              <li>
+              <a href="usertrainings-1.php">TRAININGS</a></li>
+          </ul>
+      </div>
+        <li><a href="usertraceability-1.php"><i class="fa-solid fa-shuffle"></i><span>TRACEABILITY</span></a></li>
         <li>
           <a href="profile.php">
           <i class="fa-solid fa-user"></i>
@@ -116,6 +174,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
         </li>
     </ul>
   </div>
+
 
     <div class="main-content content-right" id="main-contents">
       <div class="header-wrapper">
@@ -356,6 +415,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
             <th>USER NAME</th>
             <th>USER EMAIL</th>
             <th>JOB DESCRIPTION</th>
+            <th>UPDATE</th>
             <th>DELETE</th>
           </tr>
           <?php
@@ -368,6 +428,12 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
             <td><?php echo $row['u_name']; ?></td>
             <td><?php echo $row['u_email']; ?></td>
             <td><?php echo $row['u_type']; ?></td>
+            
+            <td>
+            <button class="button-btn-2">
+              <a href="updateusers.php?id=<?php echo $row['id']?>">UPDATE</a>
+            </button>
+            </td>
             <td>
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
             <a href="deleteuser.php?id=<?php echo $row['id']?>">REMOVE</a>

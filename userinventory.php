@@ -51,12 +51,12 @@
       <ul class="menu">
         <div class="logout">
         <li>
-        <a href="userdashboardbatchmanagement.php">
+        <a href="userdashboardinventorymanagement.php">
             <i class="fa-solid fa-house-chimney"></i>
             <span>HOME</span>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="userbatchmanagement.php">
           <i class="fa-solid fa-bars-progress"></i>
             <span>BATCH MANAGEMENT</span>
@@ -67,15 +67,16 @@
           <i class="fa-solid fa-bottle-water"></i>
             <span>LABELLING & SEALING</span>
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="userinventory.php">
             <i class="fa-solid fa-warehouse"></i>
             <span>INVENTORY</span>
           </a>
         </li>
+        <li><a href="useremail.php"><i class="fa-solid fa-envelope"></i><span>FEEDBACK</span></a></li>
         <li>
-          <a href="userprofilebatchmanagement.php">
+          <a href="userprofileinventorymanagement.php">
           <i class="fa-solid fa-user"></i>
             <span>PROFILE</span>
           </a>
