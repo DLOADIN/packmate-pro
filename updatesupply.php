@@ -144,35 +144,43 @@
         <section class="make-new">
         <div class="catch">
           <h1>SUPPLY FORM</h1>
-        <form  method="post" class="form-form">
-          <div class="formation-1">
           <?php
           $my_id=$_GET['id'];
           $sqly = mysqli_query($con, "SELECT * FROM `supply` WHERE id='$my_id'");
           while ($row = mysqli_fetch_array($sqly)):
         ?>
-          <label for="">PACKAGE CONTENT</label>
-          <input type="text" name="u_supplier" id="" required value="<?php echo $row['u_supplier']; ?>">
-          <label for="">PRODUCT NAME</label>
-          <input type="text" name="u_name" id="" required value="<?php echo $row['u_name']; ?>">
-          <label for="">AMOUNT OF PRODUCTS</label>
-          <select name="u_productnumber" id="">
-            <option value=""></option>
-            <option value="1 - 100" <?php if($row['u_productnumber']=='1 - 100')echo 'selected'?> >1 - 100</option>
-            <option value="101 - 1000" <?php if($row['u_productnumber']=='101 - 1000')echo 'selected'?> >101 - 1000</option>
-            <option value="1001 - 10000" <?php if($row['u_productnumber']=='1001 - 10000')echo 'selected'?> >1001 - 10000</option>
-            <option value="10001 - 100000" <?php if($row['u_productnumber']=='10001 - 100000')echo 'selected'?> >10001 - 100000</option>
+        <form  method="post" class="form-form">
+          <div class="formation-1">
+          <label for="">EQUIPMENT NAME</label>
+          <input type="text" name="u_equipment" id="" required placeholder="EQUIPMENT NAME" value="<?php echo $row['u_equipment']?>">
+          <label for="">TASK TYPE</label>
+          <input type="text" name="u_type" id="" required placeholder="TASK TYPE" value="<?php echo $row['u_type']?> ">
+          <label for="">SCHEDULED DATE</label>
+          <input type="date" name="s_date" id="" required placeholder="PRODUCT NAME" value="<?php echo $row['s_date']?>">
+          <label for="">END DATE</label>
+          <input type="date" name="e_date" id="" required placeholder="PRODUCT NAME" value="<?php echo $row['e_date']?>">
+          <label for="">STATUS</label>
+          <select name="status" id="" value="<?php echo $row['status']?>">
+            <option value="PENDING">PENDING</option>
+            <option value="COMPLETED">COMPLETED</option>
+            <option value="INCOMPLETED">INCOMPLETED</option>
           </select>
-          <label for="">BEST BEFORE</label>
-          
-          <input type="text" name="u_date" id="" required value="<?php echo $row['u_date'];?>">
-          <?php
-          endwhile;
-          ?>
-        </div>
-          <button name="submit" type="submit" class="btn-3" id="button-btn">SUBMIT</a>
+          <label for="">ASSIGNED TECHNICIAN</label>
+          <input type="text" name="u_technician" id="" required placeholder="ASSIGNED TECHNICIAN" value="<?php echo $row['u_technician']?> ">
+          <label for="">NOTES</label>
+          <input type="text" name="u_notes" id="" required placeholder="NOTES ON THE TASK" value="<?php echo $row['u_notes']?> ">
+          <?php 
+        endwhile
+        ?>
+          <button name="submit" type="submit" class="btn-3">SUBMIT</a>
           </button>
-
+          <style>
+            .cruel-btn{
+              width:100px;
+              margin:0 auto;
+            }
+          </style>
+        </div>
         </form>
        </div>
     <div class="tablestotable">
@@ -181,10 +189,13 @@
         <table>
           <tr>
           <th>#</th>
-            <th>AVAILABLE SUPPLIER</th>
-            <th>PRODUCT NAME</th>
-            <th>AMOUNT OF PRODUCTS</th>
-            <th>BEST BEFORE</th>
+            <th>EQUIPMENT NAME</th>
+            <th>TASK TYPE</th>
+            <th>SCHEDULED DATE</th>
+            <th>END DATE</th>
+            <th>STATUS</th>
+            <th>TECHNICIAN</th>
+            <th>NOTES</th>
             <th>MODIFY</th>
             <th>DELETE</th>
             <th>DOWNLOAD</th>
@@ -196,10 +207,13 @@
         ?>
           <tr>
             <td><?php echo ++$number; ?></td>
-            <td><?php echo $row['u_supplier']; ?></td>
-            <td><?php echo $row['u_name']; ?></td>
-            <td><?php echo $row['u_productnumber']; ?></td>
-            <td><?php echo $row['u_date']; ?></td>
+            <td><?php echo $row['u_equipment']; ?></td>
+            <td><?php echo $row['u_type']; ?></td>
+            <td><?php echo $row['s_date']; ?></td>
+            <td><?php echo $row['e_date']; ?></td>
+            <td><?php echo $row['status']; ?></td>
+            <td><?php echo $row['u_technician']; ?></td>
+            <td><?php echo $row['u_notes']; ?></td>
             <td>
             <button class="button-btn-2">
               <a href="updatesupply.php?id=<?php echo $row['id']?>">UPDATE</a>
@@ -278,7 +292,7 @@ if(isset($_POST['submit'])){
   $line_setup=$_POST['u_name'];
   $qc_check=$_POST['u_productnumber'];
   $Batchdate=$_POST['u_date'];
-  $sql=mysqli_query($con, "UPDATE `supply` SET `u_supplier` = '$raw_material', `u_name` = '$line_setup', `u_productnumber` = '$qc_check', `u_date` = '$Batchdate' WHERE `supply`.`id` = '$my_id'");
+  $sql=mysqli_query($con,"INSERT INTO `supply` VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate')");
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";
