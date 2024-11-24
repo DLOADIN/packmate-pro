@@ -159,8 +159,8 @@
           <input type="date" name="s_date" id="" required placeholder="PRODUCT NAME" value="<?php echo $row['s_date']?>">
           <label for="">END DATE</label>
           <input type="date" name="e_date" id="" required placeholder="PRODUCT NAME" value="<?php echo $row['e_date']?>">
-          <label for="">STATUS</label>
-          <input style="color:grey"type="text" name="status" id="" required readonly placeholder="STATUS" value="<?php echo $row['status']?>" >
+          <!-- <label for="">STATUS</label> -->
+          <input style="color:grey"type="text" name="status" id="" required readonly placeholder="STATUS" value="<?php echo $row['status']?>" hidden >
           <label for="">ASSIGNED TECHNICIAN</label>
           <input type="text" name="u_technician" id="" required placeholder="ASSIGNED TECHNICIAN" value="<?php echo $row['u_technician']?> ">
           <label for="">NOTES</label>
