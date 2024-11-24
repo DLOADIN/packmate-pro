@@ -1,25 +1,24 @@
 <?php
   require('../fpdf/fpdf.php');
 
-  $pageWidth = 280; // Example: A4 width is 210mm
-  $pdf = new FPDF('L', 'mm', array($pageWidth, 297)); // 'L' for landscape orientation
+  $pageWidth = 330; // Example: A4 width is 210mm
+  $pdf = new FPDF('L', 'mm', array($pageWidth, 407)); // 'L' for landscape orientation
   // Custom page width (adjust as needed)
   $number=0;
  
   $pdf->AddPage();
   $customHeaderNames = array(
     $number++ => 'ID',
-    'u_notes' => 'EQUIPMENT NAME',
+    'u_equipment' => 'EQUIPMENT NAME',
     'u_type' => 'TASK TYPE',
     's_date' => 'SCHEDULED DATE',
     'e_date' => 'END DATE',
     'status' => 'STATUS',
     'u_technician' => 'TECHNICIAN',
-    'u_notes' => 'NOTES',
 );
 
 require '../connection.php';
-$sql=mysqli_query($con," SELECT u_notes, u_type, s_date, e_date, status, u_technician, u_notes  FROM `supply` ");
+$sql=mysqli_query($con," SELECT u_equipment, u_type, s_date, e_date, status, u_technician FROM `supply` ");
 $tableName = "THE SUPPLY CHAIN REPORT";
 
 // Set font
