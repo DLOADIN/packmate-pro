@@ -416,7 +416,7 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
             <th>USER EMAIL</th>
             <th>JOB DESCRIPTION</th>
             <th>UPDATE</th>
-            <th>DELETE</th>
+            <!-- <th>DELETE</th> -->
           </tr>
           <?php
           $sqly = mysqli_query($con, "SELECT * FROM `users` WHERE `u_name` != 'admin';");
@@ -434,11 +434,11 @@ if ($totalinventory && $totalmaintenance && $totalquality && $totaltraceability 
               <a href="updateusers.php?id=<?php echo $row['id']?>">UPDATE</a>
             </button>
             </td>
-            <td>
+            <!-- <td>
             <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
             <a href="deleteuser.php?id=<?php echo $row['id']?>">REMOVE</a>
             </button>
-            </td>
+            </td> -->
           </tr>
           <?php
           endwhile;
