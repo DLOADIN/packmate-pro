@@ -153,12 +153,16 @@
           <label for="">END DATE</label>
           <input type="date" name="e_date" id="" required placeholder="PRODUCT NAME">
           <label for="">STATUS</label>
-          <input type="text" name="status" id="" required placeholder="TASK STATUS">
+          <select name="status" id="">
+            <option value="PENDING">PENDING</option>
+            <option value="COMPLETED">COMPLETED</option>
+            <option value="INCOMPLETED">INCOMPLETED</option>
+          </select>
           <label for="">ASSIGNED TECHNICIAN</label>
-          <input type="text" name="u_technician	" id="" required placeholder="ASSIGNED TECHNICIAN">
+          <input type="text" name="u_technician" id="" required placeholder="ASSIGNED TECHNICIAN">
           <label for="">NOTES</label>
-          <input type="text" name="u_notes" id="" required placeholder="TASK STATUS">
-          <button name="submit" type="submit" class="btn-3 cruel-btn" id="button-btn" >SUBMIT</a>
+          <input type="text" name="u_notes" id="" required placeholder="NOTES ON THE TASK">
+          <button name="submit" type="submit" class="btn-3">SUBMIT</a>
           </button>
           <style>
             .cruel-btn{
@@ -268,11 +272,14 @@
 </html>
 <?php
 if(isset($_POST['submit'])){
-  $raw_material=$_POST['u_supplier'];
-  $line_setup=$_POST['u_name'];
-  $qc_check=$_POST['u_productnumber'];
-  $Batchdate=$_POST['u_date'];
-  $sql=mysqli_query($con,"INSERT INTO `supply` VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate')");
+  $u_equipment=$_POST['u_equipment'];
+  $u_type=$_POST['u_type'];
+  $s_date=$_POST['s_date'];
+  $e_date=$_POST['e_date'];
+  $status=$_POST['status'];
+  $u_technician=$_POST['u_technician'];
+  $u_notes=$_POST['u_notes'];
+  $sql=mysqli_query($con,"INSERT INTO `supply` VALUES('','$u_equipment','$u_type','$s_date','$e_date','$status','$u_technician','$u_notes')");  
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";
