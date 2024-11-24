@@ -158,7 +158,6 @@
             <th>STATUS</th>
             <th>TECHNICIAN</th>
             <th>NOTES</th>
-            <th>ACTION</th>
             <th>DOWNLOAD</th>
           </tr>
           <?php
@@ -172,7 +171,17 @@
             <td><?php echo $row['u_type']; ?></td>
             <td><?php echo $row['s_date']; ?></td>
             <td><?php echo $row['e_date']; ?></td>
-            <td><?php echo $row['status']; ?></td>
+            <td>
+  <?php if ($row['status'] === 'pending'): ?>
+    <form method="POST" action="" class="la-form">
+      <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+      <button type="submit" name="action" value="approve" class="btn-approve">Approve</button>
+      <button type="submit" name="action" value="disapprove" class="btn-disapprove">Disapprove</button>
+    </form>
+  <?php else: ?>
+    <span><?php echo ucfirst($row['status']); ?></span>
+  <?php endif; ?>
+</td>
             <td><?php echo $row['u_technician']; ?></td>
             <td><?php echo $row['u_notes']; ?></td>
             <td>
@@ -187,6 +196,33 @@
     </div>
         </section>
             <style>
+              .la-form{
+                display:flex;
+              }
+              .btn-approve {
+  background-color: green;
+  color: white;
+  border: none;
+  font-size:18px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-disapprove {
+  background-color: red;
+  color:white;
+  font-size:18px;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-approve:hover, .btn-disapprove:hover {
+  opacity: 0.8;
+}
+
           .button-btn-1 a, .button-btn-2 a{
             color:white;
             text-decoration:none;
@@ -238,19 +274,17 @@
 </body>
 </html>
 <?php
-if(isset($_POST['submit'])){
-  $raw_material=$_POST['u_supplier'];
-  $line_setup=$_POST['u_name'];
-  $qc_check=$_POST['u_productnumber'];
-  $Batchdate=$_POST['u_date'];
-  $sql=mysqli_query($con,"INSERT INTO `supply` VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate')");
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && isset($_POST['id'])) {
+  $id = mysqli_real_escape_string($con, $_POST['id']);
+  $action = mysqli_real_escape_string($con, $_POST['action']);
 
-  if($sql){
-    echo "<script>alert('Documented Successfully')</script>";
+  $new_status = $action === 'approve' ? 'approved' : 'disapproved';
+  
+  $update_query = "UPDATE `supply` SET `status`='$new_status' WHERE `id`='$id'";
+  if (mysqli_query($con, $update_query)) {
+      echo "<script>alert('Status updated successfully!'); window.location.reload();</script>";
+  } else {
+      echo "<script>alert('Failed to update status');</script>";
   }
-  else{
-    echo "<script>alert('failed to document')</script>";
-  }
-
 }
 ?>

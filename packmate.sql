@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2024 at 07:18 PM
+-- Generation Time: Nov 25, 2024 at 12:41 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -41,7 +41,7 @@ CREATE TABLE `batchmanagement` (
 --
 
 INSERT INTO `batchmanagement` (`id`, `u_name`, `u_type`, `u_scans`, `faults`, `u_date`) VALUES
-(1, 'Coconut Water', 'scan', 'scan', 'scan', '2024-09-04'),
+(1, ' 2000000', 'scan', 'scan', 'scan', '2024-09-04'),
 (3, 'Mshippers', 'Very Good', 'scan', 'scan', '2024-09-06');
 
 -- --------------------------------------------------------
@@ -145,22 +145,22 @@ INSERT INTO `notifications` (`id`, `u_message`, `u_date`) VALUES
 
 CREATE TABLE `supply` (
   `id` int(11) NOT NULL,
-  `u_supplier` varchar(80) NOT NULL,
-  `u_name` varchar(80) NOT NULL,
-  `u_productnumber` varchar(80) NOT NULL,
-  `u_date` date NOT NULL
+  `u_equipment` varchar(80) NOT NULL,
+  `u_type` varchar(80) NOT NULL,
+  `s_date` date NOT NULL,
+  `e_date` date NOT NULL,
+  `status` varchar(80) NOT NULL,
+  `u_technician` varchar(80) NOT NULL,
+  `u_notes` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `supply`
 --
 
-INSERT INTO `supply` (`id`, `u_supplier`, `u_name`, `u_productnumber`, `u_date`) VALUES
-(2, 'Distri Rwa', 'Coca-cola', '101 - 1000', '2025-03-05'),
-(3, 'Fablab', 'Mshippers', '101 - 1000', '2025-05-06'),
-(4, 'Tickle', 'Coca-cola', '1 - 100', '2025-05-06'),
-(5, 'Mycellin', 'Sprite', '1001 - 10000', '2025-05-06'),
-(6, 'Gastro', 'AG1', '1 - 100', '2025-05-06');
+INSERT INTO `supply` (`id`, `u_equipment`, `u_type`, `s_date`, `e_date`, `status`, `u_technician`, `u_notes`) VALUES
+(1, 'sealing machine', 'Very Bad', '2024-11-25', '2024-12-21', 'pending', 'Mahamad ', 'We were able to finish the task ahead of us before due date '),
+(3, 'billing machine', 'Very Good', '2024-11-14', '2024-11-01', 'pending', 'Muhamadou', 'We were able to finish the task ahead of us before due date');
 
 -- --------------------------------------------------------
 
@@ -181,7 +181,6 @@ CREATE TABLE `traceability` (
 --
 
 INSERT INTO `traceability` (`id`, `u_name`, `u_receiver`, `u_status`, `u_date`) VALUES
-(1, 'San Pellegrino Sparkling Water ', 'JP Morgan Chase', 'PENDING', '2024-09-05'),
 (2, 'Minute Maid', 'Capital One', 'PENDING', '2024-11-06'),
 (3, '7UP', 'Blackstone', 'SUCCESSFULL', '2024-11-06');
 
@@ -207,8 +206,10 @@ INSERT INTO `users` (`id`, `u_name`, `u_email`, `u_password`, `u_type`) VALUES
 (1, 'Manzi', 'manzidav@gmail.com', '12345', 'service manager'),
 (2, 'admin', 'admin@admin.admin', 'admin', 'administrator'),
 (3, 'fadoul', 'fadoul@gmail.com', '12345', 'batch manager'),
-(4, 'Ganza ', 'ganzaatauca@gmail.com', 'password', 'control & traceability manager'),
-(5, 'Gatesi', 'gatesi_1@gmail.com', '12345', 'control & traceability manager');
+(4, 'Ganza', 'ganzaatauca@gmail.com', '12345', 'quality control manager'),
+(5, 'Abdoul', 'abdoul@gmail.com', '12345', 'Inventory manager'),
+(6, 'Gerald', 'geraldatauca@gmail.com', '12345', 'maintenance manager'),
+(7, 'Davis', 'davisatauca@gmail.com', '12345', 'Traceability manager');
 
 -- --------------------------------------------------------
 
@@ -328,19 +329,13 @@ ALTER TABLE `notifications`
 -- AUTO_INCREMENT for table `supply`
 --
 ALTER TABLE `supply`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `traceability`
 --
 ALTER TABLE `traceability`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_quality`
