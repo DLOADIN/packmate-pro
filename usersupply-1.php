@@ -197,8 +197,8 @@
         </div>
         <section class="make-new">
         <div class="catch">
-          <h1>SUPPLY FORM</h1>
-        <!-- <form  method="post" class="form-form">
+         <!-- <h1>SUPPLY FORM</h1>
+         <form  method="post" class="form-form">
           <div class="formation-1">
           <label for="">PACKAGE CONTENT</label>
           <input type="text" name="u_supplier" id="" required placeholder="SUPPLIER'S NAME">
@@ -230,16 +230,19 @@
         </div>
         </form> -->
        </div>
-    <div class="tablestotable">
+       <div class="tablestotable">
       <div class="table-containment">
         <h1>DETAILS ON SUPPLY DATA</h1>
         <table>
           <tr>
           <th>#</th>
-            <th>PACKAGE CONTENT</th>
-            <th>PRODUCT NAME</th>
-            <th>AMOUNT OF PRODUCTS</th>
-            <th>BEST BEFORE</th>
+            <th>EQUIPMENT NAME</th>
+            <th>TASK TYPE</th>
+            <th>SCHEDULED DATE</th>
+            <th>END DATE</th>
+            <th>STATUS</th>
+            <th>TECHNICIAN</th>
+            <th>NOTES</th>
             <th>DOWNLOAD</th>
           </tr>
           <?php
@@ -249,10 +252,13 @@
         ?>
           <tr>
             <td><?php echo ++$number; ?></td>
-            <td><?php echo $row['u_supplier']; ?></td>
-            <td><?php echo $row['u_name']; ?></td>
-            <td><?php echo $row['u_productnumber']; ?></td>
-            <td><?php echo $row['u_date']; ?></td>
+            <td><?php echo $row['u_equipment']; ?></td>
+            <td><?php echo $row['u_type']; ?></td>
+            <td><?php echo $row['s_date']; ?></td>
+            <td><?php echo $row['e_date']; ?></td>
+            <td><?php echo $row['status']; ?></td>
+            <td><?php echo $row['u_technician']; ?></td>
+            <td><?php echo $row['u_notes']; ?></td>
             <td>
               <a href="./pdf/supply.php"><i class="fa-solid fa-download"></i></a>
             </td>
@@ -315,20 +321,3 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
-<?php
-if(isset($_POST['submit'])){
-  $raw_material=$_POST['u_supplier'];
-  $line_setup=$_POST['u_name'];
-  $qc_check=$_POST['u_productnumber'];
-  $Batchdate=$_POST['u_date'];
-  $sql=mysqli_query($con,"INSERT INTO `supply` VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate')");
-
-  if($sql){
-    echo "<script>alert('Documented Successfully')</script>";
-  }
-  else{
-    echo "<script>alert('failed to document')</script>";
-  }
-
-}
-?>

@@ -288,11 +288,14 @@
 </html>
 <?php
 if(isset($_POST['submit'])){
-  $raw_material=$_POST['u_supplier'];
-  $line_setup=$_POST['u_name'];
-  $qc_check=$_POST['u_productnumber'];
-  $Batchdate=$_POST['u_date'];
-  $sql=mysqli_query($con,"INSERT INTO `supply` VALUES('','$raw_material','$line_setup','$qc_check','$Batchdate')");
+  $u_equipment=$_POST['u_equipment'];
+  $u_type=$_POST['u_type'];
+  $s_date=$_POST['s_date'];
+  $e_date=$_POST['e_date'];
+  $status=$_POST['status'];
+  $u_technician=$_POST['u_technician'];
+  $u_notes=$_POST['u_notes'];
+  $sql=mysqli_query($con,"UPDATE `supply` SET u_equipment='$u_equipment', u_type='$u_type', s_date='$s_date', e_date='$e_date', status='$status',u_technician='$u_technician', u_notes='$u_notes' WHERE id='$my_id'");  
 
   if($sql){
     echo "<script>alert('Documented Successfully')</script>";
