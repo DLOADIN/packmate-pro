@@ -152,18 +152,13 @@
           <input type="date" name="s_date" id="" required placeholder="PRODUCT NAME">
           <label for="">END DATE</label>
           <input type="date" name="e_date" id="" required placeholder="PRODUCT NAME">
-          <label for="">STATUS</label>
-          <select name="status" id="">
-            <option value="PENDING">PENDING</option>
-            <option value="COMPLETED">COMPLETED</option>
-            <option value="INCOMPLETED">INCOMPLETED</option>
-          </select>
+          <!-- <label for="">STATUS</label> -->
+          <input type="text" name="status" id="" required value="PENDING" placeholder="STATUS" hidden>
           <label for="">ASSIGNED TECHNICIAN</label>
           <input type="text" name="u_technician" id="" required placeholder="ASSIGNED TECHNICIAN">
           <label for="">NOTES</label>
           <input type="text" name="u_notes" id="" required placeholder="NOTES ON THE TASK">
-          <button name="submit" type="submit" class="btn-3">SUBMIT</a>
-          </button>
+          <button name="submit" type="submit" class="btn-3">SUBMIT</button>
           <style>
             .cruel-btn{
               width:100px;

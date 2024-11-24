@@ -160,11 +160,7 @@
           <label for="">END DATE</label>
           <input type="date" name="e_date" id="" required placeholder="PRODUCT NAME" value="<?php echo $row['e_date']?>">
           <label for="">STATUS</label>
-          <select name="status" id="" value="<?php echo $row['status']?>">
-            <option value="PENDING">PENDING</option>
-            <option value="COMPLETED">COMPLETED</option>
-            <option value="INCOMPLETED">INCOMPLETED</option>
-          </select>
+          <input style="color:grey"type="text" name="status" id="" required readonly placeholder="STATUS" value="<?php echo $row['status']?>" >
           <label for="">ASSIGNED TECHNICIAN</label>
           <input type="text" name="u_technician" id="" required placeholder="ASSIGNED TECHNICIAN" value="<?php echo $row['u_technician']?> ">
           <label for="">NOTES</label>

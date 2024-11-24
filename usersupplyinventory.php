@@ -30,7 +30,7 @@
 <body>
   <style>
     #main-contents{
-      height:fit-content;
+      height:230vh;
       overflow-y:auto;
       padding-bottom:3rem;
     }
@@ -144,51 +144,21 @@
         </div>
         <section class="make-new">
         <div class="catch">
-          <h1>SUPPLY FORM</h1>
-        <form  method="post" class="form-form">
-          <div class="formation-1">
-          <label for="">PACKAGE CONTENT</label>
-          <input type="text" name="u_supplier" id="" required placeholder="SUPPLIER'S NAME">
-          <label for="">PRODUCT NAME</label>
-          <input type="text" name="u_name" id="" required placeholder="PRODUCT NAME">
-          <label for="">AMOUNT OF PRODUCTS</label>
-          <select name="u_productnumber" id="">
-            <option value=""></option>
-            <option value="1 - 100">1 - 100</option>
-            <option value="101 - 1000">101 - 1000</option>
-            <option value="1001 - 10000">1001 - 10000</option>
-            <option value="10001 - 100000">10001 - 100000</option>
-          </select>
-          <label for="">BEST BEFORE</label>
-          <?php 
-            $date = new DateTime();
-            $date->modify('+6 months');
-            $formattedDate = $date->format('Y-m-d');
-          ?>
-          <input type="date" name="u_date" id="" required value="<?php echo $formattedDate;?>">
-          <button name="submit" type="submit" class="btn-3 cruel-btn" id="button-btn" >SUBMIT</a>
-          </button>
-          <style>
-            .cruel-btn{
-              width:100px;
-              margin:0 auto;
-            }
-          </style>
-        </div>
-        </form>
        </div>
-    <div class="tablestotable">
+       <div class="tablestotable">
       <div class="table-containment">
         <h1>DETAILS ON SUPPLY DATA</h1>
         <table>
           <tr>
           <th>#</th>
-            <th>PACKAGE CONTENT</th>
-            <th>PRODUCT NAME</th>
-            <th>AMOUNT OF PRODUCTS</th>
-            <th>BEST BEFORE</th>
-            <th>MODIFY</th>
-            <th>DELETE</th>
+            <th>EQUIPMENT NAME</th>
+            <th>TASK TYPE</th>
+            <th>SCHEDULED DATE</th>
+            <th>END DATE</th>
+            <th>STATUS</th>
+            <th>TECHNICIAN</th>
+            <th>NOTES</th>
+            <th>ACTION</th>
             <th>DOWNLOAD</th>
           </tr>
           <?php
@@ -198,20 +168,13 @@
         ?>
           <tr>
             <td><?php echo ++$number; ?></td>
-            <td><?php echo $row['u_supplier']; ?></td>
-            <td><?php echo $row['u_name']; ?></td>
-            <td><?php echo $row['u_productnumber']; ?></td>
-            <td><?php echo $row['u_date']; ?></td>
-            <td>
-            <button class="button-btn-2">
-              <a href="updatesupply.php?id=<?php echo $row['id']?>">UPDATE</a>
-            </button>
-            </td>
-            <td>
-            <button class="button-btn-1" onclick="alert('ARE YOU SURE YOU WANT TO DELETE THIS USER')">
-            <a href="deletesupply.php?id=<?php echo $row['id']?>">REMOVE</a>
-            </button>
-            </td>
+            <td><?php echo $row['u_equipment']; ?></td>
+            <td><?php echo $row['u_type']; ?></td>
+            <td><?php echo $row['s_date']; ?></td>
+            <td><?php echo $row['e_date']; ?></td>
+            <td><?php echo $row['status']; ?></td>
+            <td><?php echo $row['u_technician']; ?></td>
+            <td><?php echo $row['u_notes']; ?></td>
             <td>
               <a href="./pdf/supply.php"><i class="fa-solid fa-download"></i></a>
             </td>
@@ -223,7 +186,7 @@
       </div>
     </div>
         </section>
-        <style>
+            <style>
           .button-btn-1 a, .button-btn-2 a{
             color:white;
             text-decoration:none;
