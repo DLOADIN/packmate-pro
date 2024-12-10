@@ -190,8 +190,32 @@ INSERT INTO `traceability` (`id`, `u_name`, `u_receiver`, `u_status`, `u_date`) 
 -- Table structure for table `users`
 --
 
+References for registration page 
+<?php
+require 'connection.php';
+
+if (isset($_POST['submit'])) {
+    $name = $_POST['u_name'];
+    $email = $_POST['u_email'];
+    $password = $_POST['u_password'];
+    $job = $_POST['u_type'];
+
+    $sql = mysqli_query($con, "INSERT INTO `users` VALUES('', '$name', '$email', '$password', '$job')");
+
+    if ($sql) {
+        echo "<script>alert('Registered Successfully | Please Head to the Login')</script>";
+    } else {
+        echo "Error: " . mysqli_error($con);
+    }
+}
+?>
+
+
+
+
+
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) PRIMARY KEY AUTO-INCREMENT,
   `u_name` varchar(80) NOT NULL,
   `u_email` varchar(80) NOT NULL,
   `u_password` varchar(80) NOT NULL,
