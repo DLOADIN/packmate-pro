@@ -76,8 +76,7 @@
     $email = $_POST['u_email'];
     $password = $_POST['u_password'];
     $job = $_POST['u_type'];
-    $sql=mysqli_query($con,"INSERT INTO `users` VALUES('','$name','$email','$password','$job')");
-    
+    $sql = mysqli_query($con,"INSERT INTO `users`  VALUES ('$name', '$email', '$password', '$job')");
     if($sql){
       echo "<script>alert('Registered Successfully| Please Head to the Login ')</script>";
     }
