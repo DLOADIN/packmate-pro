@@ -69,19 +69,20 @@
 </body>
 </html>
 <?php
-  require 'connection.php';
-  
-  if(isset($_POST['submit'])){
+require 'connection.php';
+
+if (isset($_POST['submit'])) {
     $name = $_POST['u_name'];
     $email = $_POST['u_email'];
     $password = $_POST['u_password'];
     $job = $_POST['u_type'];
-    $sql = mysqli_query($con,"INSERT INTO `users`  VALUES ('$name', '$email', '$password', '$job')");
-    if($sql){
-      echo "<script>alert('Registered Successfully| Please Head to the Login ')</script>";
+
+    $sql = mysqli_query($con, "INSERT INTO `users` VALUES('', '$name', '$email', '$password', '$job')");
+
+    if ($sql) {
+        echo "<script>alert('Registered Successfully | Please Head to the Login')</script>";
+    } else {
+        echo "Error: " . mysqli_error($con);
     }
-    else{
-      echo "<script>alert('failed to register')</script>";
-    }
-  }
+}
 ?>
